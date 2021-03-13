@@ -1,0 +1,29 @@
+{
+  "name": "reducewaste",
+  "version": "1.0.0",
+  "description": "a node.js full stack application to track food items for reducing waste",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/je33ica/reduceWaste.git"
+  },
+  "author": "Jessica o'Keeffe & Ross McIntyre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/je33ica/reduceWaste/issues"
+  },
+  "homepage": "https://github.com/je33ica/reduceWaste#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
