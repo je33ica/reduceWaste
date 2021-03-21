@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reducewaste", {
 
 app.use(express.static("public"));
 app.use(require("./routes/htmlRoutes"));
-//app.use(require("./routes/apiRoute"));
+app.use(require("./routes/apiRoutes"));
 // set up routes
 
 app.listen(PORT, () => {
