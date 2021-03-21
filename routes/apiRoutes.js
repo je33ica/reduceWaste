@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../models");
 const bcrypt = require("bcryptjs");
-const { id } = require("date-fns/locale");
+const passport = require("passport");
 
 //  // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
 //  User.prototype.validPassword = function(password) {
@@ -37,5 +37,18 @@ const omitPassword = ({ username, email }) => {
   const newUser = { username, email };
   return newUser;
 };
+
+const validatePassword = (submittedPassword, passwordFromDB) =>
+  bcrypt.compareSync(submittedPassword, passwordFromDB);
+
+router.post("/api/sign-in", ({ body }, res) => {
+  db.User.findOne({ email: body.email }).then((response) => {
+    const passwordIsCorrect = validatePassword(
+      body.password,
+      response.password
+    );
+    console.log("i am the passowrdIsCorrect", passwordIsCorrect);
+  });
+});
 
 module.exports = router;
