@@ -20,10 +20,16 @@ router.post("/api/sign-up", ({ body }, res) => {
 
   db.User.create(user)
     .then((newlyCreatedUser) => {
-      res.json(omitPassword(newlyCreatedUser));
+      res.status(200).json(omitPassword(newlyCreatedUser));
     })
     .catch((err) => {
-      res.json(err);
+      if (err.keyValue.hasOwnProperty("username")) {
+        res.status(409).json({ message: "Username already exists" });
+      } else if (err.keyValue.hasOwnProperty("email")) {
+        res.status(409).json({ message: "Email address already exists" });
+      } else {
+        res.status(500).json(err);
+      }
     });
 });
 
