@@ -42,13 +42,22 @@ const validatePassword = (submittedPassword, passwordFromDB) =>
   bcrypt.compareSync(submittedPassword, passwordFromDB);
 
 router.post("/api/sign-in", ({ body }, res) => {
-  db.User.findOne({ email: body.email }).then((response) => {
-    const passwordIsCorrect = validatePassword(
-      body.password,
-      response.password
-    );
-    console.log("i am the passowrdIsCorrect", passwordIsCorrect);
-  });
+  db.User.findOne({ email: body.email })
+    .then((response) => {
+      if (!response) {
+        res.status(401).json({ message: "invalid log-in credentials" });
+      }
+      const passwordIsCorrect = validatePassword(
+        body.password,
+        response.password
+      );
+      passwordIsCorrect
+        ? res.status(200).json(omitPassword(response))
+        : res.status(401).json({ message: "invalid log-in credentials" });
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
