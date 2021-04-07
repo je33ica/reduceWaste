@@ -2,6 +2,7 @@ const router = require("express").Router();
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+const { de } = require("date-fns/locale");
 
 //  // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
 //  User.prototype.validPassword = function(password) {
@@ -61,3 +62,22 @@ router.post("/api/sign-in", ({ body }, res) => {
 });
 
 module.exports = router;
+
+
+//install express-jwt , json webtokens and .ENV
+//jwt to pass in - paylod- whatever you want signed then JWT-secret 
+//on response give cookie- then token and you can set expiration
+//res.cookie
+
+
+//user can only access their account - id
+//POST with paramatised route
+//get req useEffect with react - store it in state
+//set up - use postman to test
+//formidable 
+
+//use the cookie and use the token - user id as a webtoken 
+
+//a healthy check - hit api endpoint 
+//will checkthe service is running ok, will wake up app the heroku
+//third health package npm

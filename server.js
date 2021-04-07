@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -17,10 +17,21 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reducewaste", {
   // useUnifiedTopology: true,
 });
 
-app.use(express.static("public"));
-app.use(require("./routes/htmlRoutes"));
 app.use(require("./routes/apiRoutes"));
 // set up routes
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+// Define API routes here
+
+// Send every other request to the React app
+// Define any API routes before this runs
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`Reduce waste is running on port: ${PORT}`);
