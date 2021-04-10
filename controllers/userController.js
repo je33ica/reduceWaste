@@ -60,7 +60,6 @@ module.exports = {
       });
   },
   addProduct: ({ body, params }, res) => {
-    console.log(params.id);
     db.User.findByIdAndUpdate(
       params.id,
       { $push: { products: body } },
