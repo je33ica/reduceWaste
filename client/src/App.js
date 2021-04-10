@@ -6,7 +6,7 @@ import { useEffect } from "react";
 //checking response from back end
 function App() {
   useEffect(() => {
-    fetch("/api/sign-in", {
+    fetch("/api/users/log-in", {
       headers: {
         "Content-Type": "application/json",
       },

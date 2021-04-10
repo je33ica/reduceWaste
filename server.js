@@ -1,6 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const routes = require("./routes");
 
 const PORT = process.env.PORT || 3001;
 
@@ -17,7 +18,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reducewaste", {
   // useUnifiedTopology: true,
 });
 
-app.use(require("./routes/apiRoutes"));
 // set up routes
 
 // Serve up static assets (usually on heroku)
@@ -26,6 +26,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
+app.use(routes);
 
 // Send every other request to the React app
 // Define any API routes before this runs
