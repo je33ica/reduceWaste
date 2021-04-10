@@ -1,12 +1,15 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
+const passport = require("passport");
 
 //due to express routing, the "/" matches "/api/users"
 // because of the folder/file structure
 router.route("/sign-up").post(userController.userSignUp);
 //sends get and post requests on default route
 //to the users controller which posts to mongodb
-router.route("/log-in").post(userController.userLogIn);
+router
+  .route("/login", passport.authenticate("local"))
+  .post(userController.userLogIn);
 //remove, findbyid update
 //uses param route to target the necessary user
 // router.route("/:id")
