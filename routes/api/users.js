@@ -17,6 +17,11 @@ router
 //   .put(booksController.update)
 //   .get(booksController.findById)
 
+router
+  .route("/products/:id")
+  .put(userController.addProduct)
+  .get(userController.getProducts);
+
 module.exports = router;
 
 //install express-jwt , json webtokens and .ENV

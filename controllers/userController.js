@@ -1,5 +1,14 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
+
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(db.User.authenticate()));
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
 
 const omitPassword = ({ username, email }) => {
   const newUser = { username, email };
@@ -49,5 +58,18 @@ module.exports = {
       .catch((err) => {
         res.status(500).json(err);
       });
+  },
+  addProduct: ({ body, params }, res) => {
+    console.log(params.id);
+    db.User.findByIdAndUpdate(
+      params.id,
+      { $push: { products: body } },
+      { new: true }
+    )
+      .then((dbUser) => res.json(dbUser.products[dbUser.products.length - 1]))
+      .catch((err) => res.status(400).json(err));
+  },
+  getProducts: ({ params }, res) => {
+    db.User.findById(params.id).then((dbUser) => res.json(dbUser.products));
   },
 };
