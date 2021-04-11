@@ -1,14 +1,14 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
-const passport = require("passport");
-var LocalStrategy = require("passport-local").Strategy;
+// const passport = require("passport");
+// var LocalStrategy = require("passport-local").Strategy;
 
 // use static authenticate method of model in LocalStrategy
-passport.use(new LocalStrategy(db.User.authenticate()));
+// passport.use(new LocalStrategy(db.User.authenticate()));
 
-// use static serialize and deserialize of model for passport session support
-passport.serializeUser(db.User.serializeUser());
-passport.deserializeUser(db.User.deserializeUser());
+// // use static serialize and deserialize of model for passport session support
+// passport.serializeUser(db.User.serializeUser());
+// passport.deserializeUser(db.User.deserializeUser());
 
 const omitPassword = ({ username, email }) => {
   const newUser = { username, email };
@@ -19,7 +19,8 @@ const validatePassword = (submittedPassword, passwordFromDB) =>
   bcrypt.compareSync(submittedPassword, passwordFromDB);
 
 module.exports = {
-  userSignUp: ({ body }, res) => {
+  userSignUp: (req, res) => {
+    const { body } = req;
     body.password = bcrypt.hashSync(
       body.password,
       bcrypt.genSaltSync(10),
@@ -29,6 +30,7 @@ module.exports = {
     user.lastUpdatedDate();
     db.User.create(user)
       .then((newlyCreatedUser) => {
+        req.session.userId = newlyCreatedUser._id;
         res.status(200).json(omitPassword(newlyCreatedUser));
       })
       .catch((err) => {
@@ -41,7 +43,8 @@ module.exports = {
         }
       });
   },
-  userLogIn: ({ body }, res) => {
+  userLogIn: (req, res) => {
+    const { body } = req;
     db.User.findOne({ email: body.email })
       .then((response) => {
         if (!response) {
@@ -51,24 +54,33 @@ module.exports = {
           body.password,
           response.password
         );
-        passwordIsCorrect
-          ? res.status(200).json(omitPassword(response))
-          : res.status(401).json({ message: "invalid log-in credentials" });
+        if (passwordIsCorrect) {
+          //apply the users id as a session token
+          req.session.userId = response._id;
+          res.status(200).json(omitPassword(response));
+        } else {
+          res.status(401).json({ message: "invalid log-in credentials" });
+        }
       })
       .catch((err) => {
         res.status(500).json(err);
       });
   },
-  addProduct: ({ body, params }, res) => {
+  addProduct: (req, res) => {
+    console.log(req.session.userId);
     db.User.findByIdAndUpdate(
-      params.id,
-      { $push: { products: body } },
+      req.session.userId,
+      { $push: { products: req.body } },
       { new: true }
     )
       .then((dbUser) => res.json(dbUser.products[dbUser.products.length - 1]))
       .catch((err) => res.status(400).json(err));
   },
-  getProducts: ({ params }, res) => {
-    db.User.findById(params.id).then((dbUser) => res.json(dbUser.products));
+  getProducts: (req, res) => {
+    console.log(req.session.userId);
+    // res.json("hello");
+    db.User.findById(req.session.userId).then((dbUser) =>
+      res.json(dbUser.products)
+    );
   },
 };
