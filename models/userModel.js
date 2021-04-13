@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -68,6 +69,10 @@ UserSchema.methods.lastUpdatedDate = function () {
 
   return this.lastUpdated;
 };
+
+// User.plugin(passportLocalMongoose);
+
+UserSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model("User", UserSchema);
 
