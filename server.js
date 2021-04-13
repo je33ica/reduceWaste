@@ -3,6 +3,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const session = require("express-session");
+require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
 
@@ -16,7 +17,7 @@ app.use(
   session({
     saveUninitialized: false,
     resave: true,
-    secret: "test secret",
+    secret: process.env.SECRET,
   })
 );
 
