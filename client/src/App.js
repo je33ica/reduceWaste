@@ -8,6 +8,10 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Account from "./pages/Account";
 import NoMatch from "./pages/NoMatch";
+import Products from "./pages/Products";
+import AddProducts from "./pages/AddProducts";
+import Reciept from "./pages/Reciept";
+import Barcode from "./pages/Barcode";
 
 //checking response from back end
 function App() {
@@ -25,6 +29,18 @@ function App() {
         </Route>
         <Route path="/account">
           <Account />
+        </Route>
+        <Route path="/products">
+          <Products />
+        </Route>
+        <Route path="/addProducts">
+          <AddProducts />
+        </Route>
+        <Route path="/reciept">
+          <Reciept />
+        </Route>
+        <Route path="/barcode">
+          <Barcode />
         </Route>
         <Route path="*">
           <NoMatch />
