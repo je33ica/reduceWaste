@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Registration from "./pages/Registraion";
+import Registration from "./pages/Registration";
 import Account from "./pages/Account";
 import NoMatch from "./pages/NoMatch";
 
