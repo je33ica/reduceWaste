@@ -2,36 +2,35 @@ import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import { useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Registration from "./pages/Registraion";
+import Account from "./pages/Account";
+import NoMatch from "./pages/NoMatch";
 
 //checking response from back end
 function App() {
-  useEffect(() => {
-    fetch("/api/users/log-in", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({ email: "aree@ross.com", password: "password123" }),
-    })
-      .then((res) => res.json())
-      .then((result) => console.log("im the result", result));
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p></p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/registration">
+          <Registration />
+        </Route>
+        <Route path="/account">
+          <Account />
+        </Route>
+        <Route path="*">
+          <NoMatch />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

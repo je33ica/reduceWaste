@@ -59,15 +59,13 @@ module.exports = {
   addProduct: (req, res) => {
     db.User.findByIdAndUpdate(
       req.session.userId,
-      { $push: { products: req.body } },
+      { $push: { products: { $each: req.body } } },
       { new: true }
     )
       .then((dbUser) => res.json(dbUser.products[dbUser.products.length - 1]))
       .catch((err) => res.status(400).json(err));
   },
   getProducts: (req, res) => {
-    console.log(req.session.userId);
-    // res.json("hello");
     db.User.findById(req.session.userId).then((dbUser) =>
       res.json(dbUser.products)
     );
