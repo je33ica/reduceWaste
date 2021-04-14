@@ -12,7 +12,7 @@ const Landing = () => {
         <p>Designed for restaurants and home cooks, we offer a range of smart solutions for managing your produce.</p>
         <p><big>Its good for the planet 🌎 Its good for your wallet 💵</big></p>
         <div style={{width: "90%", textAlign: "center"}}>
-        <Link to="/login" className="inlineLink">Register for an account today!</Link>
+        <Link to="/registration" className="inlineLink">Register for an account today!</Link>
         </div>
       </div>
     </div>
