@@ -1,4 +1,5 @@
 import NavBar from "../../components/NavBar";
+import Landing from "../../components/Landing";
 
 const Home = () => {
   const navBarItems = [
@@ -9,7 +10,7 @@ const Home = () => {
     <>
       {/* left hand side is the prop name- right is value */}
       <NavBar navBarItems={navBarItems} />
-      <h1>Welcome to the home page</h1>
+      <Landing />
     </>
   );
 };
