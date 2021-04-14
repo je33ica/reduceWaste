@@ -1,17 +1,16 @@
-import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import axios from "axios";
 import { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import Registration from "./pages/Registration/Registration";
-import Account from "./pages/Account/Account";
-import NoMatch from "./pages/NoMatch/NoMatch";
-import Products from "./pages/Products/Products";
-import AddProducts from "./pages/AddProducts/AddProducts";
-import Receipt from "./pages/Receipt/Receipt";
-import Barcode from "./pages/Barcode/Barcode";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import Account from "./pages/Account";
+import NoMatch from "./pages/NoMatch";
+import Products from "./pages/Products";
+import AddProducts from "./pages/AddProducts";
+import Receipt from "./pages/Receipt";
+import Barcode from "./pages/Barcode";
 
 //checking response from back end
 function App() {
