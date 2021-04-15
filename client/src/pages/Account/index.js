@@ -1,6 +1,14 @@
+import { useEffect } from "react";
 import NavBar from "../../components/NavBar";
 
 const Account = () => {
+  useEffect(() => {
+    fetch("/api/users/products")
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("im the result", result);
+      });
+  }, []);
   const navBarItems = [
     { path: "/products", text: "View all products" },
     { path: "/addProducts", text: "Add new products" },
