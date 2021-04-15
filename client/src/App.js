@@ -1,6 +1,4 @@
 import "./App.scss";
-import axios from "axios";
-import { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
