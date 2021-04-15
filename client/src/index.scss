@@ -100,3 +100,11 @@ select:-webkit-autofill {
   margin-top: 20px;
   cursor: pointer;
 }
+
+.alert-form {
+  display: block;
+  width: 98%;
+  margin: 0 auto;
+  max-width: 400px;
+  color: $white;
+}
