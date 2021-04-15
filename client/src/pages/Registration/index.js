@@ -1,6 +1,8 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import RegistrationForm from "../../components/RegistrationForm";
+import userContext from "../../utils/context/userContext";
 
 const Registration = () => {
   const emailInput = useRef("");
@@ -8,13 +10,21 @@ const Registration = () => {
   const passwordInput = useRef("");
   const confirmPasswordInput = useRef("");
 
+  const history = useHistory();
+
   const [validationState, setValidationState] = useState({
     email: true,
     username: true,
     password: true,
     confirmPassword: true,
   });
-
+  // we check, using context, if the user is logged in and if so we redirect them to the account page
+  // the only way a logged in user would be able to access this page is by typing it direct in to the url
+  //but we still wanted to guard against it
+  const { isUserLoggedIn } = useContext(userContext);
+  if (isUserLoggedIn) {
+    return <Redirect to="/account" />;
+  }
   const submitRegistrationHandler = (e) => {
     e.preventDefault();
     const emailRegex = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
@@ -62,14 +72,16 @@ const Registration = () => {
       body: JSON.stringify(userData),
     })
       .then((res) => res.json())
-      .then((result) =>
+      .then((result) => {
         setValidationState({
           email: true,
           username: true,
           password: true,
           confirmPassword: true,
-        })
-      );
+        });
+        history.push("/login");
+      })
+      .catch((err) => console.log(err));
   };
 
   const navBarItems = [
