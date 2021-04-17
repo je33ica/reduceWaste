@@ -1,10 +1,10 @@
 import spinnerGif from "../../assets/loading/spinner.gif";
-import { loadingCont } from "./loading.module.scss";
+import { loadingCont, loadingSpinner } from "./loading.module.scss";
 
 const Loading = () => {
   return (
     <div className={loadingCont}>
-      <img src={spinnerGif} alt="loading gif" />
+      <img className={loadingSpinner} src={spinnerGif} alt="loading gif" />
     </div>
   );
 };
