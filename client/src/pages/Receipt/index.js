@@ -16,16 +16,9 @@ const Receipts = () => {
   // we add a quick check to the backend to see if the user is currently logged in
   const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
   if (!isUserLoggedIn) {
-    API.checkIfUserIsLoggedIn()
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.email) {
-          setUserLogInStatus(true);
-        } else {
-          return <Redirect to="/" />;
-        }
-      });
+    return <Redirect to="/" />;
   }
+
   return (
     <>
       <NavBar navBarItems={navBarItems} />

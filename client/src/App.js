@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import userContext from "./utils/context/userContext";
 import Home from "./pages/Home";
@@ -19,6 +19,13 @@ function App() {
   const setUserLogInStatus = (bool) => {
     setUserLoginState(bool);
   };
+  // we need to check cookies
+  useEffect(() => {
+    if (sessionStorage.getItem().length > 0) {
+      setUserLogInStatus(true);
+    }
+    console.log(sessionStorage);
+  }, []);
 
   return (
     <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>

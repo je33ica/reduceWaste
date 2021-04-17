@@ -30,15 +30,8 @@ const Login = () => {
 
   // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
   // we add a quick check to the backend to see if the user is currently logged in
-  if (!isUserLoggedIn) {
-    API.checkIfUserIsLoggedIn()
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.email) {
-          setUserLogInStatus(true);
-          return <Redirect to="/account" />;
-        }
-      });
+  if (isUserLoggedIn) {
+    return <Redirect to="/products" />;
   }
   const loginHandler = (e) => {
     e.preventDefault();
