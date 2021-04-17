@@ -50,6 +50,8 @@ const postToOCR = async (url) => {
       });
       await timer(3000); // then the created Promise can be awaited
     }
+    //if we have had a successful result from azure (i.e. the img has been read and the results have been received) then
+    //return them (by checking with optional chaining) or return an error message
     return (
       realResults?.data?.analyzeResult?.readResults[0]?.lines ||
       "Error: Could not obtain data from Azure"
