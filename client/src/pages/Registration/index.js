@@ -82,22 +82,37 @@ const Registration = () => {
       .then((res) => res.json())
       .then((result) => {
         setLoading(false);
+        if (result.message) {
+          setDisplayPopup({
+            show: true,
+            type: "failure",
+            message: result.message,
+          });
+        } else {
+          setDisplayPopup({
+            show: true,
+            type: "success",
+            message: "Registration Successful! Redirecting to login page",
+          });
+          setValidationState({
+            email: true,
+            username: true,
+            password: true,
+            confirmPassword: true,
+          });
+          setTimeout(() => {
+            history.push("/login");
+          }, 20000);
+        }
+      })
+      .catch((err) =>
         setDisplayPopup({
           show: true,
-          type: "success",
-          message: "Registration Successful! Redirecting to login page",
-        });
-        setValidationState({
-          email: true,
-          username: true,
-          password: true,
-          confirmPassword: true,
-        });
-        setTimeout(() => {
-          history.push("/login");
-        }, 20000);
-      })
-      .catch((err) => console.log(err));
+          type: "failure",
+          message:
+            "Sorry there were problems making your request, please try again later!",
+        })
+      );
   };
 
   const navBarItems = [
