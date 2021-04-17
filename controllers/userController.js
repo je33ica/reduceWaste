@@ -38,7 +38,7 @@ module.exports = {
     db.User.findOne({ email: body.email })
       .then((response) => {
         if (!response) {
-          res.status(401).json({ message: "invalid log-in credentials" });
+          res.status(401).json({ message: "Invalid log-in credentials" });
         }
         const passwordIsCorrect = validatePassword(
           body.password,

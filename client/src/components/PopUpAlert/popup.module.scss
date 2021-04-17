@@ -1,0 +1,37 @@
+@import "../../styles/colors";
+
+.popupAlert {
+  width: 500px;
+  max-width: 60%;
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-name: movePopup;
+  animation-duration: 1s;
+  border: solid;
+  border-width: 2px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+@keyframes movePopup {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: 100px;
+  }
+}
+
+.success {
+  border-color: $successGreen;
+  background-color: $lightGreen;
+  color: $successGreen;
+}
+
+.failure {
+  border-color: $failRed;
+  background-color: $lightred;
+  color: $failRed;
+}

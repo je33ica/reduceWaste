@@ -1,8 +1,10 @@
 import { useRef, useState, useContext } from "react";
 import { Redirect, useHistory } from "react-router-dom";
+import userContext from "../../utils/context/userContext";
 import NavBar from "../../components/NavBar";
 import RegistrationForm from "../../components/RegistrationForm";
-import userContext from "../../utils/context/userContext";
+import PopUpAlert from "../../components/PopUpAlert";
+import Loading from "../../components/Loading";
 
 const Registration = () => {
   const emailInput = useRef("");
@@ -11,6 +13,12 @@ const Registration = () => {
   const confirmPasswordInput = useRef("");
 
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [displayPopup, setDisplayPopup] = useState({
+    show: false,
+    type: "",
+    message: "",
+  });
 
   const [validationState, setValidationState] = useState({
     email: true,
@@ -62,7 +70,7 @@ const Registration = () => {
       username,
       products: [],
     };
-
+    setLoading(true);
     //submit the registration form
     fetch("/api/users/sign-up", {
       method: "POST",
@@ -73,15 +81,38 @@ const Registration = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        setValidationState({
-          email: true,
-          username: true,
-          password: true,
-          confirmPassword: true,
-        });
-        history.push("/login");
+        setLoading(false);
+        if (result.message) {
+          setDisplayPopup({
+            show: true,
+            type: "failure",
+            message: result.message,
+          });
+        } else {
+          setDisplayPopup({
+            show: true,
+            type: "success",
+            message: "Registration Successful! Redirecting to login page",
+          });
+          setValidationState({
+            email: true,
+            username: true,
+            password: true,
+            confirmPassword: true,
+          });
+          setTimeout(() => {
+            history.push("/login");
+          }, 1500);
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        setDisplayPopup({
+          show: true,
+          type: "failure",
+          message:
+            "Sorry there were problems making your request, please try again later!",
+        })
+      );
   };
 
   const navBarItems = [
@@ -99,6 +130,10 @@ const Registration = () => {
         submitRegistrationHandler={submitRegistrationHandler}
         validationState={validationState}
       />
+      {loading && <Loading />}
+      {displayPopup.show && (
+        <PopUpAlert type={displayPopup.type} message={displayPopup.message} />
+      )}
     </>
   );
 };
