@@ -41,7 +41,6 @@ const postToOCR = async (url) => {
       attempts < 5 && !realResults?.data?.analyzeResult?.readResults[0]?.lines;
       attempts++
     ) {
-      console.log(attempts);
       realResults = await axios({
         method: "get",
         headers: {
