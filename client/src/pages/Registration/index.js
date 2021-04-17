@@ -43,6 +43,8 @@ const Registration = () => {
           return <Redirect to="/account" />;
         }
       });
+  } else {
+    return <Redirect to="/account" />;
   }
 
   const submitRegistrationHandler = (e) => {

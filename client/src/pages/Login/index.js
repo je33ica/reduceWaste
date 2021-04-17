@@ -40,7 +40,6 @@ const Login = () => {
         }
       });
   }
-
   const loginHandler = (e) => {
     e.preventDefault();
     const email = emailInput.current.value.trim();
