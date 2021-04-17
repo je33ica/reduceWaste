@@ -1,6 +1,12 @@
+import { Redirect } from "react-router";
 import NavBar from "../../components/NavBar";
+import userContext from "../../utils/context/userContext";
 
 const Receipts = () => {
+  const { isUserLoggedIn } = useContext(userContext);
+  if (!isUserLoggedIn) {
+    return <Redirect to="/login" />;
+  }
   const navBarItems = [
     { path: "/account", text: "Account" },
     { path: "/products", text: "Sign Up" },
