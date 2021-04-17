@@ -10,6 +10,13 @@ const validatePassword = (submittedPassword, passwordFromDB) =>
   bcrypt.compareSync(submittedPassword, passwordFromDB);
 
 module.exports = {
+  getUser: (req, res) => {
+    db.User.findById(req.session.userId)
+      .then((dbUser) => res.json(omitPassword(dbUser)))
+      .catch((err) =>
+        res.status(200).json({ message: "user not currently logged in" })
+      );
+  },
   userSignUp: (req, res) => {
     const { body } = req;
     body.password = bcrypt.hashSync(

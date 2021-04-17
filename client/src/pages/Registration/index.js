@@ -5,6 +5,7 @@ import NavBar from "../../components/NavBar";
 import RegistrationForm from "../../components/RegistrationForm";
 import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
+import API from "../../utils/api";
 
 const Registration = () => {
   const emailInput = useRef("");
@@ -29,10 +30,21 @@ const Registration = () => {
   // we check, using context, if the user is logged in and if so we redirect them to the account page
   // the only way a logged in user would be able to access this page is by typing it direct in to the url
   //but we still wanted to guard against it
-  const { isUserLoggedIn } = useContext(userContext);
-  if (isUserLoggedIn) {
-    return <Redirect to="/account" />;
+  const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
+
+  // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
+  // we add a quick check to the backend to see if the user is currently logged in
+  if (!isUserLoggedIn) {
+    API.checkIfUserIsLoggedIn()
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.email) {
+          setUserLogInStatus(true);
+          return <Redirect to="/account" />;
+        }
+      });
   }
+
   const submitRegistrationHandler = (e) => {
     e.preventDefault();
     const emailRegex = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;

@@ -15,8 +15,13 @@ import Barcode from "./pages/Barcode";
 //checking response from back end
 function App() {
   const [isUserLoggedIn, setUserLoginState] = useState(false);
+
+  const setUserLogInStatus = (bool) => {
+    setUserLoginState(bool);
+  };
+
   return (
-    <userContext.Provider value={{ isUserLoggedIn }}>
+    <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>
       <Router>
         <Switch>
           <Route exact path="/">

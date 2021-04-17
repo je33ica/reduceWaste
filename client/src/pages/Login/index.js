@@ -1,9 +1,11 @@
-import { useRef, useState } from "react";
-import { useHistory } from "react-router";
+import { useRef, useState, useContext } from "react";
+import { useHistory, Redirect } from "react-router";
 import NavBar from "../../components/NavBar";
 import LoginForm from "../../components/LoginForm";
 import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
+import userContext from "../../utils/context/userContext";
+import API from "../../utils/api";
 
 const Login = () => {
   const emailInput = useRef("");
@@ -21,6 +23,23 @@ const Login = () => {
     email: true,
     password: true,
   });
+  // we check, using context, if the user is logged in and if so we redirect them to the account page
+  // the only way a logged in user would be able to access this page is by typing it direct in to the url
+  //but we still wanted to guard against it
+  const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
+
+  // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
+  // we add a quick check to the backend to see if the user is currently logged in
+  if (!isUserLoggedIn) {
+    API.checkIfUserIsLoggedIn()
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.email) {
+          setUserLogInStatus(true);
+          return <Redirect to="/account" />;
+        }
+      });
+  }
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -59,6 +78,8 @@ const Login = () => {
       .then((res) => res.json())
       .then((result) => {
         setLoading(false);
+        setUserLogInStatus(true);
+        console.log("I have just set the user to be logged in", isUserLoggedIn);
         if (result.message) {
           setDisplayPopup({
             show: true,
@@ -73,7 +94,7 @@ const Login = () => {
           setDisplayPopup({
             show: true,
             type: "success",
-            message: "Registration Successful! Redirecting to products page",
+            message: "Login Successful! Redirecting to products page",
           });
           //use the useHistory hook from react-router to redirect the user once logged in successfully
           setTimeout(() => {
