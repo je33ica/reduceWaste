@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import { useHistory } from "react-router";
 import NavBar from "../../components/NavBar";
 import LoginForm from "../../components/LoginForm";
+import PopUpAlert from "../../components/PopUpAlert";
+import Loading from "../../components/Loading";
 
 const Login = () => {
   const emailInput = useRef("");
@@ -9,6 +11,12 @@ const Login = () => {
 
   const history = useHistory();
 
+  const [loading, setLoading] = useState(false);
+  const [displayPopup, setDisplayPopup] = useState({
+    show: false,
+    type: "",
+    message: "",
+  });
   const [validationState, setValidationState] = useState({
     email: true,
     password: true,
@@ -39,6 +47,7 @@ const Login = () => {
       email,
       password,
     };
+    setLoading(true);
 
     fetch("/api/users/login", {
       method: "POST",
@@ -49,13 +58,28 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        setValidationState({
-          email: true,
-          password: true,
-        });
-        //use the useHistory hook from react-router to redirect the user once logged in successfully
-
-        history.push("/account");
+        setLoading(false);
+        if (result.message) {
+          setDisplayPopup({
+            show: true,
+            type: "failure",
+            message: result.message,
+          });
+        } else {
+          setValidationState({
+            email: true,
+            password: true,
+          });
+          setDisplayPopup({
+            show: true,
+            type: "success",
+            message: "Registration Successful! Redirecting to products page",
+          });
+          //use the useHistory hook from react-router to redirect the user once logged in successfully
+          setTimeout(() => {
+            history.push("/products");
+          }, 1500);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -70,6 +94,10 @@ const Login = () => {
         passwordInput={passwordInput}
         loginHandler={loginHandler}
       />
+      {loading && <Loading />}
+      {displayPopup.show && (
+        <PopUpAlert type={displayPopup.type} message={displayPopup.message} />
+      )}
     </>
   );
 };

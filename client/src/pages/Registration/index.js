@@ -102,7 +102,7 @@ const Registration = () => {
           });
           setTimeout(() => {
             history.push("/login");
-          }, 20000);
+          }, 1500);
         }
       })
       .catch((err) =>
