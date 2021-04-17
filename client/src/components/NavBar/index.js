@@ -1,16 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link /*useLocation*/ } from "react-router-dom";
 import {
   fullNav,
   navList,
   navItem,
   navIconContainer,
   navIcons,
+  navHeader,
 } from "./nav.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import icons from "../../icons/";
 
 const NavBar = ({ navBarItems }) => {
-  const location = useLocation();
+  // const location = useLocation();
 
   return (
     <nav className={fullNav}>
@@ -18,6 +19,7 @@ const NavBar = ({ navBarItems }) => {
         <FontAwesomeIcon className={navIcons} icon={icons.shoppingBasket} />
         <FontAwesomeIcon className={navIcons} icon={icons.utensils} />
       </Link>
+      <h1 className={navHeader}>Reduce Waste</h1>
       <ul className={navList}>
         {navBarItems.map((item) => {
           return (
