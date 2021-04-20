@@ -73,7 +73,7 @@ const Receipts = () => {
       reader.readAsDataURL(image);
     });
   };
-
+  //uses the id, which we know will always be unique because the main array is only generated once
   const removeCard = (idToDelete) => {
     const productCards = [...resultsFromOcr];
     const filtered = productCards.filter(
