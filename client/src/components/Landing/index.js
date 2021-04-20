@@ -1,11 +1,11 @@
 import placeholder from "../../assets/images/placeholder.png";
-import {landingContainer, landingImg} from "./landing.module.scss";
+import {landingImg} from "./landing.module.scss";
 import {Link} from "react-router-dom"
 
 const Landing = () => {
   
   return (
-    <div className={landingContainer}>
+    <div className="grid">
       <img src={placeholder} alt="placeholder" className={landingImg}/>
       <div>
         <p>An application designed to track your food items, to help you reduce waste.</p>

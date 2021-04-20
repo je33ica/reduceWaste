@@ -28,6 +28,27 @@ a:visited {
   text-decoration: none;
 }
 
+.grid {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.grid-item{
+  width: 95%;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
+  }
+}
+
 .inlineLink {
   color: $red;
 }
@@ -40,7 +61,7 @@ a:visited {
   text-decoration: underline;
 }
 
-form {
+.form {
   width: 90%;
   max-width: 600px;
   margin: 0 auto;
@@ -52,11 +73,11 @@ form {
   font-size: 1.15rem;
 }
 
-form h3 {
+.form h3 {
   text-align: center;
 }
 
-form label {
+.form label {
   display: block;
   width: 100%;
   margin-bottom: 0.8rem;
@@ -65,7 +86,7 @@ form label {
   margin: 10px auto;
 }
 
-form input {
+.form input {
   display: block;
   width: 98%;
   margin: 0 auto;

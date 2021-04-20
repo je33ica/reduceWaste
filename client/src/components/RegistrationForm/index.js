@@ -11,7 +11,7 @@ const RegistrationForm = ({
 }) => {
   return (
     <>
-      <form onSubmit={submitRegistrationHandler}>
+      <form className="form" onSubmit={submitRegistrationHandler}>
         <h3>Register</h3>
         <label htmlFor="email">Email</label>
         <input type="email" name="email" ref={emailInput} />

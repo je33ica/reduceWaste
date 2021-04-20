@@ -1,9 +1,11 @@
-import { useRef, useState } from "react";
-import { useHistory } from "react-router";
+import { useRef, useState, useContext } from "react";
+import { useHistory, Redirect } from "react-router";
 import NavBar from "../../components/NavBar";
 import LoginForm from "../../components/LoginForm";
 import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
+import userContext from "../../utils/context/userContext";
+import API from "../../utils/api";
 
 const Login = () => {
   const emailInput = useRef("");
@@ -21,7 +23,18 @@ const Login = () => {
     email: true,
     password: true,
   });
+  // we check, using context, if the user is logged in and if so we redirect them to the account page
+  // the only way a logged in user would be able to access this page is by typing it direct in to the url
+  //but we still wanted to guard against it
+  const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
 
+  // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
+  // we add a quick check to the backend to see if the user is currently logged in
+
+
+  if (isUserLoggedIn) {
+    return <Redirect to="/products" />;
+  }
   const loginHandler = (e) => {
     e.preventDefault();
     const email = emailInput.current.value.trim();
@@ -73,11 +86,12 @@ const Login = () => {
           setDisplayPopup({
             show: true,
             type: "success",
-            message: "Registration Successful! Redirecting to products page",
+            message: "Login Successful! Redirecting to products page",
           });
           //use the useHistory hook from react-router to redirect the user once logged in successfully
           setTimeout(() => {
-            history.push("/products");
+            history.push("/account");
+            setUserLogInStatus(true);
           }, 1500);
         }
       })
