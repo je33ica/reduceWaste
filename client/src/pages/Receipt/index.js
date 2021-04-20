@@ -5,11 +5,32 @@ import userContext from "../../utils/context/userContext";
 import ImageUpload from "../../components/ImageUpload";
 import ReceiptCard from "../../components/ReceiptCard"
 import ocrParser from "../../utils/ocrParser/ocrParser";
-import cardContainer from "./receipt.module.scss"
+import {cardContainer, receiptForm} from "./receipt.module.scss"
 
 const Receipts = () => {
 
-  const [resultsFromOcr, setResultsFromOcr] = useState([])
+  const date = new Date().toISOString().slice(0,10)
+
+  const [resultsFromOcr, setResultsFromOcr] = useState([
+    {
+      productName: "jam",
+      amount: 50,
+      expiry: date,
+      id: 2
+    },
+    {
+      productName: "beer",
+      amount: 5,
+      expiry: date,
+      id: 3423
+    },
+    {
+      productName: "butter",
+      amount: 77,
+      expiry: date,
+      id: 7
+    },
+  ])
 
 
   // we check, using context, if the user is logged in and if so we redirect them to the account page
@@ -57,6 +78,12 @@ const Receipts = () => {
     });
   };
 
+  const removeCard = (idToDelete) => {
+    const productCards = [...resultsFromOcr];
+    const filtered = productCards.filter(product => product.id !== idToDelete);
+    setResultsFromOcr(filtered)
+  }
+
 
 
   const uploadImage = async (e) => {
@@ -70,7 +97,7 @@ const Receipts = () => {
       //grab all the images, save them to state
       setImages([
         ...images,
-        ...newImages.filter((image) => image != undefined),
+        ...newImages.filter((image) => image !== undefined),
       ]);
       // send the base 64 encoded string to our api
       fetch("/api/ocr", {
@@ -98,7 +125,7 @@ const Receipts = () => {
             return {
               productName: productStr,
               amount: "",
-              expiry: Date.now(),
+              expiry: date,
               id: index
             }
           })
@@ -145,9 +172,9 @@ const Receipts = () => {
         </div>
       </div>
       {resultsFromOcr.length > 0 && 
-        <form>
+        <form className={receiptForm}>
           <div className={cardContainer}>
-          {resultsFromOcr.map(product => <ReceiptCard product={product} key={product}/>)} 
+          {resultsFromOcr.map(product => <ReceiptCard product={product} key={product.productName} removeCard={removeCard}/>)} 
          </div>
         </form>
       }

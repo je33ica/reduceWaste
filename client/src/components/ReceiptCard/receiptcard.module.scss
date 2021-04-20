@@ -1,7 +1,31 @@
-
+@import "../../styles/colors";
 .card{
   width: 95%;
   margin: 0 auto;
-  background-color: blue;
-  color: white;
+  background-color: $lightred;
+  color: $white;
+  padding: 5px
+}
+
+.card label {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  margin-top: 0.8rem;
+  max-width: 400px;
+  margin: 10px auto;
+}
+
+.card input {
+  display: block;
+  width: 98%;
+  margin: 0 auto;
+  max-width: 400px;
+  border: none;
+  border-bottom: 2px solid $white;
+  color: $white;
+  background: none;
+  outline-style: none;
+  box-shadow: none;
+  font-weight: bold;
 }
