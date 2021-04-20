@@ -3,35 +3,33 @@ import { Redirect } from "react-router";
 import NavBar from "../../components/NavBar";
 import userContext from "../../utils/context/userContext";
 import ImageUpload from "../../components/ImageUpload";
-import ReceiptCard from "../../components/ReceiptCard"
+import ReceiptCard from "../../components/ReceiptCard";
 import ocrParser from "../../utils/ocrParser/ocrParser";
-import {cardContainer, receiptForm} from "./receipt.module.scss"
+import { cardContainer, receiptForm } from "./receipt.module.scss";
 
 const Receipts = () => {
-
-  const date = new Date().toISOString().slice(0,10)
+  const date = new Date().toISOString().slice(0, 10);
 
   const [resultsFromOcr, setResultsFromOcr] = useState([
     {
       productName: "jam",
       amount: 50,
       expiry: date,
-      id: 2
+      id: 2,
     },
     {
       productName: "beer",
       amount: 5,
       expiry: date,
-      id: 3423
+      id: 3423,
     },
     {
       productName: "butter",
       amount: 77,
       expiry: date,
-      id: 7
+      id: 7,
     },
-  ])
-
+  ]);
 
   // we check, using context, if the user is logged in and if so we redirect them to the account page
   // the only way a logged in user would be able to access this page is by typing it direct in to the url
@@ -39,7 +37,6 @@ const Receipts = () => {
   // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
   // we add a quick check to the backend to see if the user is currently logged in
   const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
-
 
   //********************************************************** */
 
@@ -60,7 +57,6 @@ const Receipts = () => {
     message: "",
   });
 
-
   //helper function to convert image to base64
   const fileToDataUri = (image) => {
     return new Promise((res) => {
@@ -80,15 +76,27 @@ const Receipts = () => {
 
   const removeCard = (idToDelete) => {
     const productCards = [...resultsFromOcr];
-    const filtered = productCards.filter(product => product.id !== idToDelete);
-    setResultsFromOcr(filtered)
-  }
+    const filtered = productCards.filter(
+      (product) => product.id !== idToDelete
+    );
+    setResultsFromOcr(filtered);
+  };
 
-
+  const updateElement = (value, target, id) => {
+    let elementUpdated = false;
+    const tempResults = [...resultsFromOcr]
+    for (let i = 0; i < tempResults.length && !elementUpdated; i++) {
+      if (tempResults[i].id === id) {
+        tempResults[i][target] = value;
+        elementUpdated = true;
+      }
+    }
+    setResultsFromOcr(tempResults)
+  };
 
   const uploadImage = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      setLoading(true)
+      setLoading(true);
       const newImagesPromises = [];
       for (let i = 0; i < e.target.files.length; i++) {
         newImagesPromises.push(fileToDataUri(e.target.files[i]));
@@ -103,44 +111,49 @@ const Receipts = () => {
       fetch("/api/ocr", {
         method: "post",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          image: newImages[0].base64
+          image: newImages[0].base64,
+        }),
+      })
+        .then((res) => res.json())
+        .then((results) => {
+          setLoading(false);
+
+          if (results.message) {
+            //fail alert
+            setDisplayPopup({
+              show: true,
+              type: "failure",
+              message: results.message,
+            });
+          } else {
+            //display the data
+            const setFromOcr = new Set(ocrParser(results).slice(3));
+            const cardObjects = Array.from(setFromOcr).map(
+              (productStr, index) => {
+                return {
+                  productName: productStr,
+                  amount: "",
+                  expiry: date,
+                  id: index,
+                };
+              }
+            );
+            setResultsFromOcr(cardObjects);
+          }
         })
-      }).then(res => res.json()).then(results => {
-        setLoading(false);
-        
-        if (results.message){
+        .catch((err) => {
           //fail alert
           setDisplayPopup({
             show: true,
             type: "failure",
-            message: results.message,
+            message: err,
           });
-        } else {
-          //display the data
-          const setFromOcr = new Set(ocrParser(results).slice(3));
-          const cardObjects = Array.from(setFromOcr).map((productStr, index) => {
-            return {
-              productName: productStr,
-              amount: "",
-              expiry: date,
-              id: index
-            }
-          })
-          setResultsFromOcr(cardObjects)
-        }
-      }).catch(err => {
-        //fail alert
-        setDisplayPopup({
-          show: true,
-          type: "failure",
-          message: err,
         });
-      })
     }
-  }
+  };
 
   const navBarItems = [
     { path: "/account", text: "Account" },
@@ -162,22 +175,33 @@ const Receipts = () => {
             populated with the data stored in your database.
           </p>
           <small>
-            Our AI service is constantly improving, however there may be some errors
-            from reading the results. The form created below will be editable to
-            allow you to correct any mistakes
+            Our AI service is constantly improving, however there may be some
+            errors from reading the results. The form created below will be
+            editable to allow you to correct any mistakes
           </small>
         </div>
-        <div className="grid-item" style={{textAlign: "center"}}>
-          <ImageUpload uploadImage={uploadImage} loading={loading} displayPopup={displayPopup}/>
+        <div className="grid-item" style={{ textAlign: "center" }}>
+          <ImageUpload
+            uploadImage={uploadImage}
+            loading={loading}
+            displayPopup={displayPopup}
+          />
         </div>
       </div>
-      {resultsFromOcr.length > 0 && 
+      {resultsFromOcr.length > 0 && (
         <form className={receiptForm}>
           <div className={cardContainer}>
-          {resultsFromOcr.map(product => <ReceiptCard product={product} key={product.productName} removeCard={removeCard}/>)} 
-         </div>
+            {resultsFromOcr.map((product) => (
+              <ReceiptCard
+                product={product}
+                key={product.id}
+                removeCard={removeCard}
+                updateElement={updateElement}
+              />
+            ))}
+          </div>
         </form>
-      }
+      )}
     </>
   );
 };
