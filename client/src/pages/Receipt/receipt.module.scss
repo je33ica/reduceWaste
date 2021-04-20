@@ -1,0 +1,9 @@
+.card-container{
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+

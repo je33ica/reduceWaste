@@ -90,7 +90,7 @@ const Login = () => {
           });
           //use the useHistory hook from react-router to redirect the user once logged in successfully
           setTimeout(() => {
-            history.push("/products");
+            history.push("/account");
             setUserLogInStatus(true);
           }, 1500);
         }

@@ -12,7 +12,7 @@ const Account = () => {
   const navBarItems = [
     { path: "/products", text: "View all products" },
     { path: "/addProducts", text: "Add new products" },
-    { path: "/reciept", text: "Upload reciepts" },
+    { path: "/receipt", text: "Upload receipts" },
     { path: "/barcode", text: "Barcode scanner" },
   ];
   return (

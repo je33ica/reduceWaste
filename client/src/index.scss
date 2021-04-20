@@ -28,6 +28,27 @@ a:visited {
   text-decoration: none;
 }
 
+.grid {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.grid-item{
+  width: 95%;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
+  }
+}
+
 .inlineLink {
   color: $red;
 }
