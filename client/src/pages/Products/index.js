@@ -1,5 +1,17 @@
+import NavBar from "../../components/NavBar";
+
 const Products = () => {
-  return <h1> Welcome to the Products page</h1>;
+  const navBarItems = [
+    { path: "/account", text: "Account" },
+    { path: "/barcode", text: "Barcode scanner" },
+    { path: "/receipt", text: "Upload receipt" },
+    { path: "/addProducts", text: "Add Products" },
+  ];
+  return (
+    <>
+      <NavBar navBarItems={navBarItems} />
+    </>
+  );
 };
 
 export default Products;
