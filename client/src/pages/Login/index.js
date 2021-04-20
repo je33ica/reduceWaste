@@ -30,6 +30,8 @@ const Login = () => {
 
   // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
   // we add a quick check to the backend to see if the user is currently logged in
+
+
   if (isUserLoggedIn) {
     return <Redirect to="/products" />;
   }
@@ -70,8 +72,6 @@ const Login = () => {
       .then((res) => res.json())
       .then((result) => {
         setLoading(false);
-        setUserLogInStatus(true);
-        console.log("I have just set the user to be logged in", isUserLoggedIn);
         if (result.message) {
           setDisplayPopup({
             show: true,
@@ -91,6 +91,7 @@ const Login = () => {
           //use the useHistory hook from react-router to redirect the user once logged in successfully
           setTimeout(() => {
             history.push("/products");
+            setUserLogInStatus(true);
           }, 1500);
         }
       })
