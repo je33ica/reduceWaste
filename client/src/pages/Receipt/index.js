@@ -4,7 +4,8 @@ import NavBar from "../../components/NavBar";
 import userContext from "../../utils/context/userContext";
 import ImageUpload from "../../components/ImageUpload";
 import ReceiptCard from "../../components/ReceiptCard"
-import ocrParser from "../../utils/ocrParser/ocrParser"
+import ocrParser from "../../utils/ocrParser/ocrParser";
+import cardContainer from "./receipt.module.scss"
 
 const Receipts = () => {
 
@@ -92,7 +93,16 @@ const Receipts = () => {
           });
         } else {
           //display the data
-          setResultsFromOcr(new Set(ocrParser(results).slice(3)))
+          const setFromOcr = new Set(ocrParser(results).slice(3));
+          const cardObjects = Array.from(setFromOcr).map((productStr, index) => {
+            return {
+              productName: productStr,
+              amount: "",
+              expiry: Date.now(),
+              id: index
+            }
+          })
+          setResultsFromOcr(cardObjects)
         }
       }).catch(err => {
         //fail alert
@@ -104,10 +114,6 @@ const Receipts = () => {
       })
     }
   }
-
-
-
-
 
   const navBarItems = [
     { path: "/account", text: "Account" },
@@ -140,7 +146,7 @@ const Receipts = () => {
       </div>
       {resultsFromOcr.length > 0 && 
         <form>
-          <div className="card-container">
+          <div className={cardContainer}>
           {resultsFromOcr.map(product => <ReceiptCard product={product} key={product}/>)} 
          </div>
         </form>

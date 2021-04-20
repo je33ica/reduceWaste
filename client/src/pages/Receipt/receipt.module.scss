@@ -1,9 +1,24 @@
-.card-container{
+.cardContainer{
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   max-width: 1200px;
   margin: 0 auto;
   align-items: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 90%;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
+  }
 }
 
