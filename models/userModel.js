@@ -34,12 +34,8 @@ const UserSchema = new Schema({
         required: "Product Name Required",
       },
 
-      quantity: {
-        type: Number,
-      },
-
-      weight: {
-        type: Number,
+      amount: {
+        type: String,
       },
 
       dateAdded: {
