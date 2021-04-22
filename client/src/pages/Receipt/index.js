@@ -10,29 +10,7 @@ import { cardContainer, receiptForm } from "./receipt.module.scss";
 const Receipts = () => {
   const date = new Date().toISOString().slice(0, 10);
 
-  const [resultsFromOcr, setResultsFromOcr] = useState([
-    {
-      productName: "jam",
-      amount: 50,
-      expiry: date,
-      id: 2,
-      ean: "",
-    },
-    {
-      productName: "beer",
-      amount: 5,
-      expiry: date,
-      id: 3423,
-      ean: "",
-    },
-    {
-      productName: "butter",
-      amount: 77,
-      expiry: date,
-      id: 7,
-      ean: "",
-    },
-  ]);
+  const [resultsFromOcr, setResultsFromOcr] = useState([]);
 
   // we check, using context, if the user is logged in and if so we redirect them to the account page
   // the only way a logged in user would be able to access this page is by typing it direct in to the url

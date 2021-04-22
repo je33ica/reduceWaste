@@ -44,7 +44,11 @@ const ReceiptCard = ({ product, removeCard, updateElement }) => {
           updateElement(e.target.value, e.target.name, product.id)
         }
       />
-      <button type="button" onClick={() => removeCard(product.id)}>
+      <button
+        className="btn"
+        type="button"
+        onClick={() => removeCard(product.id)}
+      >
         Remove Item
       </button>
     </div>
