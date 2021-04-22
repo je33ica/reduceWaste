@@ -75,7 +75,7 @@ const Receipts = () => {
     setResultsFromOcr(tempResults);
   };
 
-  const addCard = () => {
+  const addCard = (position) => {
     const tempObj = {
       productName: "",
       amount: "",
@@ -83,8 +83,11 @@ const Receipts = () => {
       id: uuid(),
       ean: "",
     };
-
-    setResultsFromOcr([tempObj, ...resultsFromOcr]);
+    if (position === "start") {
+      setResultsFromOcr([tempObj, ...resultsFromOcr]);
+    } else {
+      setResultsFromOcr([...resultsFromOcr, tempObj]);
+    }
   };
 
   const uploadImage = async (e) => {

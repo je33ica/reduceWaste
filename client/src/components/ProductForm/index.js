@@ -10,7 +10,7 @@ import {
 const ProductForm = ({ addCard, resultsFromOcr }) => {
   return (
     <form className={productForm}>
-      <button type="button" onClick={addCard} className={btn}>
+      <button type="button" onClick={() => addCard("start")} className={btn}>
         Add Item
       </button>
       <div className={cardContainer}>
@@ -23,7 +23,7 @@ const ProductForm = ({ addCard, resultsFromOcr }) => {
           />
         ))}
       </div>
-      <button type="button" onClick={addCard} className={btn}>
+      <button type="button" onClick={() => addCard("end")} className={btn}>
         Add Item
       </button>
     </form>
