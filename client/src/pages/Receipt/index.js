@@ -19,18 +19,11 @@ const Receipts = () => {
   //but we still wanted to guard against it
   // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
   // we add a quick check to the backend to see if the user is currently logged in
-  const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
+  const { isUserLoggedIn} = useContext(userContext);
 
-  //********************************************************** */
-
-  // the following code is to protect the route from non logged in users. Uncomment following
-  //testing
-
-  // if (!isUserLoggedIn) {
-  //   return <Redirect to="/" />;
-  // }
-
-  // **********************************************************
+  if (!isUserLoggedIn) {
+    return <Redirect to="/" />;
+  }
 
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
