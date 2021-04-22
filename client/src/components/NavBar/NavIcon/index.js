@@ -1,11 +1,22 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState } from "react"
 import {Link} from "react-router-dom"
+import {navIcon, holder} from "./navicon.module.scss"
+import Tooltip from "./Tooltip"
 
 const NavIcon = ({icon, text, path}) => {
+
+  const [displayTooltip, setTooltip] = useState(true)
+
   return (
     <>
     <Link to={path}>
-      <FontAwesomeIcon icon={icon} />
+      <div className={navIcon}>
+        <div className={holder} onMouseEnter={() => setTooltip(true)} onMouseLeave={() => setTooltip(false)}>
+        <FontAwesomeIcon icon={icon} />
+        {displayTooltip && <Tooltip text={text}/>}
+        </div>
+      </div>
     </Link>
     </>
   )
