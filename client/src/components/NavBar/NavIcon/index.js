@@ -6,7 +6,7 @@ import Tooltip from "./Tooltip"
 
 const NavIcon = ({icon, text, path}) => {
 
-  const [displayTooltip, setTooltip] = useState(true)
+  const [displayTooltip, setTooltip] = useState(false)
 
   return (
     <>
