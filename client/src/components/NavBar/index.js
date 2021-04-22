@@ -1,5 +1,6 @@
 import { Link /*useLocation*/ } from "react-router-dom";
-import { useState } from "react"
+import { useState } from "react";
+import {useMediaQuery} from "react-responsive";
 import {
   fullNav,
   navList,
@@ -12,28 +13,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import icons from "../../icons/";
 import NavIcon from "./NavIcon";
 import Tooltip from "./NavIcon/Tooltip";
+import MobileNav from "./MobileNav";
 
 const NavBar = ({ navBarItems }) => {
   // const location = useLocation();
 
-  const [displayTooltip, setTooltip] = useState(false)
+  const [displayTooltip, setTooltip] = useState(false);
+  const isSmallerScreen = useMediaQuery({ query: "(max-width: 768px" });
 
   return (
     <nav className={fullNav}>
-      <Link to="/" className={navIconContainer} onMouseEnter={() => setTooltip(true)} onMouseLeave={() => setTooltip(false)}>
+      <Link
+        to="/"
+        className={navIconContainer}
+        onMouseEnter={() => setTooltip(true)}
+        onMouseLeave={() => setTooltip(false)}
+      >
         <FontAwesomeIcon className={navIcons} icon={icons.shoppingBasket} />
         <FontAwesomeIcon className={navIcons} icon={icons.utensils} />
         {displayTooltip && <Tooltip text={"Home"} />}
       </Link>
-      <h1 className={navHeader}>Reduce Waste</h1>
+      <Link to="/">
+        <h1 className={navHeader}>Reduce Waste</h1>
+      </Link>
       <ul className={navList}>
-        {navBarItems.map((item) => {
-          return (
-            <li className={navItem} key={`${item.text}`}>
-              <NavIcon text={item.text} path={item.path} icon={item.icon}/>
-            </li>
-          );
-        })}
+        {isSmallerScreen ? (
+          <MobileNav items={navBarItems} />
+        ) : (
+          navBarItems.map((item) => {
+            return (
+              <li className={navItem} key={`${item.text}`}>
+                <NavIcon text={item.text} path={item.path} icon={item.icon} />
+              </li>
+            );
+          })
+        )}
       </ul>
     </nav>
   );

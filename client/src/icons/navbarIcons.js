@@ -6,7 +6,8 @@ import {
   faFileUpload,
   faShoppingBasket,
   faPlus,
-  faUserPlus
+  faUserPlus,
+  faBars
 } from "@fortawesome/free-solid-svg-icons";
 
 // const Logout = () => {
@@ -94,7 +95,8 @@ const navbarIcons = {
   bag: faShoppingBasket,
   barcode: faBarcode,
   add: faPlus,
-  signup: faUserPlus
+  signup: faUserPlus,
+  bars: faBars
 };
 
 export default navbarIcons;
