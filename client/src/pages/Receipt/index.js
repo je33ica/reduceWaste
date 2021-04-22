@@ -14,7 +14,17 @@ const Receipts = () => {
 
   const [resultsFromOcr, setResultsFromOcr] = useState([]);
 
-  // we check, using context, if the user is logged in and if so we redirect them to the account page
+
+
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [displayPopup, setDisplayPopup] = useState({
+    show: false,
+    type: "",
+    message: "",
+  });
+
+    // we check, using context, if the user is logged in and if so we redirect them to the account page
   // the only way a logged in user would be able to access this page is by typing it direct in to the url
   //but we still wanted to guard against it
   // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
@@ -24,14 +34,6 @@ const Receipts = () => {
   if (!isUserLoggedIn) {
     return <Redirect to="/" />;
   }
-
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [displayPopup, setDisplayPopup] = useState({
-    show: false,
-    type: "",
-    message: "",
-  });
 
   //helper function to convert image to base64
   const fileToDataUri = (image) => {
