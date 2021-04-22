@@ -16,18 +16,21 @@ const Receipts = () => {
       amount: 50,
       expiry: date,
       id: 2,
+      ean: "",
     },
     {
       productName: "beer",
       amount: 5,
       expiry: date,
       id: 3423,
+      ean: "",
     },
     {
       productName: "butter",
       amount: 77,
       expiry: date,
       id: 7,
+      ean: "",
     },
   ]);
 
@@ -84,14 +87,14 @@ const Receipts = () => {
 
   const updateElement = (value, target, id) => {
     let elementUpdated = false;
-    const tempResults = [...resultsFromOcr]
+    const tempResults = [...resultsFromOcr];
     for (let i = 0; i < tempResults.length && !elementUpdated; i++) {
       if (tempResults[i].id === id) {
         tempResults[i][target] = value;
         elementUpdated = true;
       }
     }
-    setResultsFromOcr(tempResults)
+    setResultsFromOcr(tempResults);
   };
 
   const uploadImage = async (e) => {
@@ -138,6 +141,7 @@ const Receipts = () => {
                   amount: "",
                   expiry: date,
                   id: index,
+                  ean: "",
                 };
               }
             );
