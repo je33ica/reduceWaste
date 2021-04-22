@@ -19,7 +19,9 @@ const AddProductForm = ({
         <label>Expiry</label>
         <input type="date" name="expiry" ref={expiryDate} required></input>
         <p>
-          <button>Add product</button>
+          <button className="btn" type="submit">
+            Add product
+          </button>
         </p>
       </form>
     </div>
