@@ -1,16 +1,42 @@
 import { useContext, useState } from "react";
 import { Redirect } from "react-router";
+import { uuid } from "uuidv4";
 import NavBar from "../../components/NavBar";
 import userContext from "../../utils/context/userContext";
 import ImageUpload from "../../components/ImageUpload";
 import ocrParser from "../../utils/ocrParser/ocrParser";
 import ProductForm from "../../components/ProductForm";
-import { uuid } from "uuidv4";
+import API from "../../utils/api";
 
 const Receipts = () => {
   const date = new Date().toISOString().slice(0, 10);
 
-  const [resultsFromOcr, setResultsFromOcr] = useState([]);
+  const [resultsFromOcr, setResultsFromOcr] = useState([
+    {
+      productName: "GRILLS",
+      amount: "",
+      expiry: "2021-04-08",
+      id: 1,
+      ean: "",
+      date: "hello",
+    },
+    {
+      productName: "OREO",
+      amount: "5",
+      expiry: "2021-04-08",
+      id: 32,
+      ean: "",
+      date: "hello",
+    },
+    {
+      productName: "BANANA",
+      amount: "8",
+      expiry: "2021-04-08",
+      id: 33,
+      ean: "",
+      date: "hello",
+    },
+  ]);
 
   // we check, using context, if the user is logged in and if so we redirect them to the account page
   // the only way a logged in user would be able to access this page is by typing it direct in to the url
@@ -150,6 +176,13 @@ const Receipts = () => {
     }
   };
 
+  const submitProductCardstoDB = () => {
+    console.log(resultsFromOcr);
+    API.addProducts(resultsFromOcr)
+      .then((res) => res.json())
+      .then((result) => console.log(result));
+  };
+
   const navBarItems = [
     { path: "/account", text: "Account" },
     { path: "/products", text: "Sign Up" },
@@ -185,6 +218,7 @@ const Receipts = () => {
           resultsFromOcr={resultsFromOcr}
           updateElement={updateElement}
           removeCard={removeCard}
+          submitProductCardstoDB={submitProductCardstoDB}
         />
       )}
     </>

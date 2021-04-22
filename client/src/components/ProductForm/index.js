@@ -1,15 +1,18 @@
 import ProductCard from "../ProductCard";
-import {
-  cardContainer,
-  productForm,
+import { cardContainer, productForm, btn } from "./product.module.scss";
+
+const ProductForm = ({
+  addCard,
+  resultsFromOcr,
   removeCard,
   updateElement,
-  btn,
-} from "./product.module.scss";
-
-const ProductForm = ({ addCard, resultsFromOcr }) => {
+  submitProductCardstoDB,
+}) => {
   return (
     <form className={productForm}>
+      <button type="button" className={btn} onClick={submitProductCardstoDB}>
+        Save Products to Database
+      </button>
       <button type="button" onClick={() => addCard("start")} className={btn}>
         Add Item
       </button>
