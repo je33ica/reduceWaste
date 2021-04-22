@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import {menuCont, menuItem} from "./mobilenav.module.scss"
 
 const Menu = ({ items }) => {
   return (
-    <ul>
+    <ul className={menuCont}>
       {items.map((item) => {
         return (
-          <li className="" key={`${item.text}`}>
+          <li className={menuItem} key={`${item.text}`}>
             <Link to = {item.path}>{item.text}</Link>
           </li>
         );
