@@ -5,6 +5,7 @@ import userContext from "../../utils/context/userContext";
 import ImageUpload from "../../components/ImageUpload";
 import ocrParser from "../../utils/ocrParser/ocrParser";
 import ProductForm from "../../components/ProductForm";
+import { uuid } from "uuidv4";
 
 const Receipts = () => {
   const date = new Date().toISOString().slice(0, 10);
@@ -79,7 +80,7 @@ const Receipts = () => {
       productName: "",
       amount: "",
       expiry: date,
-      id: resultsFromOcr[resultsFromOcr.length - 1].id + 1,
+      id: uuid(),
       ean: "",
     };
 
@@ -123,17 +124,15 @@ const Receipts = () => {
           } else {
             //display the data
             const setFromOcr = new Set(ocrParser(results).slice(3));
-            const cardObjects = Array.from(setFromOcr).map(
-              (productStr, index) => {
-                return {
-                  productName: productStr,
-                  amount: "",
-                  expiry: date,
-                  id: index,
-                  ean: "",
-                };
-              }
-            );
+            const cardObjects = Array.from(setFromOcr).map((productStr) => {
+              return {
+                productName: productStr,
+                amount: "",
+                expiry: date,
+                id: uuid(),
+                ean: "",
+              };
+            });
             setResultsFromOcr(cardObjects);
           }
         })
@@ -162,10 +161,6 @@ const Receipts = () => {
             Using the service below, you can upload scanned receipts and our
             Artificial Intelligence service will read the receipt for product
             information.
-          </p>
-          <p>
-            Any products which match products you have saved before will be
-            populated with the data stored in your database.
           </p>
           <small>
             Our AI service is constantly improving, however there may be some
