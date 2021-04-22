@@ -9,6 +9,7 @@ import {
 } from "./nav.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import icons from "../../icons/";
+import NavIcon from "./NavIcon";
 
 const NavBar = ({ navBarItems }) => {
   // const location = useLocation();
@@ -24,7 +25,7 @@ const NavBar = ({ navBarItems }) => {
         {navBarItems.map((item) => {
           return (
             <li className={navItem} key={`${item.text}`}>
-              <Link to={item.path}>{item.text}</Link>
+              <NavIcon text={item.text} path={item.path} icon={item.icon}/>
             </li>
           );
         })}

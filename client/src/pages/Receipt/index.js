@@ -7,6 +7,7 @@ import ImageUpload from "../../components/ImageUpload";
 import ocrParser from "../../utils/ocrParser/ocrParser";
 import ProductForm from "../../components/ProductForm";
 import API from "../../utils/api";
+import navbarIcons from "../../icons/navbarIcons";
 
 const Receipts = () => {
   const date = new Date().toISOString().slice(0, 10);
@@ -207,8 +208,8 @@ const Receipts = () => {
   };
 
   const navBarItems = [
-    { path: "/account", text: "Account" },
-    { path: "/products", text: "Sign Up" },
+    { path: "/account", text: "Account", icon: navbarIcons.user },
+    { path: "/products", text: "Products", icon: navbarIcons.bag },
   ];
   return (
     <>
