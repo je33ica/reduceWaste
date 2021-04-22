@@ -177,10 +177,33 @@ const Receipts = () => {
   };
 
   const submitProductCardstoDB = () => {
-    console.log(resultsFromOcr);
+    setLoading(true);
     API.addProducts(resultsFromOcr)
       .then((res) => res.json())
-      .then((result) => console.log(result));
+      .then((result) => {
+        setLoading(false);
+        setDisplayPopup({
+          show: true,
+          type: "success",
+          message: "Products successfully saved to database",
+        });
+        setTimeout(() => {
+          setDisplayPopup({
+            show: false,
+            type: "success",
+            message: "",
+          });
+        }, 2000);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setDisplayPopup({
+          show: true,
+          type: "failure",
+          message:
+            "Error submitting products to database. Please try again later",
+        });
+      });
   };
 
   const navBarItems = [
@@ -219,6 +242,8 @@ const Receipts = () => {
           updateElement={updateElement}
           removeCard={removeCard}
           submitProductCardstoDB={submitProductCardstoDB}
+          loading={loading}
+          displayPopup={displayPopup}
         />
       )}
     </>
