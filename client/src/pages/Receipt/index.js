@@ -3,9 +3,8 @@ import { Redirect } from "react-router";
 import NavBar from "../../components/NavBar";
 import userContext from "../../utils/context/userContext";
 import ImageUpload from "../../components/ImageUpload";
-import ReceiptCard from "../../components/ReceiptCard";
 import ocrParser from "../../utils/ocrParser/ocrParser";
-import { cardContainer, receiptForm } from "./receipt.module.scss";
+import ProductForm from "../../components/ProductForm";
 
 const Receipts = () => {
   const date = new Date().toISOString().slice(0, 10);
@@ -73,6 +72,18 @@ const Receipts = () => {
       }
     }
     setResultsFromOcr(tempResults);
+  };
+
+  const addCard = () => {
+    const tempObj = {
+      productName: "",
+      amount: "",
+      expiry: date,
+      id: resultsFromOcr[resultsFromOcr.length - 1].id + 1,
+      ean: "",
+    };
+
+    setResultsFromOcr([tempObj, ...resultsFromOcr]);
   };
 
   const uploadImage = async (e) => {
@@ -146,7 +157,7 @@ const Receipts = () => {
       <NavBar navBarItems={navBarItems} />
       <div className="grid">
         <div className="grid-item">
-          <h1>Reduce Waste Receipt Uploader</h1>
+          <h1 style={{ textAlign: "center" }}>Reduce Waste Receipt Uploader</h1>
           <p>
             Using the service below, you can upload scanned receipts and our
             Artificial Intelligence service will read the receipt for product
@@ -171,18 +182,12 @@ const Receipts = () => {
         </div>
       </div>
       {resultsFromOcr.length > 0 && (
-        <form className={receiptForm}>
-          <div className={cardContainer}>
-            {resultsFromOcr.map((product) => (
-              <ReceiptCard
-                product={product}
-                key={product.id}
-                removeCard={removeCard}
-                updateElement={updateElement}
-              />
-            ))}
-          </div>
-        </form>
+        <ProductForm
+          addCard={addCard}
+          resultsFromOcr={resultsFromOcr}
+          updateElement={updateElement}
+          removeCard={removeCard}
+        />
       )}
     </>
   );

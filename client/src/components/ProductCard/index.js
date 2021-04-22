@@ -1,6 +1,6 @@
-import { card } from "./receiptcard.module.scss";
+import { card } from "./productcard.module.scss";
 
-const ReceiptCard = ({ product, removeCard, updateElement }) => {
+const ProductCard = ({ product, removeCard, updateElement }) => {
   return (
     <div className={card}>
       <label htmlFor="productName">Product</label>
@@ -55,4 +55,4 @@ const ReceiptCard = ({ product, removeCard, updateElement }) => {
   );
 };
 
-export default ReceiptCard;
+export default ProductCard;
