@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-
+import AddProductForm from "../../components/AddProductForm";
 import NavBar from "../../components/NavBar";
 
 
@@ -36,6 +36,12 @@ const AddProducts = () => {
   return (
     <>
       <NavBar navBarItems={navBarItems} />
+      <AddProductForm
+        productName={productNameInput}
+        productAmount={productAmountInput}
+        expiryDate={expiryDateInput}
+        submitProductHandler={submitProductHandler}
+      />
      
     </>
   );
