@@ -2,13 +2,10 @@ import { useRef, useState } from "react";
 import AddProductForm from "../../components/AddProductForm";
 import NavBar from "../../components/NavBar";
 
-
 const AddProducts = () => {
   const productNameInput = useRef("");
   const productAmountInput = useRef("");
   const expiryDateInput = useRef("");
-
- 
 
   const submitProductHandler = (e) => {
     e.preventDefault();
@@ -24,9 +21,25 @@ const AddProducts = () => {
       },
     ];
     console.log("im the new prodcut", addNewProduct);
+    fetch("api/users/products", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addNewProduct),
+    })
+      .then((res) => res.json())
+      .then((result) => {})
+      .catch((err) =>
+        setDisplayPopup({
+          show: true,
+          type: "failure",
+          message:
+            "Sorry but your product could not be saved right now, please try again later",
+        })
+      );
+  };
 
-   
-    
   const navBarItems = [
     { path: "/account", text: "Account" },
     { path: "/barcode", text: "Barcode scanner" },
@@ -42,7 +55,6 @@ const AddProducts = () => {
         expiryDate={expiryDateInput}
         submitProductHandler={submitProductHandler}
       />
-     
     </>
   );
 };
