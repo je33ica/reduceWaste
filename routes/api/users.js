@@ -51,7 +51,8 @@ router.post("/login", invalidateSession, userController.userLogIn);
 router.post("/logout", destroySession);
 
 router.get("/products", isUserLoggedIn, userController.getProducts);
-router.put("/products", isUserLoggedIn, userController.addProduct);
+router.put("/products", userController.addProduct);
+// isUserLoggedIn,
 // .put(userController.addProduct)
 
 module.exports = router;

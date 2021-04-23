@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import AddProductForm from "../../components/AddProductForm";
 import NavBar from "../../components/NavBar";
 
@@ -13,31 +13,48 @@ const AddProducts = () => {
     const amount = productAmountInput.current.value.trim();
     const expiry = expiryDateInput.current.value.trim();
 
-    const addNewProduct = {
-      productName,
-      amount,
-      expiry,
-    };
+    const addNewProduct = [
+      {
+        productName,
+        amount,
+        expiry,
+      },
+    ];
     console.log("im the new prodcut", addNewProduct);
-
-    //before fetch -> render the loading component
-    //insde 2nd .then -> unrender loading component
-    //render a a pop up alert based on the response
-    //hanlde the promise relut with the succes/fail message - use registration form
-
-    // fetch("api/users/products", {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(addNewProduct),
-
-    // })
-    // .then((res) => res.json())
-    // .then((result) => {
-
-    // })
+    fetch("api/users/products", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addNewProduct),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setLoading(false);
+        if (result.message) {
+          setDisplayPopup({
+            show: true,
+            type: "failure",
+            message: result.message,
+          });
+        } else {
+          setDisplayPopup({
+            show: true,
+            type: "success",
+            message: "Product successfully saved",
+          });
+        }
+      })
+      .catch((err) =>
+        setDisplayPopup({
+          show: true,
+          type: "failure",
+          message:
+            "Sorry but your product could not be saved right now, please try again later",
+        })
+      );
   };
+
   const navBarItems = [
     { path: "/account", text: "Account" },
     { path: "/barcode", text: "Barcode scanner" },
@@ -53,6 +70,12 @@ const AddProducts = () => {
         expiryDate={expiryDateInput}
         submitProductHandler={submitProductHandler}
       />
+
+      {loading && <Loading />}
+      {displayPopup.show && (
+        //popup
+        <PopUpAlert type={displayPopup.type} message={displayPopup.message} />
+      )}
     </>
   );
 };
