@@ -70,6 +70,12 @@ const AddProducts = () => {
         expiryDate={expiryDateInput}
         submitProductHandler={submitProductHandler}
       />
+
+      {loading && <Loading />}
+      {displayPopup.show && (
+        //popup
+        <PopUpAlert type={displayPopup.type} message={displayPopup.message} />
+      )}
     </>
   );
 };
