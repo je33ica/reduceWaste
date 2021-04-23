@@ -6,6 +6,7 @@ import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
 import userContext from "../../utils/context/userContext";
 import API from "../../utils/api";
+import navbarIcons from "../../icons/navbarIcons";
 
 const Login = () => {
   const emailInput = useRef("");
@@ -98,7 +99,7 @@ const Login = () => {
       .catch((err) => console.log(err));
   };
 
-  const navBarItems = [{ path: "/registration", text: "Sign Up" }];
+  const navBarItems = [{ path: "/registration", text: "Sign Up", icon: navbarIcons.signup }];
 
   return (
     <>

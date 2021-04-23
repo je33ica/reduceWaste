@@ -1,7 +1,6 @@
 import "./App.scss";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Cookies from "js-cookie";
 import userContext from "./utils/context/userContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -16,15 +15,10 @@ import Barcode from "./pages/Barcode";
 //checking response from back end
 function App() {
   const [isUserLoggedIn, setUserLoginState] = useState(false);
-  // console.log(Cookies.get("connect.sid"));
 
   const setUserLogInStatus = (bool) => {
     setUserLoginState(bool);
   };
-  // we need to check cookies
-  // useEffect(() => {
-  //   console.log(document.cookie)
-  // }, []);
 
   return (
     <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>

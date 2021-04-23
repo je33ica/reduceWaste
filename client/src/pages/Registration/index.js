@@ -6,6 +6,7 @@ import RegistrationForm from "../../components/RegistrationForm";
 import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
 import API from "../../utils/api";
+import navbarIcons from "../../icons/navbarIcons";
 
 const Registration = () => {
   const emailInput = useRef("");
@@ -121,8 +122,7 @@ const Registration = () => {
   };
 
   const navBarItems = [
-    { path: "/login", text: "Login" },
-    { path: "/registration", text: "Sign Up" },
+    { path: "/login", text: "Login", icon: navbarIcons.login },
   ];
   return (
     <>

@@ -1,0 +1,28 @@
+$scale: 1;
+$arrow: 20px;
+$grey: #353b48;
+$translate-y: calc(-100% - $arrow);
+
+.navIcon {
+  font-size: 1.3rem;
+  position: relative;
+  display: inline;
+};
+
+.holder{
+  position: relative;
+  display: inline;
+}
+
+.tooltip{
+  position: absolute;
+  background-color: $grey;
+  text-align: center;
+  width: 115px;
+  font-size: 0.8rem;
+  padding: .5rem;
+  border-radius: 2px;
+  right: -50px;
+}
+
+

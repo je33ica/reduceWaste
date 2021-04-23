@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import NavBar from "../../components/NavBar";
+import navbarIcons from "../../icons/navbarIcons"
 
 const Account = () => {
   useEffect(() => {
@@ -10,15 +11,15 @@ const Account = () => {
       });
   }, []);
   const navBarItems = [
-    { path: "/products", text: "View all products" },
-    { path: "/addProducts", text: "Add new products" },
-    { path: "/receipt", text: "Upload receipts" },
-    { path: "/barcode", text: "Barcode scanner" },
+    { path: "/products", text: "View all products", icon: navbarIcons.bag },
+    { path: "/addProducts", text: "Add new products", icon: navbarIcons.add},
+    { path: "/receipt", text: "Upload receipts", icon: navbarIcons.upload },
+    { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
   ];
   return (
     <>
       <NavBar navBarItems={navBarItems} />
-      <h1> Welcome to the Account page</h1>;
+      <h1> Welcome to the Account page</h1>
     </>
   );
 };
