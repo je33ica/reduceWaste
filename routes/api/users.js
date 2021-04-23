@@ -16,6 +16,16 @@ const destroySession = (req, res, next) => {
   });
 };
 
+const homePageCheck = (req, res, next) => {
+  if (req.session.userId !== undefined) {
+    return next();
+  }
+
+  res.status(200).send({
+    message: "No user currently logged in!",
+  });
+};
+
 const isUserLoggedIn = (req, res, next) => {
   if (req.session.userId !== undefined) {
     return next();
@@ -26,6 +36,12 @@ const isUserLoggedIn = (req, res, next) => {
     message: "user must be signed in to access this page",
   });
 };
+
+//creating a default route that simply gets the users identity, this is required for
+// some front end routing]
+
+router.get("/", homePageCheck, userController.getUser);
+
 //due to express routing, the "/" matches "/api/users"
 // because of the folder/file structure
 router.post("/sign-up", invalidateSession, userController.userSignUp);

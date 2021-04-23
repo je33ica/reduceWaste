@@ -1,10 +1,11 @@
 import NavBar from "../../components/NavBar";
 import Landing from "../../components/Landing";
+import navbarIcons from "../../icons/navbarIcons"
 
 const Home = () => {
   const navBarItems = [
-    { path: "/login", text: "Login" },
-    { path: "/registration", text: "Sign Up" },
+    { path: "/login", text: "Login", icon: navbarIcons.login },
+    { path: "/registration", text: "Sign Up", icon: navbarIcons.signup },
   ];
   return (
     <>

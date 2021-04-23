@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const LoginForm = ({ emailInput, passwordInput, loginHandler }) => {
   return (
     <>
-      <form onSubmit={loginHandler}>
+      <form className="form" onSubmit={loginHandler}>
         <h3>Login</h3>
         <label htmlFor="email">Email</label>
         <input type="email" name="email" ref={emailInput} />
