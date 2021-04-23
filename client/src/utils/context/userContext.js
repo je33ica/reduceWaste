@@ -7,6 +7,7 @@ import { createContext } from "react";
 //we define the schema here, the values are provided by the provider
 const userContext = createContext({
   isUserLoggedIn: undefined,
+  setUserLogInStatus: () => {},
 });
 
 export default userContext;

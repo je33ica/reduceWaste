@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import userContext from "./utils/context/userContext";
 import Home from "./pages/Home";
@@ -15,8 +15,13 @@ import Barcode from "./pages/Barcode";
 //checking response from back end
 function App() {
   const [isUserLoggedIn, setUserLoginState] = useState(false);
+
+  const setUserLogInStatus = (bool) => {
+    setUserLoginState(bool);
+  };
+
   return (
-    <userContext.Provider value={{ isUserLoggedIn }}>
+    <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>
       <Router>
         <Switch>
           <Route exact path="/">
