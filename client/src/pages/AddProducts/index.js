@@ -29,7 +29,22 @@ const AddProducts = () => {
       body: JSON.stringify(addNewProduct),
     })
       .then((res) => res.json())
-      .then((result) => {})
+      .then((result) => {
+        setLoading(false);
+        if (result.message) {
+          setDisplayPopup({
+            show: true,
+            type: "failure",
+            message: result.message,
+          });
+        } else {
+          setDisplayPopup({
+            show: true,
+            type: "success",
+            message: "Product successfully saved",
+          });
+        }
+      })
       .catch((err) =>
         setDisplayPopup({
           show: true,
