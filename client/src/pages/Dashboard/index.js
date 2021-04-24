@@ -52,7 +52,24 @@ const Dashboard = () => {
     }
     API.findRecipes(ingredientsArr)
       .then((res) => res.json())
-      .then((results) => setRecipes(results))
+      .then((results) => {
+        setRecipes(results);
+        if (recipes.length === 0){
+          setDisplayPopup({
+            show: true,
+            type: "failure",
+            message: "Sorry, no recipes were found which matched those ingredients",
+          })
+          setTimeout(() => {
+            setDisplayPopup({
+              show: false,
+              type: "",
+              message: "",
+            })
+          }, 2000)
+          return  
+        }
+      })
       .catch((err) => console.log(err));
 
   } 

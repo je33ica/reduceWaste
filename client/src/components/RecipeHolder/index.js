@@ -1,6 +1,13 @@
-const RecipeHolder = ({searchRecipes}) => {
+import RecipeCard from "./RecipeCard"
+
+const RecipeHolder = ({searchRecipes,recipes}) => {
+  console.log(recipes)
   return (
-    <button type="button" onClick={searchRecipes}>Find recipes</button>
+    <div className="recipeCont">
+        <button type="button" onClick={searchRecipes}>Find recipes</button>
+        {recipes.length > 1 ? recipes.map(({recipe}) => <RecipeCard recipe={recipe}/>) : <h1>Hit find to search for recipes</h1>}
+    </div>
+
   )
 }
 
