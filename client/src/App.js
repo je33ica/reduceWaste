@@ -2,6 +2,7 @@ import "./App.scss";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import userContext from "./utils/context/userContext";
+import menuContext from "./utils/context/menuContext"
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
@@ -20,39 +21,47 @@ function App() {
     setUserLoginState(bool);
   };
 
+  const [displayMenu, setDisplayMenu] = useState(false);
+
+  const toggleMenu = (bool) => {
+    setDisplayMenu(bool)
+  }
+
   return (
     <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/registration">
-            <Registration />
-          </Route>
-          <Route path="/account">
-            <Account />
-          </Route>
-          <Route path="/products">
-            <Products />
-          </Route>
-          <Route path="/addProducts">
-            <AddProducts />
-          </Route>
-          <Route path="/receipt">
-            <Receipt />
-          </Route>
-          <Route path="/barcode">
-            <Barcode />
-          </Route>
-          <Route path="*">
-            <NoMatch />
-          </Route>
-        </Switch>
-      </Router>
+      <menuContext.Provider value={{displayMenu, toggleMenu}}>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/registration">
+              <Registration />
+            </Route>
+            <Route path="/account">
+              <Account />
+            </Route>
+            <Route path="/products">
+              <Products />
+            </Route>
+            <Route path="/addProducts">
+              <AddProducts />
+            </Route>
+            <Route path="/receipt">
+              <Receipt />
+            </Route>
+            <Route path="/barcode">
+              <Barcode />
+            </Route>
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        </Router>
+      </menuContext.Provider>
     </userContext.Provider>
   );
 }
