@@ -5,7 +5,31 @@ const ocrParser = (arrFromOcr) => {
   return arrFromOcr.reduce((accArr, ocrObject) => {
     if (invalid.test(ocrObject.text)) {
       return accArr;
-    }
+    } else if (ocrObject.text.toLowerCase().includes("www.")){
+      return accArr;
+    } else if (ocrObject.text.toLowerCase().includes("tesco")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes("aldi")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes("ltd")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes("£")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes("$")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes("multibuy")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes("€")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes("manager")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes(",")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes(".")){
+      return accArr
+    } else if (ocrObject.text.toLowerCase().includes("total")){
+      return accArr
+    } 
 
     accArr.push(ocrObject.text);
     return accArr;

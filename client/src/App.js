@@ -8,7 +8,6 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Account from "./pages/Account";
 import NoMatch from "./pages/NoMatch";
-import Products from "./pages/Products";
 import AddProducts from "./pages/AddProducts";
 import Receipt from "./pages/Receipt";
 import Barcode from "./pages/Barcode";
@@ -44,9 +43,6 @@ function App() {
             </Route>
             <Route path="/account">
               <Account />
-            </Route>
-            <Route path="/products">
-              <Products />
             </Route>
             <Route path="/addProducts">
               <AddProducts />

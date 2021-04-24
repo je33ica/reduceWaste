@@ -1,4 +1,4 @@
-import { Link /*useLocation*/ } from "react-router-dom";
+import { Link , useLocation } from "react-router-dom";
 import { useState } from "react";
 import {useMediaQuery} from "react-responsive";
 import {
@@ -14,12 +14,25 @@ import icons from "../../icons/";
 import NavIcon from "./NavIcon";
 import Tooltip from "./NavIcon/Tooltip";
 import MobileNav from "./MobileNav";
+import navbarIcons from "../../icons/navbarIcons";
 
 const NavBar = ({ navBarItems }) => {
-  // const location = useLocation();
+  const location = useLocation();
+
+
 
   const [displayTooltip, setTooltip] = useState(false);
   const isSmallerScreen = useMediaQuery({ query: "(max-width: 768px" });
+
+  const logoutItem = {
+    path: "/logout", text: "Logout", icon: navbarIcons.logout
+  }
+
+  const itemsWithLogout = [...navBarItems, logoutItem];
+
+  if (location.pathname === "/" || location.pathname === "/login"){
+    itemsWithLogout.pop()
+  }
 
   return (
     <nav className={fullNav}>
@@ -38,9 +51,9 @@ const NavBar = ({ navBarItems }) => {
       </Link>
       <ul className={navList}>
         {isSmallerScreen ? (
-          <MobileNav items={navBarItems} />
+          <MobileNav items={itemsWithLogout} />
         ) : (
-          navBarItems.map((item) => {
+          itemsWithLogout.map((item) => {
             return (
               <li className={navItem} key={`${item.text}`}>
                 <NavIcon text={item.text} path={item.path} icon={item.icon} />

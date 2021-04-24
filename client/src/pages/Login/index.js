@@ -33,7 +33,7 @@ const Login = () => {
   // we add a quick check to the backend to see if the user is currently logged in
 
   if (isUserLoggedIn) {
-    return <Redirect to="/products" />;
+    return <Redirect to="/dashboard" />;
   }
   const loginHandler = (e) => {
     e.preventDefault();
