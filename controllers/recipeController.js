@@ -13,7 +13,7 @@ module.exports = {
       method: "GET",
       url: `https://api.edamam.com/search?app_id=${appID}&app_key=${apiKey}&q=${ingredients}`,
     })
-      .then((response) => res.json(response.data))
+      .then((response) => res.json(response.data.hits))
       .catch((err) =>
         res.status(500).json({
           message:
