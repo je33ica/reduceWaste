@@ -11,6 +11,7 @@ import Products from "./pages/Products";
 import AddProducts from "./pages/AddProducts";
 import Receipt from "./pages/Receipt";
 import Barcode from "./pages/Barcode";
+import Dashboard from "./pages/Dashboard";
 
 //checking response from back end
 function App() {
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/account">
             <Account />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
           </Route>
           <Route path="/products">
             <Products />
