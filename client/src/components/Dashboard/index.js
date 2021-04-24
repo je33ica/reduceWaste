@@ -1,6 +1,4 @@
-import Moment from "react-moment";
-
-const DashboardTable = ({ products }) => {
+const DashboardTable = ({ products, ingredients, updateIngredients }) => {
   const daysToExpiry = (expiry) => {
     const dateNow = Date.now();
     const expiryToUnix = Date.parse(expiry);
@@ -29,6 +27,7 @@ const DashboardTable = ({ products }) => {
             <th>Category</th>
             <th>Expiry date</th>
             <th>Days until expiry</th>
+            <th>Add to recipe finder</th>
           </tr>
           {products.map((product) => {
             return (
@@ -38,6 +37,7 @@ const DashboardTable = ({ products }) => {
                 <td>{product.category || "General"}</td>
                 <td>{product.expiry.slice(0, 10)}</td>
                 <td>{daysToExpiry(product.expiry)}</td>
+                <td><input type="checkbox" name={product.productName} value={ingredients[product.productName]} onChange={(e) => updateIngredients(e.target.name)}/></td>
               </tr>
             );
           })}
