@@ -124,7 +124,7 @@ const Receipts = () => {
             });
           } else {
             //display the data
-            const setFromOcr = new Set(ocrParser(results).slice(3));
+            const setFromOcr = new Set(ocrParser(results));
             const cardObjects = Array.from(setFromOcr).map((productStr) => {
               return {
                 productName: productStr,
@@ -160,6 +160,7 @@ const Receipts = () => {
           type: "success",
           message: "Products successfully saved to database",
         });
+        setResultsFromOcr([])
         setTimeout(() => {
           setDisplayPopup({
             show: false,

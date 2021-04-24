@@ -5,6 +5,14 @@ const ocrParser = (arrFromOcr) => {
   return arrFromOcr.reduce((accArr, ocrObject) => {
     if (invalid.test(ocrObject.text)) {
       return accArr;
+    } else if (ocrObject.text.includes("www.")){
+      return accArr;
+    } else if (ocrObject.text.includes("TESCO STORES")){
+      return accArr
+    } else if (ocrObject.text.includes("ALDI")){
+      return accArr
+    } else if (ocrObject.text.includes("LTD")){
+      return accArr
     }
 
     accArr.push(ocrObject.text);
