@@ -15,7 +15,6 @@ const AddProducts = () => {
     type: "",
     message: "",
   });
-
   const submitProductHandler = (e) => {
     e.preventDefault();
     const productName = productNameInput.current.value.trim();
@@ -30,7 +29,6 @@ const AddProducts = () => {
       },
     ];
     console.log("im the new prodcut", addNewProduct);
-
     //before fetch -> render the loading component
     //insde 2nd .then -> unrender loading component
     //render a a pop up alert based on the response
