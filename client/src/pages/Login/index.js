@@ -32,7 +32,6 @@ const Login = () => {
   // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
   // we add a quick check to the backend to see if the user is currently logged in
 
-
   if (isUserLoggedIn) {
     return <Redirect to="/products" />;
   }
@@ -91,7 +90,7 @@ const Login = () => {
           });
           //use the useHistory hook from react-router to redirect the user once logged in successfully
           setTimeout(() => {
-            history.push("/account");
+            history.push("/dashboard");
             setUserLogInStatus(true);
           }, 1500);
         }
@@ -99,7 +98,9 @@ const Login = () => {
       .catch((err) => console.log(err));
   };
 
-  const navBarItems = [{ path: "/registration", text: "Sign Up", icon: navbarIcons.signup }];
+  const navBarItems = [
+    { path: "/registration", text: "Sign Up", icon: navbarIcons.signup },
+  ];
 
   return (
     <>
