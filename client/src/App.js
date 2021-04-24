@@ -30,42 +30,42 @@ function App() {
 
   return (
     <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>
-
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/registration">
-            <Registration />
-          </Route>
-          <Route path="/account">
-            <Account />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route path="/products">
-            <Products />
-          </Route>
-          <Route path="/addProducts">
-            <AddProducts />
-          </Route>
-          <Route path="/receipt">
-            <Receipt />
-          </Route>
-          <Route path="/barcode">
-            <Barcode />
-          </Route>
-          <Route path="*">
-            <NoMatch />
-          </Route>
-        </Switch>
-      </Router>
-
+      <menuContext.Provider value={{displayMenu, toggleMenu}}>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/registration">
+              <Registration />
+            </Route>
+            <Route path="/account">
+              <Account />
+            </Route>
+            <Route path="/products">
+              <Products />
+            </Route>
+            <Route path="/addProducts">
+              <AddProducts />
+            </Route>
+            <Route path="/receipt">
+              <Receipt />
+            </Route>
+            <Route path="/barcode">
+              <Barcode />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        </Router>
+      </menuContext.Provider>
     </userContext.Provider>
   );
 }
