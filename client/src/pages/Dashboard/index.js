@@ -20,13 +20,17 @@ const Dashboard = () => {
     { path: "/account", text: "Account", icon: navbarIcons.user }, //change icon?
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
     { path: "/receipt", text: "Upload receipt", icon: navbarIcons.add }, //chnage icon
-    { path: "/addProducts", text: "Upload receipt", icon: navbarIcons.add },
+    { path: "/addProducts", text: "Add products", icon: navbarIcons.add },
   ];
 
   return (
     <>
       <NavBar navBarItems={navBarItems} />
-      <DashboardTable products={products} />;
+      {products.length > 0 ? (
+        <DashboardTable products={products} />
+      ) : (
+        <h1>No products in DB</h1>
+      )}
     </>
   );
 };
