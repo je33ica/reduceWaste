@@ -6,17 +6,18 @@ import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
 import navbarIcons from "../../icons/navbarIcons";
 
-
 const AddProducts = () => {
   const date = new Date().toISOString().slice(0, 10);
-  const [products, setProducts] = useState([{
-    productName: "",
-    amount: "",
-    expiry: date,
-    id: uuid(),
-    ean: "",
-    category: ""
-  }]);
+  const [products, setProducts] = useState([
+    {
+      productName: "",
+      amount: "",
+      expiry: date,
+      id: uuid(),
+      ean: "",
+      category: "",
+    },
+  ]);
 
   const removeCard = (idToDelete) => {
     const productCards = [...products];
@@ -45,7 +46,7 @@ const AddProducts = () => {
       expiry: date,
       id: uuid(),
       ean: "",
-      category: ""
+      category: "",
     };
     if (position === "start") {
       setProducts([tempObj, ...products]);
@@ -66,6 +67,7 @@ const AddProducts = () => {
   });
   const submitProductHandler = (e) => {
     e.preventDefault();
+
     // const productName = productNameInput.current.value.trim();
     // const amount = productAmountInput.current.value.trim();
     // const expiry = expiryDateInput.current.value.trim();
@@ -122,6 +124,7 @@ const AddProducts = () => {
     { path: "/account", text: "Account", icon: navbarIcons.user },
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
     { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload },
+    { path: "/dashboard", text: "Dashboard", icon: navbarIcons.bag },
   ];
 
   return (

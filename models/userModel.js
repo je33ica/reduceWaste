@@ -48,6 +48,9 @@ const UserSchema = new Schema({
         required: "Product expiry date required",
         min: Date.now,
       },
+      category: {
+        type: String,
+      },
     },
   ],
 

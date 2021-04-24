@@ -12,6 +12,7 @@ import Products from "./pages/Products";
 import AddProducts from "./pages/AddProducts";
 import Receipt from "./pages/Receipt";
 import Barcode from "./pages/Barcode";
+import Dashboard from "./pages/Dashboard";
 
 //checking response from back end
 function App() {
@@ -29,39 +30,42 @@ function App() {
 
   return (
     <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>
-      <menuContext.Provider value={{displayMenu, toggleMenu}}>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/registration">
-              <Registration />
-            </Route>
-            <Route path="/account">
-              <Account />
-            </Route>
-            <Route path="/products">
-              <Products />
-            </Route>
-            <Route path="/addProducts">
-              <AddProducts />
-            </Route>
-            <Route path="/receipt">
-              <Receipt />
-            </Route>
-            <Route path="/barcode">
-              <Barcode />
-            </Route>
-            <Route path="*">
-              <NoMatch />
-            </Route>
-          </Switch>
-        </Router>
-      </menuContext.Provider>
+
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/registration">
+            <Registration />
+          </Route>
+          <Route path="/account">
+            <Account />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/products">
+            <Products />
+          </Route>
+          <Route path="/addProducts">
+            <AddProducts />
+          </Route>
+          <Route path="/receipt">
+            <Receipt />
+          </Route>
+          <Route path="/barcode">
+            <Barcode />
+          </Route>
+          <Route path="*">
+            <NoMatch />
+          </Route>
+        </Switch>
+      </Router>
+
     </userContext.Provider>
   );
 }
