@@ -67,7 +67,6 @@ const AddProducts = () => {
   });
   const submitProductHandler = (e) => {
     e.preventDefault();
-
     // const productName = productNameInput.current.value.trim();
     // const amount = productAmountInput.current.value.trim();
     // const expiry = expiryDateInput.current.value.trim();
@@ -124,7 +123,6 @@ const AddProducts = () => {
     { path: "/account", text: "Account", icon: navbarIcons.user },
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
     { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload },
-    { path: "/dashboard", text: "Dashboard", icon: navbarIcons.bag },
   ];
 
   return (
