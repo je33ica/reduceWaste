@@ -1,0 +1,36 @@
+@import "../../styles/colors";
+
+.cardContainer {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1200px;
+  margin: 25px auto;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .cardContainer {
+    grid-template-columns: repeat(2, 1fr);
+    width: 90%;
+  }
+}
+
+@media (max-width: 400px) {
+  .cardContainer {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
+  }
+}
+
+.card{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: $lightred;
+  text-align: center;
+}
+
+.link {
+  text-align: center;
+  height: 45px;
+  padding-top: 15px;
+}

@@ -54,7 +54,7 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then((results) => {
         setRecipes(results);
-        if (recipes.length === 0){
+        if (recipes[0].length === 0){
           setDisplayPopup({
             show: true,
             type: "failure",

@@ -1,8 +1,12 @@
+import { card, link } from "./recipe.module.scss";
+
 const RecipeCard = ({recipe}) => {
   return (
-    <div>
-      <h4>{recipe.label}</h4>
-    </div>
+    <a href={recipe.url} target="_blank" className={card}>
+      <img src={recipe.image} alt={recipe.label}/>
+      <div className={link}>{recipe.label}
+      </div> 
+    </a>
   )
 }
 
