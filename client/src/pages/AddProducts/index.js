@@ -1,13 +1,62 @@
 import { useRef, useState } from "react";
-import AddProductForm from "../../components/AddProductForm";
+import ProductForm from "../../components/ProductForm";
+import { uuid } from "uuidv4";
 import NavBar from "../../components/NavBar";
 import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
+import navbarIcons from "../../icons/navbarIcons";
+
 
 const AddProducts = () => {
-  const productNameInput = useRef("");
-  const productAmountInput = useRef("");
-  const expiryDateInput = useRef("");
+  const date = new Date().toISOString().slice(0, 10);
+  const [products, setProducts] = useState([{
+    productName: "",
+    amount: "",
+    expiry: date,
+    id: uuid(),
+    ean: "",
+    category: ""
+  }]);
+
+  const removeCard = (idToDelete) => {
+    const productCards = [...products];
+    const filtered = productCards.filter(
+      (product) => product.id !== idToDelete
+    );
+    setProducts(filtered);
+  };
+
+  const updateElement = (value, target, id) => {
+    let elementUpdated = false;
+    const tempResults = [...products];
+    for (let i = 0; i < tempResults.length && !elementUpdated; i++) {
+      if (tempResults[i].id === id) {
+        tempResults[i][target] = value;
+        elementUpdated = true;
+      }
+    }
+    setProducts(tempResults);
+  };
+
+  const addCard = (position) => {
+    const tempObj = {
+      productName: "",
+      amount: "",
+      expiry: date,
+      id: uuid(),
+      ean: "",
+      category: ""
+    };
+    if (position === "start") {
+      setProducts([tempObj, ...products]);
+    } else {
+      setProducts([...products, tempObj]);
+    }
+  };
+
+  // const productNameInput = useRef("");
+  // const productAmountInput = useRef("");
+  // const expiryDateInput = useRef("");
 
   const [loading, setLoading] = useState(false);
   const [displayPopup, setDisplayPopup] = useState({
@@ -17,18 +66,18 @@ const AddProducts = () => {
   });
   const submitProductHandler = (e) => {
     e.preventDefault();
-    const productName = productNameInput.current.value.trim();
-    const amount = productAmountInput.current.value.trim();
-    const expiry = expiryDateInput.current.value.trim();
+    // const productName = productNameInput.current.value.trim();
+    // const amount = productAmountInput.current.value.trim();
+    // const expiry = expiryDateInput.current.value.trim();
 
-    const addNewProduct = [
-      {
-        productName,
-        amount,
-        expiry,
-      },
-    ];
-    console.log("im the new prodcut", addNewProduct);
+    // const addNewProduct = [
+    //   {
+    //     productName,
+    //     amount,
+    //     expiry,
+    //   },
+    // ];
+    // console.log("im the new prodcut", addNewProduct);
     //before fetch -> render the loading component
     //insde 2nd .then -> unrender loading component
     //render a a pop up alert based on the response
@@ -41,7 +90,7 @@ const AddProducts = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(addNewProduct),
+      body: JSON.stringify(products),
     })
       .then((res) => res.json())
       .then((result) => {
@@ -70,19 +119,22 @@ const AddProducts = () => {
       );
   };
   const navBarItems = [
-    { path: "/account", text: "Account" },
-    { path: "/barcode", text: "Barcode scanner" },
-    { path: "/receipt", text: "Upload receipt" },
+    { path: "/account", text: "Account", icon: navbarIcons.user },
+    { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
+    { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload },
   ];
 
   return (
     <>
       <NavBar navBarItems={navBarItems} />
-      <AddProductForm
-        productName={productNameInput}
-        productAmount={productAmountInput}
-        expiryDate={expiryDateInput}
-        submitProductHandler={submitProductHandler}
+      <ProductForm
+        addCard={addCard}
+        productsArr={products}
+        removeCard={removeCard}
+        updateElement={updateElement}
+        submitProductCardstoDB={submitProductHandler}
+        loading={loading}
+        displayPopup={displayPopup}
       />
 
       {loading && <Loading />}

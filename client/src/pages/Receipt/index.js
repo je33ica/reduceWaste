@@ -79,6 +79,7 @@ const Receipts = () => {
       expiry: date,
       id: uuid(),
       ean: "",
+      category: ""
     };
     if (position === "start") {
       setResultsFromOcr([tempObj, ...resultsFromOcr]);
@@ -131,6 +132,7 @@ const Receipts = () => {
                 expiry: date,
                 id: uuid(),
                 ean: "",
+                category: ""
               };
             });
             setResultsFromOcr(cardObjects);
@@ -209,7 +211,7 @@ const Receipts = () => {
       {resultsFromOcr.length > 0 && (
         <ProductForm
           addCard={addCard}
-          resultsFromOcr={resultsFromOcr}
+          productsArr={resultsFromOcr}
           updateElement={updateElement}
           removeCard={removeCard}
           submitProductCardstoDB={submitProductCardstoDB}

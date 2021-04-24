@@ -5,7 +5,7 @@ import { cardContainer, productForm, btn } from "./product.module.scss";
 
 const ProductForm = ({
   addCard,
-  resultsFromOcr,
+  productsArr,
   removeCard,
   updateElement,
   submitProductCardstoDB,
@@ -29,7 +29,7 @@ const ProductForm = ({
       </button>
       {loading && <Loading />}
       <div className={cardContainer}>
-        {resultsFromOcr.map((product) => (
+        {productsArr.map((product) => (
           <ProductCard
             product={product}
             key={product.id}
