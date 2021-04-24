@@ -1,12 +1,20 @@
 import { useRef, useState } from "react";
 import AddProductForm from "../../components/AddProductForm";
 import NavBar from "../../components/NavBar";
+import PopUpAlert from "../../components/PopUpAlert";
+import Loading from "../../components/Loading";
 
 const AddProducts = () => {
   const productNameInput = useRef("");
   const productAmountInput = useRef("");
   const expiryDateInput = useRef("");
 
+  const [loading, setLoading] = useState(false);
+  const [displayPopup, setDisplayPopup] = useState({
+    show: false,
+    type: "",
+    message: "",
+  });
   const submitProductHandler = (e) => {
     e.preventDefault();
     const productName = productNameInput.current.value.trim();
@@ -21,6 +29,13 @@ const AddProducts = () => {
       },
     ];
     console.log("im the new prodcut", addNewProduct);
+    //before fetch -> render the loading component
+    //insde 2nd .then -> unrender loading component
+    //render a a pop up alert based on the response
+    //hanlde the promise relut with the succes/fail message - use registration form
+    //the server expects an array
+    setLoading(true);
+    //submit the registration form
     fetch("api/users/products", {
       method: "PUT",
       headers: {
@@ -54,7 +69,6 @@ const AddProducts = () => {
         })
       );
   };
-
   const navBarItems = [
     { path: "/account", text: "Account" },
     { path: "/barcode", text: "Barcode scanner" },
