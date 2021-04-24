@@ -1,8 +1,45 @@
-table,
-th,
-td {
-  border: 1px solid black;
+@import "../../styles/colors";
+
+.tableContainer {
+  width: 95%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  // border-collapse: collapse;
+  // border-spacing: 10px 20px;
+
+  // border-collapse: separate;
+  // border-spacing: 10px 20px;
+
+  border-collapse: separate;
+  border-spacing: 0 1px;
+
+  font-size: 0.9em;
+  font-family: sans-serif;
+
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  font-size: medium;
+  border-radius: 5px;
+  color: white;
+
+  // background-color: none;
 }
-style {
-  width: 1000%;
+
+.headers {
+  background-color: $grey;
+  color: white;
+  font-size: medium;
+  border-radius: 5px;
 }
+// .styleBody {
+// border-collapse: separate;
+// border-spacing: 0 1px;
+
+//   border-collapse: separate;
+//   border-spacing: 10px 20px;
+// }
+
+// .dashboard_styleBody__3GQ7h {
+//   border-collapse: separate;
+//   border-spacing: 0 1px;
+// }
