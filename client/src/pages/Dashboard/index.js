@@ -27,8 +27,10 @@ const Dashboard = () => {
         ingredientsArr.push(key)
       }
     }
-    console.log(ingredientsArr)
-    // API.findRecipes()
+    API.findRecipes(ingredientsArr)
+      .then((res) => res.json())
+      .then((results) => console.log(results))
+      .catch((err) => console.log(err));
 
   } 
   useEffect(() => {
@@ -38,7 +40,6 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then((result) => {
         setProducts(result);
-        console.log(result);
       });
   }, []);
 
