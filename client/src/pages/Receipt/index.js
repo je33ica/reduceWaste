@@ -14,8 +14,6 @@ const Receipts = () => {
 
   const [resultsFromOcr, setResultsFromOcr] = useState([]);
 
-
-
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [displayPopup, setDisplayPopup] = useState({
