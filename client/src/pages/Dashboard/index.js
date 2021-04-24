@@ -86,7 +86,7 @@ const Dashboard = () => {
   const navBarItems = [
     { path: "/account", text: "Account", icon: navbarIcons.user }, //change icon?
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
-    { path: "/receipt", text: "Upload receipt", icon: navbarIcons.add }, //chnage icon
+    { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload }, //chnage icon
     { path: "/addProducts", text: "Add products", icon: navbarIcons.add },
   ];
 
