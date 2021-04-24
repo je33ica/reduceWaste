@@ -1,7 +1,5 @@
-$scale: 1;
-$arrow: 20px;
-$grey: #353b48;
-$translate-y: calc(-100% - $arrow);
+@import "../../../styles/colors";
+
 
 .navIcon {
   font-size: 1.3rem;

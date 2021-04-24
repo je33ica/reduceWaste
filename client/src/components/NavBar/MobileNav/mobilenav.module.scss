@@ -1,3 +1,5 @@
+@import "../../../styles/colors";
+
 .mobileNav {
   text-align: center;
   width: 50px;
@@ -9,20 +11,21 @@
 }
 
 .menuCont{
-  background-color: black;
+  background-color: $grey;
   font-size: 16px;
   position: fixed;
   top: 40px;
   right: -30px;
   list-style-type: none!important;
-  padding: 0;
+  padding-left: 5px;
   min-width: 130px;
   width: fit-content;
   text-align: center;
+  border-radius: 0 0 0 4px
 }
 
 .menuItem{
-  border-top: 2px solid red;
+  border-top: 2px solid $red;
   height: 40px;
   line-height: 40px;
 }

@@ -2,6 +2,7 @@ import "./App.scss";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import userContext from "./utils/context/userContext";
+import menuContext from "./utils/context/menuContext"
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
@@ -21,8 +22,15 @@ function App() {
     setUserLoginState(bool);
   };
 
+  const [displayMenu, setDisplayMenu] = useState(false);
+
+  const toggleMenu = (bool) => {
+    setDisplayMenu(bool)
+  }
+
   return (
     <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>
+
       <Router>
         <Switch>
           <Route exact path="/">
@@ -57,6 +65,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+
     </userContext.Provider>
   );
 }
