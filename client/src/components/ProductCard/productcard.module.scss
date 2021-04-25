@@ -1,10 +1,12 @@
 @import "../../styles/colors";
+@import "../../styles/shadow";
 .card{
   width: 95%;
   margin: 0 auto;
   background-color: $lightred;
   color: $white;
-  padding: 5px
+  padding: 5px;
+  box-shadow: $shadow;
 }
 
 .card label {
