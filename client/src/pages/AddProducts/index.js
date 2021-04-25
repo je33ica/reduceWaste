@@ -67,18 +67,7 @@ const AddProducts = () => {
   });
   const submitProductHandler = (e) => {
     e.preventDefault();
-    // const productName = productNameInput.current.value.trim();
-    // const amount = productAmountInput.current.value.trim();
-    // const expiry = expiryDateInput.current.value.trim();
 
-    // const addNewProduct = [
-    //   {
-    //     productName,
-    //     amount,
-    //     expiry,
-    //   },
-    // ];
-    // console.log("im the new prodcut", addNewProduct);
     //before fetch -> render the loading component
     //insde 2nd .then -> unrender loading component
     //render a a pop up alert based on the response
@@ -120,6 +109,7 @@ const AddProducts = () => {
       );
   };
   const navBarItems = [
+    { path: "/dashboard", text: "Your food store", icon: navbarIcons.bag },
     { path: "/account", text: "Account", icon: navbarIcons.user },
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
     { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload },
