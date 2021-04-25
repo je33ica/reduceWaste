@@ -44,19 +44,15 @@ const ProductCard = ({ product, removeCard, updateElement }) => {
           updateElement(e.target.value, e.target.name, product.id);
         }}
       >
+        <option value="" selected disabled hidden>
+          Choose a category
+        </option>
         <option value="Fresh">Fresh</option>
         <option value="Frozen">Frozen</option>
         <option value="Dry">Dry</option>
         <option value="General">General</option>
       </select>
-      {/* <input
-        type="date"
-        name="expiry"
-        value={product.expiry}
-        onChange={(e) =>
-          updateElement(e.target.value, e.target.name, product.id)
-        }
-      /> */}
+
       <label htmlFor="expiry">Expiry</label>
       <input
         type="date"
