@@ -7,6 +7,7 @@
   top: 0;
   background-color: $red;
   height: 80px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 .navIconContainer {
   position: absolute;
@@ -42,4 +43,6 @@
 .navHeader {
   color: $white;
   text-align: center;
+  letter-spacing: 2px;
+  font-size: 30px;
 }

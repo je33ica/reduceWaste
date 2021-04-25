@@ -3,7 +3,7 @@
 .tableContainer {
   width: 95%;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 20px auto;
   text-align: center;
   // border-collapse: collapse;
   // border-spacing: 10px 20px;
@@ -20,26 +20,14 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   font-size: medium;
   border-radius: 5px;
-  color: white;
+  // color: white;
 
   // background-color: none;
 }
-
-.headers {
-  background-color: $grey;
-  color: white;
-  font-size: medium;
+.heading {
+  background-color: #da5959;
+  color: whitesmoke;
+  width: 30%;
+  text-align: center;
   border-radius: 5px;
 }
-// .styleBody {
-// border-collapse: separate;
-// border-spacing: 0 1px;
-
-//   border-collapse: separate;
-//   border-spacing: 10px 20px;
-// }
-
-// .dashboard_styleBody__3GQ7h {
-//   border-collapse: separate;
-//   border-spacing: 0 1px;
-// }

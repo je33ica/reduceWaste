@@ -1,4 +1,4 @@
-import { tableContainer, headers } from "./dashboard.module.scss";
+import { tableContainer, heading } from "./dashboard.module.scss";
 const DashboardTable = ({ products, ingredients, updateIngredients }) => {
   const daysToExpiry = (expiry) => {
     const dateNow = Date.now();
@@ -7,8 +7,6 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
   };
 
   const categoryColour = (category, daysToExpiry) => {
-    console.log("im the cat", category);
-
     if (category === "Dry") {
       return dryColour(daysToExpiry);
     } else if (category === "Frozen") {
@@ -58,12 +56,47 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
     }
   };
 
-  const productsComponent = products.map((product) => {
+  //sort array by date
+  //mongo could sort bydate - remove anythin that has expired by 1 day
+  const productsWithColour = products.map((product) => {
     const daysToExpiryCondition = daysToExpiry(product.expiry);
     const colour = categoryColour(product.category, daysToExpiryCondition);
+    product.colour = colour;
+    return product;
+  });
+
+  const redSorted = [];
+  const orangeSorted = [];
+  const generalSorted = [];
+  productsWithColour.forEach((product) => {
+    if (product.colour == "redAlert") {
+      redSorted.push(product);
+    } else if (product.colour == "orangeAlert") {
+      orangeSorted.push(product);
+    } else {
+      generalSorted.push(product);
+    }
+  });
+
+  const sortedProducts = [...redSorted, ...orangeSorted, ...generalSorted];
+
+  const productsComponent = sortedProducts.map((product) => {
+    const daysToExpiryCondition = daysToExpiry(product.expiry);
+    // const colour = categoryColour(product.category, daysToExpiryCondition);
+    // const sortedColours = [...colour];
+    //  const sortColours = colour.filter(
+    //   (colours) => colours.selectedColour == "redAlert"
+    // );
+    // console.log("im the colo", colour);
+    // console.log("im the sorted colo", sortedColours);
+    const { colour } = product;
     return (
       <tr className={`${colour} productTR`} key={product._id}>
-        <td>{product.productName}</td>
+        <td>
+          {product.productName.length > 20
+            ? product.productName.slice(0, 17) + "..."
+            : product.productName}
+        </td>
         <td>{product.amount}</td>
 
         <td>{product.category || "General"}</td>
@@ -82,19 +115,21 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
   });
 
   return (
-    <table className={tableContainer}>
-      <thead className={headers}>
-        <tr>
-          <th>Product</th>
-          <th>Amount</th>
-          <th>Category</th>
-          <th>Expiry date</th>
-          <th>Days until expiry</th>
-          <th>Add to recipe finder</th>
-        </tr>
-      </thead>
-      <tbody> {productsComponent}</tbody>
-    </table>
+    <>
+      <table className={tableContainer}>
+        <thead className="headers">
+          <tr>
+            <th>Product</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Expiry date</th>
+            <th>Days until expiry</th>
+            <th>Add to recipe finder</th>
+          </tr>
+        </thead>
+        <tbody> {productsComponent}</tbody>
+      </table>
+    </>
   );
 };
 

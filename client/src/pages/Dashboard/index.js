@@ -17,62 +17,61 @@ const Dashboard = () => {
   });
 
   const updateIngredients = (ingredient) => {
-    const tempIngredients = {...ingredients};
-    if (!tempIngredients[ingredient]){
-      tempIngredients[ingredient] = true
+    const tempIngredients = { ...ingredients };
+    if (!tempIngredients[ingredient]) {
+      tempIngredients[ingredient] = true;
     } else {
-      tempIngredients[ingredient] = false
+      tempIngredients[ingredient] = false;
     }
 
-    setIngredients(tempIngredients)
-  }
+    setIngredients(tempIngredients);
+  };
 
   const searchRecipes = () => {
-    
     const ingredientsArr = [];
-    for (const key in ingredients){
-      if (ingredients[key]){
-        ingredientsArr.push(key)
+    for (const key in ingredients) {
+      if (ingredients[key]) {
+        ingredientsArr.push(key);
       }
     }
-    if (ingredientsArr.length === 0){
+    if (ingredientsArr.length === 0) {
       setDisplayPopup({
         show: true,
         type: "failure",
         message: "You need to select at least 1 ingredient",
-      })
+      });
       setTimeout(() => {
         setDisplayPopup({
           show: false,
           type: "",
           message: "",
-        })
-      }, 2000)
-      return  
+        });
+      }, 2000);
+      return;
     }
     API.findRecipes(ingredientsArr)
       .then((res) => res.json())
       .then((results) => {
         setRecipes(results);
-        if (recipes[0].length === 0){
+        if (recipes[0].length === 0) {
           setDisplayPopup({
             show: true,
             type: "failure",
-            message: "Sorry, no recipes were found which matched those ingredients",
-          })
+            message:
+              "Sorry, no recipes were found which matched those ingredients",
+          });
           setTimeout(() => {
             setDisplayPopup({
               show: false,
               type: "",
               message: "",
-            })
-          }, 2000)
-          return  
+            });
+          }, 2000);
+          return;
         }
       })
       .catch((err) => console.log(err));
-
-  } 
+  };
   useEffect(() => {
     fetch("api/users/products", {
       method: "GET",
@@ -92,14 +91,22 @@ const Dashboard = () => {
 
   return (
     <>
+      <h1 style={{ textAlign: "center" }}>Your food store </h1>
       <NavBar navBarItems={navBarItems} />
-      <RecipeHolder searchRecipes={searchRecipes} recipes={recipes}/>
+
+      <RecipeHolder searchRecipes={searchRecipes} recipes={recipes} />
       {products.length > 0 ? (
-        <DashboardTable products={products} ingredients={ingredients} updateIngredients={updateIngredients}/>
+        <DashboardTable
+          products={products}
+          ingredients={ingredients}
+          updateIngredients={updateIngredients}
+        />
       ) : (
         <h1>No products in DB</h1>
       )}
-      {displayPopup.show && <PopUpAlert type={displayPopup.type} message={displayPopup.message}/>}
+      {displayPopup.show && (
+        <PopUpAlert type={displayPopup.type} message={displayPopup.message} />
+      )}
     </>
   );
 };
