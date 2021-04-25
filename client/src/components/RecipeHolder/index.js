@@ -7,18 +7,18 @@ const RecipeHolder = ({ searchRecipes, recipes }) => {
 
   if (recipes.length === 0) {
     return (
-      <div>
+      <div style={{textAlign: "center"}}>
         <div className={cardContainer}>
-          <h1>Hit find to search for recipes</h1>
         </div>
         <button type="button" onClick={searchRecipes} className={btn}>
           Find recipes
         </button>
+        <small>Add ingredients below and hit find to search for recipes</small>
       </div>
     );
   }
   return (
-    <div>
+    <div style={{textAlign: "center"}}>
       {recipes.length > 1 && (
         <button
           type="button"
@@ -36,6 +36,7 @@ const RecipeHolder = ({ searchRecipes, recipes }) => {
       <button type="button" onClick={searchRecipes} className={btn}>
         Find recipes
       </button>
+      <small>Add ingredients below and hit find to search for recipes</small>
     </div>
   );
 };
