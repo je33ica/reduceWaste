@@ -1,6 +1,6 @@
 import { tableContainer, heading } from "./dashboard.module.scss";
 const DashboardTable = ({ products, ingredients, updateIngredients }) => {
-  const daysToExpiry = (expiry) => {
+  const calculateDaysToExpiry = (expiry) => {
     const dateNow = Date.now();
     const expiryToUnix = Date.parse(expiry);
     return Math.floor((expiryToUnix - dateNow) / (1000 * 60 * 60 * 24));
@@ -59,7 +59,7 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
   //sort array by date
   //mongo could sort bydate - remove anythin that has expired by 1 day
   const productsWithColour = products.map((product) => {
-    const daysToExpiryCondition = daysToExpiry(product.expiry);
+    const daysToExpiryCondition = calculateDaysToExpiry(product.expiry);
     const colour = categoryColour(product.category, daysToExpiryCondition);
     product.colour = colour;
     return product;
@@ -81,7 +81,7 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
   const sortedProducts = [...redSorted, ...orangeSorted, ...generalSorted];
 
   const productsComponent = sortedProducts.map((product) => {
-    const daysToExpiryCondition = daysToExpiry(product.expiry);
+    const daysToExpiryCondition = calculateDaysToExpiry(product.expiry);
     // const colour = categoryColour(product.category, daysToExpiryCondition);
     // const sortedColours = [...colour];
     //  const sortColours = colour.filter(
