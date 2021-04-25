@@ -19,6 +19,14 @@ const API = {
       },
       body: JSON.stringify(ingredients),
     })
+  },
+  userLogout: () => {
+    return fetch("/api/users/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
   }
 };
 

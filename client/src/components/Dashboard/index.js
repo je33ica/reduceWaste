@@ -127,7 +127,7 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
             <th>Add to recipe finder</th>
           </tr>
         </thead>
-        <tbody> {productsComponent}</tbody>
+        <tbody>{productsComponent}</tbody>
       </table>
     </>
   );
