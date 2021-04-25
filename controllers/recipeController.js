@@ -11,7 +11,7 @@ module.exports = {
     const ingredients = req.body.join(",");
     axios({
       method: "GET",
-      url: `https://api.edamam.com/search?app_id=${appID}&app_key=${apiKey}&q=${ingredients}`,
+      url: `https://api.edamam.com/search?app_id=${appID}&app_key=${apiKey}&q=${ingredients}&to=12`,
     })
       .then((response) => res.json(response.data.hits))
       .catch((err) =>
