@@ -22,7 +22,7 @@ const ProductForm = ({
         />
       )}
       <button type="button" className={btn} onClick={submitProductCardstoDB}>
-        Save Products to Database
+        Save Products to your store
       </button>
       <button type="button" onClick={() => addCard("start")} className={btn}>
         Add Item to Form
@@ -39,7 +39,7 @@ const ProductForm = ({
         ))}
       </div>
       <button type="button" className={btn} onClick={submitProductCardstoDB}>
-        Save Products to Database
+        Save Products to your store
       </button>
       <button type="button" onClick={() => addCard("end")} className={btn}>
         Add Item to Form

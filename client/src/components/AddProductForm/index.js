@@ -1,12 +1,9 @@
-import { useEffect } from "react";
-
 const AddProductForm = ({
   productName,
   productAmount,
   expiryDate,
   submitProductHandler,
 }) => {
-  //   submitProductHandler;
 
   return (
     <div>
