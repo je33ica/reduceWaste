@@ -1,24 +1,26 @@
 import { useState } from "react";
 import RecipeCard from "./RecipeCard";
 import { cardContainer, btn } from "./recipe.module.scss";
+import Loading from "../Loading";
 
-const RecipeHolder = ({ searchRecipes, recipes }) => {
+const RecipeHolder = ({ searchRecipes, recipes, loading }) => {
   const [hideRecipes, setHideRecipes] = useState(false);
-
+  console.log(loading)
   if (recipes.length === 0) {
     return (
-      <div>
+      <div style={{textAlign: "center"}}>
         <div className={cardContainer}>
-          <h1>Hit find to search for recipes</h1>
         </div>
         <button type="button" onClick={searchRecipes} className={btn}>
           Find recipes
         </button>
+        <small>Add ingredients below and hit find to search for recipes</small>
+        {loading && <Loading />}
       </div>
     );
   }
   return (
-    <div>
+    <div style={{textAlign: "center"}}>
       {recipes.length > 1 && (
         <button
           type="button"
@@ -33,9 +35,14 @@ const RecipeHolder = ({ searchRecipes, recipes }) => {
           recipes.map(({ recipe }) => <RecipeCard recipe={recipe} />)
         )}
       </div>
-      <button type="button" onClick={searchRecipes} className={btn}>
+      <button type="button" onClick={() => {
+        searchRecipes();
+        setHideRecipes(false)
+      }} className={btn}>
         Find recipes
       </button>
+      <small>Add ingredients below and hit find to search for recipes</small>
+      {loading && <Loading />}
     </div>
   );
 };

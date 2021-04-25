@@ -1,4 +1,4 @@
-import { card } from "./productcard.module.scss";
+import { card, customSelect } from "./productcard.module.scss";
 
 const ProductCard = ({ product, removeCard, updateElement }) => {
   return (
@@ -43,6 +43,7 @@ const ProductCard = ({ product, removeCard, updateElement }) => {
         onChange={(e) => {
           updateElement(e.target.value, e.target.name, product.id);
         }}
+        className={customSelect}
       >
         <option value="" selected disabled hidden>
           Choose a category

@@ -86,7 +86,7 @@ const Login = () => {
           setDisplayPopup({
             show: true,
             type: "success",
-            message: "Login Successful! Redirecting to products page",
+            message: "Login Successful! Redirecting to your food store!",
           });
           //use the useHistory hook from react-router to redirect the user once logged in successfully
           setTimeout(() => {

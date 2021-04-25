@@ -1,10 +1,12 @@
 @import "../../styles/colors";
+@import "../../styles/shadow";
 .card{
   width: 95%;
   margin: 0 auto;
   background-color: $lightred;
   color: $white;
-  padding: 5px
+  padding: 5px;
+  box-shadow: $shadow;
 }
 
 .card label {
@@ -28,4 +30,16 @@
   outline-style: none;
   box-shadow: none;
   font-weight: bold;
+}
+
+.customSelect{
+  background-color: $white;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
 }

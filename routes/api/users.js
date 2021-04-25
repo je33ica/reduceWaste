@@ -8,12 +8,14 @@ const destroySession = (req, res, next) => {
   if (req.session.userId !== undefined) {
     req.session.destroy();
     res.status(200).json({ message: "successfully logged out" });
+  } else {
+    res.status(401).send({
+      error: "forbidden",
+      message: "You can't log out if you aren't logged in!",
+    });
   }
 
-  res.status(401).send({
-    error: "forbidden",
-    message: "You can't log out if you aren't logged in!",
-  });
+
 };
 
 const homePageCheck = (req, res, next) => {
