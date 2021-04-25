@@ -15,6 +15,7 @@ const Receipts = () => {
   const [resultsFromOcr, setResultsFromOcr] = useState([]);
 
   const [images, setImages] = useState([]);
+  const [displayedImage, setDisplayedImage] = useState(null)
   const [loading, setLoading] = useState(false);
   const [displayPopup, setDisplayPopup] = useState({
     show: false,
@@ -99,6 +100,7 @@ const Receipts = () => {
         ...images,
         ...newImages.filter((image) => image !== undefined),
       ]);
+      setDisplayedImage(newImages[0])
       // send the base 64 encoded string to our api
       fetch("/api/ocr", {
         method: "post",
@@ -180,7 +182,7 @@ const Receipts = () => {
 
   const navBarItems = [
     { path: "/account", text: "Account", icon: navbarIcons.user },
-    { path: "/products", text: "Products", icon: navbarIcons.bag },
+    { path: "/dashboard", text: "Your food store", icon: navbarIcons.bag },
   ];
   return (
     <>
@@ -188,16 +190,16 @@ const Receipts = () => {
       <div className="grid">
         <div className="grid-item">
           <h1 style={{ textAlign: "center" }}>Reduce Waste Receipt Uploader</h1>
-          <p>
+          <p style={{fontSize: "larger"}}>
             Using the service below, you can upload scanned receipts and our
             Artificial Intelligence service will read the receipt for product
             information.
           </p>
-          <small>
+          <p>
             Our AI service is constantly improving, however there may be some
             errors from reading the results. The form created below will be
-            editable to allow you to correct any mistakes
-          </small>
+            editable to allow you to correct any mistakes.
+          </p>
         </div>
         <div className="grid-item" style={{ textAlign: "center" }}>
           <ImageUpload
@@ -207,6 +209,11 @@ const Receipts = () => {
           />
         </div>
       </div>
+      {displayedImage &&
+       <div style={{width: "90%", margin: "0 auto", maxWidth: "400px"}}>
+         <img src={displayedImage.base64} alt="Uploaded Receipt" style={{width: "100%", height: "auto"}}/>
+       </div>
+      }
       {resultsFromOcr.length > 0 && (
         <ProductForm
           addCard={addCard}
