@@ -1,6 +1,6 @@
-import { Link , useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import {useMediaQuery} from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 import {
   fullNav,
   navList,
@@ -19,19 +19,19 @@ import navbarIcons from "../../icons/navbarIcons";
 const NavBar = ({ navBarItems }) => {
   const location = useLocation();
 
-
-
   const [displayTooltip, setTooltip] = useState(false);
-  const isSmallerScreen = useMediaQuery({ query: "(max-width: 768px" });
+  const isSmallerScreen = useMediaQuery({ query: "(max-width: 768px)" });
 
   const logoutItem = {
-    path: "/logout", text: "Logout", icon: navbarIcons.logout
-  }
+    path: "/logout",
+    text: "Logout",
+    icon: navbarIcons.logout,
+  };
 
   const itemsWithLogout = [...navBarItems, logoutItem];
 
-  if (location.pathname === "/" || location.pathname === "/login"){
-    itemsWithLogout.pop()
+  if (location.pathname === "/" || location.pathname === "/login") {
+    itemsWithLogout.pop();
   }
 
   return (
