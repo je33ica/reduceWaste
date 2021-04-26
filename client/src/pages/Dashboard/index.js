@@ -120,7 +120,7 @@ const Dashboard = () => {
         searchRecipes={searchRecipes}
         recipes={recipes}
         loading={loading}
-      />
+        />
       {products.length > 0 ? (
         <>
           <RecipeHolder searchRecipes={searchRecipes} recipes={recipes} loading={loading} />
@@ -129,7 +129,8 @@ const Dashboard = () => {
           ingredients={ingredients}
           updateIngredients={updateIngredients}
           removeProductFromView={removeProductFromView}
-        />
+          />
+        </>
       ) : (
         <p style={{ textAlign: "center" }}>
           You don't have any products in your store yet. Click <Link to="/addProducts" className="inlineLink">here</Link> to add products or try our <Link to="/receipts" className="inlineLink">Receipt Reader</Link> instead.
