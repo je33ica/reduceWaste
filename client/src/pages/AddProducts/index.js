@@ -95,7 +95,14 @@ const AddProducts = () => {
           setDisplayPopup({
             show: true,
             type: "success",
-            message: "Product successfully saved",
+            message: "Products successfully saved",
+          })
+          setTimeout(() => {
+            setDisplayPopup({
+              show: false,
+              type: "",
+              message: ""
+            }, 1500)
           });
         }
       })
