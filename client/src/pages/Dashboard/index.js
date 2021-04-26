@@ -86,6 +86,24 @@ const Dashboard = () => {
       });
   }, []);
 
+  const removeProductFromView = (id) => {
+    const newProducts = products.filter((product) => product._id !== id);
+
+    setProducts(newProducts);
+    fetch("api/users/products", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ _id: id }),
+    })
+      .then((response) => {
+        console.log("im the response", response);
+        response.json();
+      })
+      .then((parsed) => console.log(parsed));
+  };
+
   const navBarItems = [
     { path: "/account", text: "Account", icon: navbarIcons.user }, //change icon?
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
@@ -108,6 +126,7 @@ const Dashboard = () => {
           products={products}
           ingredients={ingredients}
           updateIngredients={updateIngredients}
+          removeProductFromView={removeProductFromView}
         />
       ) : (
         <h1>No products in DB</h1>
