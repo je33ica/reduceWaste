@@ -6,13 +6,12 @@
 }
 
 .cardContainer {
-  display: flex;
-  // grid-gap: 1rem;
-  // grid-template-columns: repeat(4, 1fr);
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
   max-width: 1200px;
-  width: calc((300px + (10px * 2)) * 4);
   margin: 25px auto;
-  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 900px) {
