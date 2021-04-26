@@ -30,7 +30,7 @@ const Dashboard = () => {
 
   const searchRecipes = () => {
     const ingredientsArr = [];
-    setRecipes([])
+    setRecipes([]);
     for (const key in ingredients) {
       if (ingredients[key]) {
         ingredientsArr.push(key);
@@ -51,11 +51,11 @@ const Dashboard = () => {
       }, 2000);
       return;
     }
-    setLoading(true)
+    setLoading(true);
     API.findRecipes(ingredientsArr)
       .then((res) => res.json())
       .then((results) => {
-        setLoading(false)
+        setLoading(false);
         setRecipes(results);
         if (recipes[0].length === 0) {
           setDisplayPopup({
@@ -98,7 +98,11 @@ const Dashboard = () => {
       <h1 style={{ textAlign: "center" }}>Your food store </h1>
       <NavBar navBarItems={navBarItems} />
 
-      <RecipeHolder searchRecipes={searchRecipes} recipes={recipes} loading={loading} />
+      <RecipeHolder
+        searchRecipes={searchRecipes}
+        recipes={recipes}
+        loading={loading}
+      />
       {products.length > 0 ? (
         <DashboardTable
           products={products}

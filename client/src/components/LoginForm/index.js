@@ -7,6 +7,7 @@
 // once successful login redirect to account page
 
 import { Link } from "react-router-dom";
+
 const LoginForm = ({ emailInput, passwordInput, loginHandler }) => {
   return (
     <>
