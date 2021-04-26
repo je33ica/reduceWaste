@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import DashboardTable from "../../components/Dashboard";
 import NavBar from "../../components/NavBar";
 import PopUpAlert from "../../components/PopUpAlert";
@@ -115,21 +116,24 @@ const Dashboard = () => {
     <>
       <h1 style={{ textAlign: "center" }}>Your food store </h1>
       <NavBar navBarItems={navBarItems} />
-
       <RecipeHolder
         searchRecipes={searchRecipes}
         recipes={recipes}
         loading={loading}
       />
       {products.length > 0 ? (
-        <DashboardTable
+        <>
+          <RecipeHolder searchRecipes={searchRecipes} recipes={recipes} loading={loading} />
+          <DashboardTable
           products={products}
           ingredients={ingredients}
           updateIngredients={updateIngredients}
           removeProductFromView={removeProductFromView}
         />
       ) : (
-        <h1>No products in DB</h1>
+        <p style={{ textAlign: "center" }}>
+          You don't have any products in your store yet. Click <Link to="/addProducts" className="inlineLink">here</Link> to add products or try our <Link to="/receipts" className="inlineLink">Receipt Reader</Link> instead.
+        </p>
       )}
       {displayPopup.show && (
         <PopUpAlert type={displayPopup.type} message={displayPopup.message} />

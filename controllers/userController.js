@@ -1,8 +1,8 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 
-const omitPassword = ({ username, email }) => {
-  const newUser = { username, email };
+const omitPassword = ({ username, email, userCreated }) => {
+  const newUser = { username, email, userCreated };
   return newUser;
 };
 
