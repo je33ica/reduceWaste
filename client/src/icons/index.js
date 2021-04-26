@@ -4,6 +4,7 @@ import {
   faExclamationCircle,
   faUserCircle,
   faAt
+  faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 const icons = {
   shoppingBasket: faShoppingBasket,
@@ -11,5 +12,6 @@ const icons = {
   warning: faExclamationCircle,
   userCircle: faUserCircle,
   email: faAt
+  trash: faTrashAlt,
 };
 export default icons;

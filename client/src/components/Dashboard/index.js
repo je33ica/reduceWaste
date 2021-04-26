@@ -1,5 +1,11 @@
-import { tableContainer, heading } from "./dashboard.module.scss";
-const DashboardTable = ({ products, ingredients, updateIngredients }) => {
+import { tableContainer } from "./dashboard.module.scss";
+//import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+const DashboardTable = ({
+  products,
+  ingredients,
+  updateIngredients,
+  removeProductFromView,
+}) => {
   const calculateDaysToExpiry = (expiry) => {
     const dateNow = Date.now();
     const expiryToUnix = Date.parse(expiry);
@@ -58,12 +64,16 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
 
   //sort array by date
   //mongo could sort bydate - remove anythin that has expired by 1 day
-  const productsWithColour = products.map((product) => {
+  const productsWithColour = products.reduce((acc, product) => {
     const daysToExpiryCondition = calculateDaysToExpiry(product.expiry);
+    if (daysToExpiryCondition < -3) {
+      return acc;
+    }
     const colour = categoryColour(product.category, daysToExpiryCondition);
     product.colour = colour;
-    return product;
-  });
+    acc.push(product);
+    return acc;
+  }, []);
 
   const redSorted = [];
   const orangeSorted = [];
@@ -80,15 +90,11 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
 
   const sortedProducts = [...redSorted, ...orangeSorted, ...generalSorted];
 
+  //UX always assuma  delete req has worked-  remove from front end first even if hasnt not from backend
+
   const productsComponent = sortedProducts.map((product) => {
     const daysToExpiryCondition = calculateDaysToExpiry(product.expiry);
-    // const colour = categoryColour(product.category, daysToExpiryCondition);
-    // const sortedColours = [...colour];
-    //  const sortColours = colour.filter(
-    //   (colours) => colours.selectedColour == "redAlert"
-    // );
-    // console.log("im the colo", colour);
-    // console.log("im the sorted colo", sortedColours);
+
     const { colour } = product;
     return (
       <tr className={`${colour} productTR`} key={product._id}>
@@ -102,6 +108,11 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
         <td>{product.category || "General"}</td>
         <td>{product.expiry.slice(0, 10)}</td>
         <td>{daysToExpiryCondition}</td>
+        <td>
+          <button onClick={() => removeProductFromView(product._id)}>
+            Delete
+          </button>
+        </td>
         <td>
           <input
             type="checkbox"
@@ -124,6 +135,7 @@ const DashboardTable = ({ products, ingredients, updateIngredients }) => {
             <th>Category</th>
             <th>Expiry date</th>
             <th>Days until expiry</th>
+            <th>Delete Item</th>
             <th>Add to recipe finder</th>
           </tr>
         </thead>
