@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 import NavBar from "../../components/NavBar";
 import UserCard from "../../components/UserCard";
@@ -25,7 +26,13 @@ const Account = () => {
   return (
     <>
       <NavBar navBarItems={navBarItems} />
-      {user ? <UserCard user={user}/>: <Loading />}
+      {user ? (
+        <>
+          <UserCard user={user}/>
+          <p style={{textAlign: "center"}}>Visit your <Link className="inlineLink" to="/dashboard">store cupboard</Link> or click <Link to="/addProducts" className="inlineLink">here</Link> to add products.</p>
+        </>
+        )
+        : <Loading />}
     </>
   );
 };
