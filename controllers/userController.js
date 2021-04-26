@@ -73,8 +73,21 @@ module.exports = {
       .catch((err) => res.status(400).json(err));
   },
   getProducts: (req, res) => {
-    db.User.findById(req.session.userId).then((dbUser) =>
-      res.json(dbUser.products)
-    );
+    db.User.findById(req.session.userId).then((dbUser) => {
+      const sortedProducts = dbUser.products.sort((productA, productB) => {
+        return new Date(productA.expiry) - new Date(productB.expiry);
+      });
+      res.json(sortedProducts);
+    });
+  },
+
+  removeProduct: (req, res) => {
+    db.User.findByIdAndUpdate(req.session.userId, {
+      $pull: { products: { _id: req.body._id } },
+    })
+      .then((response) => {
+        res.json({ message: "successfully deleted product" });
+      })
+      .catch((err) => res.status(400).json(err));
   },
 };
