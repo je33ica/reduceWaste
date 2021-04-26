@@ -77,4 +77,14 @@ module.exports = {
       res.json(dbUser.products)
     );
   },
+
+  removeProduct: (req, res) => {
+    db.User.findByIdAndUpdate(req.session.userId, {
+      $pull: { products: { _id: req.body._id } },
+    })
+      .then((response) => {
+        res.json({ message: "successfully deleted product" });
+      })
+      .catch((err) => res.status(400).json(err));
+  },
 };

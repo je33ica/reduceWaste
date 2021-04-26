@@ -14,8 +14,6 @@ const destroySession = (req, res, next) => {
       message: "You can't log out if you aren't logged in!",
     });
   }
-
-
 };
 
 const homePageCheck = (req, res, next) => {
@@ -53,7 +51,8 @@ router.post("/login", invalidateSession, userController.userLogIn);
 router.post("/logout", destroySession);
 
 router.get("/products", isUserLoggedIn, userController.getProducts);
-router.put("/products", userController.addProduct);
+router.put("/products", isUserLoggedIn, userController.addProduct);
+router.delete("/products", isUserLoggedIn, userController.removeProduct);
 // isUserLoggedIn,
 // .put(userController.addProduct)
 
