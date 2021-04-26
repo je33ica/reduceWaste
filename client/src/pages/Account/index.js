@@ -4,7 +4,7 @@ import navbarIcons from "../../icons/navbarIcons";
 
 const Account = () => {
   useEffect(() => {
-    fetch("/api/users/products")
+    fetch("/api/users")
       .then((res) => res.json())
       .then((result) => {
         console.log("im the result", result);
