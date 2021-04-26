@@ -1,13 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Loading from "../../components/Loading";
 import NavBar from "../../components/NavBar";
+import UserCard from "../../components/UserCard";
 import navbarIcons from "../../icons/navbarIcons";
 
 const Account = () => {
+  const [user, setUser] = useState(null)
+
   useEffect(() => {
     fetch("/api/users")
       .then((res) => res.json())
       .then((result) => {
-        console.log("im the result", result);
+        if (result.username){
+          setUser(result)
+        }
       });
   }, []);
   const navBarItems = [
@@ -19,7 +25,7 @@ const Account = () => {
   return (
     <>
       <NavBar navBarItems={navBarItems} />
-      <h1> Welcome to the Account page</h1>
+      {user ? <UserCard user={user}/>: <Loading />}
     </>
   );
 };
