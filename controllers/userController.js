@@ -90,4 +90,14 @@ module.exports = {
       })
       .catch((err) => res.status(400).json(err));
   },
+  searchBarcode: (req, res) => {
+    console.log(req.body)
+    db.User.findById(req.session.userId).then((dbUser) => {
+      const product = dbUser.products.map(dbProduct => {
+        console.log(dbProduct);
+        return []
+      })
+      res.json(product);
+    });
+  }
 };

@@ -209,11 +209,6 @@ const Receipts = () => {
           />
         </div>
       </div>
-      {displayedImage &&
-       <div style={{width: "90%", margin: "0 auto", maxWidth: "400px"}}>
-         <img src={displayedImage.base64} alt="Uploaded Receipt" style={{width: "100%", height: "auto"}}/>
-       </div>
-      }
       {resultsFromOcr.length > 0 && (
         <ProductForm
           addCard={addCard}
@@ -225,6 +220,11 @@ const Receipts = () => {
           displayPopup={displayPopup}
         />
       )}
+      {displayedImage &&
+       <div style={{width: "90%", margin: "0 auto", maxWidth: "400px"}}>
+         <img src={displayedImage.base64} alt="Uploaded Receipt" style={{width: "100%", height: "auto"}}/>
+       </div>
+      }
     </>
   );
 };
