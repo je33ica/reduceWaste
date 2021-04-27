@@ -3,7 +3,7 @@ import NavBar from "../../components/NavBar";
 import Scanner from "../../components/Scanner";
 import navbarIcons from "../../icons/navbarIcons";
 
-const Barcode = (props) => {
+const Barcode = () => {
   
   const [scanning, setScanning] = useState(false);
   const [result, setResult] = useState(null)
