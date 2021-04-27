@@ -1,10 +1,11 @@
 @import "./styles/colors";
 @import "./styles/_shadow.scss";
+@import "./styles/font.scss";
 
 body {
   margin: 0;
 
-  font-family: "Rajdhani", sans-serif;
+  font-family: $fontStyle;
 
   // font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
   //   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -16,8 +17,9 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  // font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  //   monospace;
+  font-family: $fontStyle;
 }
 
 h1 {
@@ -126,6 +128,7 @@ select:-webkit-autofill {
   margin: 0 auto;
   margin-top: 20px;
   cursor: pointer;
+  font-family: "Rajdhani", sans-serif;
 }
 
 .alert-form {
@@ -165,7 +168,8 @@ tr {
   border-radius: 5px;
   color: white;
 }
-// .productTR {
-//   border-collapse: separate;
-//   border-spacing: 0 1px;
-// }
+
+.deleteButton {
+  border: none;
+  background: transparent;
+}
