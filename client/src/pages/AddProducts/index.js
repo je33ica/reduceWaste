@@ -96,24 +96,31 @@ const AddProducts = () => {
             show: true,
             type: "success",
             message: "Products successfully saved",
-          })
+          });
           setTimeout(() => {
             setDisplayPopup({
               show: false,
               type: "",
-              message: ""
-            }, 1500)
-          });
+              message: "",
+            });
+          }, 1500);
         }
       })
-      .catch((err) =>
+      .catch((err) => {
         setDisplayPopup({
           show: true,
           type: "failure",
           message:
             "Sorry but your product could not be saved right now, please try again later",
-        })
-      );
+        });
+        setTimeout(() => {
+          setDisplayPopup({
+            show: false,
+            type: "",
+            message: "",
+          });
+        }, 1500);
+      });
   };
   const navBarItems = [
     { path: "/dashboard", text: "Your food store", icon: navbarIcons.bag },

@@ -1,5 +1,6 @@
 import { tableContainer } from "./dashboard.module.scss";
-//import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import icons from "../../icons/index";
 const DashboardTable = ({
   products,
   ingredients,
@@ -109,8 +110,12 @@ const DashboardTable = ({
         <td>{product.expiry.slice(0, 10)}</td>
         <td>{daysToExpiryCondition}</td>
         <td>
-          <button onClick={() => removeProductFromView(product._id)}>
-            Delete
+          <button
+            className="deleteButton"
+            onClick={() => removeProductFromView(product._id)}
+            style={!colour ? { color: "black" } : { color: "white" }}
+          >
+            <FontAwesomeIcon icon={icons.trash} />
           </button>
         </td>
         <td>

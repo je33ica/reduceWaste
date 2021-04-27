@@ -1,28 +1,22 @@
 @import "../../styles/colors";
+@import "../../styles/font";
 
 .tableContainer {
   width: 95%;
   max-width: 800px;
   margin: 20px auto;
   text-align: center;
-  // border-collapse: collapse;
-  // border-spacing: 10px 20px;
-
-  // border-collapse: separate;
-  // border-spacing: 10px 20px;
 
   border-collapse: separate;
   border-spacing: 0 1px;
 
   font-size: 0.9em;
-  font-family: sans-serif;
+  font-family: $fontStyle;
+  font-weight: bold;
 
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   font-size: medium;
   border-radius: 5px;
-  // color: white;
-
-  // background-color: none;
 }
 .heading {
   background-color: #da5959;
@@ -30,4 +24,9 @@
   width: 30%;
   text-align: center;
   border-radius: 5px;
+}
+
+.deleteButton {
+  border: none;
+  background: transparent;
 }

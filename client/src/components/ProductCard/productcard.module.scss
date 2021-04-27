@@ -1,12 +1,13 @@
 @import "../../styles/colors";
 @import "../../styles/shadow";
-.card{
+.card {
   width: 95%;
   margin: 0 auto;
   background-color: $lightred;
   color: $white;
   padding: 5px;
   box-shadow: $shadow;
+  border-radius: 4px;
 }
 
 .card label {
@@ -32,7 +33,7 @@
   font-weight: bold;
 }
 
-.customSelect{
+.customSelect {
   background-color: $white;
   border: none;
   padding: 0 1em 0 0;
