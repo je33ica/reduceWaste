@@ -58,7 +58,7 @@ const Dashboard = () => {
       .then((results) => {
         setLoading(false);
         setRecipes(results);
-        if (recipes[0].length === 0) {
+        if (results.length === 0) {
           setDisplayPopup({
             show: true,
             type: "failure",
@@ -99,10 +99,9 @@ const Dashboard = () => {
       body: JSON.stringify({ _id: id }),
     })
       .then((response) => {
-        console.log("im the response", response);
         response.json();
       })
-      .then((parsed) => console.log(parsed));
+      .then((parsed) => parsed);
   };
 
   const navBarItems = [
@@ -114,7 +113,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Your food store </h1>
+      <h1 style={{ textAlign: "center" }}>Your food store</h1>
       <NavBar navBarItems={navBarItems} />
 
       {products.length > 0 ? (

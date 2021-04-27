@@ -4,9 +4,8 @@ import { cardContainer, btn } from "./recipe.module.scss";
 import Loading from "../Loading";
 
 const RecipeHolder = ({ searchRecipes, recipes, loading }) => {
-  const [hideRecipes, setHideRecipes] = useState(false);
-  console.log(loading)
-  if (recipes.length === 0) {
+  const [hideRecipes, setHideRecipes] = useState();
+  if (!recipes) {
     return (
       <div style={{textAlign: "center"}}>
         <div className={cardContainer}>
@@ -32,7 +31,7 @@ const RecipeHolder = ({ searchRecipes, recipes, loading }) => {
       )}
       <div className={cardContainer}>
         {!hideRecipes && (
-          recipes.map(({ recipe }) => <RecipeCard recipe={recipe} />)
+          recipes.map(({ recipe }) => <RecipeCard recipe={recipe} key={recipe.url} />)
         )}
       </div>
       <button type="button" onClick={() => {
