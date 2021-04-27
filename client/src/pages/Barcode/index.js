@@ -12,7 +12,7 @@ const Barcode = () => {
   const date = new Date().toISOString().slice(0, 10);
   const [scanning, setScanning] = useState(false);
   const [result, setResult] = useState(null);
-  const [product, setProduct] = useState(null);
+  const [productsArr, setProductsArr] = useState([])
   const [displayPopup, setDisplayPopup] = useState({
     show: false,
     type: "",
@@ -34,17 +34,17 @@ const Barcode = () => {
           if (res.status === 200) {
             return res.json();
           }
-          setProduct({
+          setProductsArr([{
             productName: "",
             amount: "",
             expiry: date,
             id: uuid(),
             EAN: "",
             category: "",
-          });
+          }])
         })
         .then((parsed) => {
-          setProduct(parsed);
+          setProductsArr([{...parsed, id: uuid()}]);
         })
         .catch((err) => {
           setLoading(false);
@@ -81,7 +81,7 @@ const Barcode = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify([product]),
+      body: JSON.stringify(productsArr),
     })
       .then((res) => res.json())
       .then((response) => {
@@ -126,14 +126,14 @@ const Barcode = () => {
 
   const updateElement = (value, target, id) => {
     let elementUpdated = false;
-    const tempResults = [product];
+    const tempResults = [productsArr];
     for (let i = 0; i < tempResults.length && !elementUpdated; i++) {
       if (tempResults[i].id === id) {
         tempResults[i][target] = value;
         elementUpdated = true;
       }
     }
-    setProduct(tempResults[0]);
+    setProductsArr(tempResults);
   };
 
   const navBarItems = [
@@ -159,11 +159,11 @@ const Barcode = () => {
         {scanning && <Scanner readBarcode={readBarcode} toggleScanner={toggleScanner}/>}
         {result && <h4>Your barcode is {result}</h4>}
         {loading && <Loading />}
-        {product?.productName && <p>We found the following product previously in your store. Would you like to add it again?</p>}
-        {product && (
+        {productsArr[0]?.productName && <p>We found the following product previously in your store. Would you like to add it again?</p>}
+        {productsArr[0] && (
           <ProductForm
             updateElement={updateElement}
-            productsArr={[product]}
+            productsArr={productsArr}
             submitProductCardstoDB={submitProductHandler}
             loading={loading}
             displayPopup={displayPopup}

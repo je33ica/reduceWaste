@@ -8,6 +8,7 @@ const Scanner = ({ readBarcode, toggleScanner }) => {
     type: "",
     message: "",
   });
+
   useEffect(() => {
     Quagga.init(
       {
