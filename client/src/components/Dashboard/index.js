@@ -107,7 +107,7 @@ const DashboardTable = ({
         <td>{product.amount}</td>
 
         <td>{product.category || "General"}</td>
-        <td>{product.expiry.slice(0, 10)}</td>
+        <td>{product.expiry.slice(0, 10).split("-").reverse().join("-")}</td>
         <td>{daysToExpiryCondition}</td>
         <td>
           <button
