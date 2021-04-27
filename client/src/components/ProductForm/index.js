@@ -18,7 +18,6 @@ const ProductForm = ({
   displayPopup,
   single,
 }) => {
-  console.log('productsarr', productsArr)
   return (
     <form className={productForm}>
       {displayPopup.show && (
