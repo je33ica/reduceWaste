@@ -150,13 +150,16 @@ const Barcode = () => {
     <>
       <NavBar navBarItems={navBarItems} />
       <div style={{ textAlign: "center" }}>
-        <h1>Barcode page</h1>
+        <h1>Barcode Scanner</h1>
+        <p>Scan the barcode of a product with the scanner below.</p>
+        <p>If it is in your store cupboard we will find it for you or you can add it as a new product!</p>
         <button className="btn" type="button" onClick={toggleScanner}>
           {scanning ? "Stop" : "Start Scanner"}
         </button>
         {scanning && <Scanner readBarcode={readBarcode} />}
         {result && <h4>Your barcode is {result}</h4>}
         {loading && <Loading />}
+        {product?.productName && <p>We found the following product previously in your store. Would you like to add it again?</p>}
         {product && (
           <ProductForm
             updateElement={updateElement}
@@ -164,6 +167,7 @@ const Barcode = () => {
             submitProductCardstoDB={submitProductHandler}
             loading={loading}
             displayPopup={displayPopup}
+            single
           />
         )}
         {displayPopup.show && (

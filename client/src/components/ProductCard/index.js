@@ -1,6 +1,6 @@
 import { card, customSelect } from "./productcard.module.scss";
 
-const ProductCard = ({ product, removeCard, updateElement }) => {
+const ProductCard = ({ product, removeCard, updateElement, single }) => {
   return (
     <div className={card}>
       <label htmlFor="productName">Product</label>
@@ -63,13 +63,15 @@ const ProductCard = ({ product, removeCard, updateElement }) => {
           updateElement(e.target.value, e.target.name, product.id)
         }
       />
-      <button
-        className="btn"
-        type="button"
-        onClick={() => removeCard(product.id)}
-      >
-        Remove Item
-      </button>
+      {!single && (
+        <button
+          className="btn"
+          type="button"
+          onClick={() => removeCard(product.id)}
+        >
+          Remove Item
+        </button>
+      )}
     </div>
   );
 };
