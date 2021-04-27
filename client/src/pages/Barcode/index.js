@@ -11,9 +11,9 @@ const Barcode = (props) => {
     setScanning(!scanning)
   }
 
-  const readBarcode = (result) => {
-    if(result?.codeResult?.code){
-      setResult(result.codeResult.code);
+  const readBarcode = (resultFromScan) => {
+    if(resultFromScan?.codeResult?.code){
+      setResult(resultFromScan.codeResult.code);
       toggleScanner()
     }
     return
