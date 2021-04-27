@@ -123,8 +123,8 @@ const AddProducts = () => {
       });
   };
   const navBarItems = [
-    { path: "/dashboard", text: "Your food store", icon: navbarIcons.bag },
     { path: "/account", text: "Account", icon: navbarIcons.user },
+    { path: "/dashboard", text: "Your food store", icon: navbarIcons.bag },
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
     { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload },
   ];

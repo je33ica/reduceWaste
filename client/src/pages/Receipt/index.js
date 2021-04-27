@@ -183,6 +183,8 @@ const Receipts = () => {
   const navBarItems = [
     { path: "/account", text: "Account", icon: navbarIcons.user },
     { path: "/dashboard", text: "Your food store", icon: navbarIcons.bag },
+    { path: "/addProducts", text: "Add products", icon: navbarIcons.add },
+    { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
   ];
   return (
     <>

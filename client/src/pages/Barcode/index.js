@@ -141,7 +141,7 @@ const Barcode = () => {
     {
       path: "/dashboard",
       text: "Your store cupboard",
-      icon: navbarIcons.barcode,
+      icon: navbarIcons.bag,
     },
     { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload },
     { path: "/addProducts", text: "Add products", icon: navbarIcons.add },
