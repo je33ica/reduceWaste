@@ -92,8 +92,10 @@ module.exports = {
   },
   searchBarcode: (req, res) => {
     db.User.findById(req.session.userId).then((dbUser) => {
-      const product = dbUser.products.find(dbProduct => dbProduct._id.toString() === req.body._id)//_id from MongoDB is of type Object so we must convert to a string implicitly to compare
-      res.json(product);
+      const product = dbUser.products.find(dbProduct => dbProduct.EAN === req.body.EAN)
+      if (product){
+        return res.json(product)
+      }
     });
   }
 };
