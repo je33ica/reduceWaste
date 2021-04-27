@@ -1,7 +1,13 @@
 import Quagga from "@ericblade/quagga2";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import PopUpAlert from "../PopUpAlert";
 
-const Scanner = ({ readBarcode }) => {
+const Scanner = ({ readBarcode, toggleScanner }) => {
+  const [displayPopup, setDisplayPopup] = useState({
+    show: false,
+    type: "",
+    message: "",
+  });
   useEffect(() => {
     Quagga.init(
       {
@@ -39,7 +45,21 @@ const Scanner = ({ readBarcode }) => {
       },
       (err) => {
         if (err) {
-          return console.log(err);
+          setDisplayPopup({
+            show: true,
+            type: "failure",
+            message:
+              "We couldn't find your camera. It may be being used by another application",
+          });
+          setTimeout(() => {
+            toggleScanner()
+            setDisplayPopup({
+              show: false,
+              type: "",
+              message: "",
+            });
+          }, 2500);
+          return
         }
         Quagga.start();
       }
@@ -97,14 +117,17 @@ const Scanner = ({ readBarcode }) => {
     transform: "translateX(-50%)",
   }
   return (
-    <div
-      className="viewport"
-      id="interactive"
-      style={{ position: 'unset' }}
-    >
-      <video src="" style={positionViewportAndCanvas}></video>
-      <canvas className="drawingBuffer" style={positionViewportAndCanvas}></canvas>
-    </div>
+    <>
+      <div
+        className="viewport"
+        id="interactive"
+        style={{ position: 'unset' }}
+      >
+        <video src="" style={positionViewportAndCanvas}></video>
+        <canvas className="drawingBuffer" style={positionViewportAndCanvas}></canvas>
+      </div>
+      {displayPopup.show && <PopUpAlert type={displayPopup.type} message={displayPopup.message}/>}
+    </>
   );
 };
 

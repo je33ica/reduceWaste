@@ -156,7 +156,7 @@ const Barcode = () => {
         <button className="btn" type="button" onClick={toggleScanner}>
           {scanning ? "Stop" : "Start Scanner"}
         </button>
-        {scanning && <Scanner readBarcode={readBarcode} />}
+        {scanning && <Scanner readBarcode={readBarcode} toggleScanner={toggleScanner}/>}
         {result && <h4>Your barcode is {result}</h4>}
         {loading && <Loading />}
         {product?.productName && <p>We found the following product previously in your store. Would you like to add it again?</p>}
