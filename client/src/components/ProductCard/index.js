@@ -45,7 +45,7 @@ const ProductCard = ({ product, removeCard, updateElement }) => {
         }}
         className={customSelect}
       >
-        <option value="" selected disabled hidden>
+        <option value="" disabled hidden>
           Choose a category
         </option>
         <option value="Fresh">Fresh</option>

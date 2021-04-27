@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Redirect } from "react-router";
-import { uuid } from "uuidv4";
+import {v4 as uuid} from "uuid";
 import NavBar from "../../components/NavBar";
 import userContext from "../../utils/context/userContext";
 import ImageUpload from "../../components/ImageUpload";

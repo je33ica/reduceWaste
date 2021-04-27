@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import ProductForm from "../../components/ProductForm";
-import { uuid } from "uuidv4";
+import {v4 as uuid} from "uuid";
 import NavBar from "../../components/NavBar";
 import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";

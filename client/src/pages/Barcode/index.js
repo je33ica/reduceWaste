@@ -2,6 +2,7 @@ import { useState } from "react";
 import NavBar from "../../components/NavBar";
 import Scanner from "../../components/Scanner";
 import navbarIcons from "../../icons/navbarIcons";
+import API from "../../utils/api";
 
 const Barcode = () => {
   
@@ -14,7 +15,11 @@ const Barcode = () => {
   const readBarcode = (resultFromScan) => {
     if(resultFromScan?.codeResult?.code){
       setResult(resultFromScan.codeResult.code);
-      toggleScanner()
+      toggleScanner();
+      API.searchWithBarcode(resultFromScan.codeResult.code)
+        .then(res => {
+          console.log(res)
+        })
     }
     return
   }
