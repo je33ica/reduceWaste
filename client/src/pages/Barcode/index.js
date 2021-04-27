@@ -84,13 +84,13 @@ const Barcode = () => {
       body: JSON.stringify([product]),
     })
       .then((res) => res.json())
-      .then((result) => {
+      .then((response) => {
         setLoading(false);
-        if (result.message) {
+        if (response.message) {
           setDisplayPopup({
             show: true,
             type: "failure",
-            message: result.message,
+            message: response.message,
           });
         } else {
           setDisplayPopup({
