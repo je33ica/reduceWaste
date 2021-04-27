@@ -91,9 +91,10 @@ module.exports = {
       .catch((err) => res.status(400).json(err));
   },
   searchBarcode: (req, res) => {
-    console.log(req.body.EAN)
     db.User.findById(req.session.userId).then((dbUser) => {
-      const product = dbUser.products.find(dbProduct => dbProduct.EAN === req.body.EAN)
+      const product = dbUser.products.find(dbProduct => {
+        return dbProduct.EAN === req.body.EAN;
+      })
       if (product){
         return res.json(product)
       } else{

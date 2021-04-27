@@ -14,7 +14,7 @@ const AddProducts = () => {
       amount: "",
       expiry: date,
       id: uuid(),
-      ean: "",
+      EAN: "",
       category: "",
     },
   ]);
@@ -45,7 +45,7 @@ const AddProducts = () => {
       amount: "",
       expiry: date,
       id: uuid(),
-      ean: "",
+      EAN: "",
       category: "",
     };
     if (position === "start") {

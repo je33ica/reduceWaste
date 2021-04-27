@@ -24,13 +24,13 @@ const ProductCard = ({ product, removeCard, updateElement }) => {
           updateElement(e.target.value, e.target.name, product.id)
         }
       />
-      <label htmlFor="ean">
+      <label htmlFor="EAN">
         EAN (barcode) - <em>Optional</em>
       </label>
       <input
         type="text"
-        name="ean"
-        value={product.ean}
+        name="EAN"
+        value={product.EAN}
         onChange={(e) =>
           updateElement(e.target.value, e.target.name, product.id)
         }

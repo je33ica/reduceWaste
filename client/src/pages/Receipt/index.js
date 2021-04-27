@@ -77,7 +77,7 @@ const Receipts = () => {
       amount: "",
       expiry: date,
       id: uuid(),
-      ean: "",
+      EAN: "",
       category: ""
     };
     if (position === "start") {
@@ -131,7 +131,7 @@ const Receipts = () => {
                 amount: "",
                 expiry: date,
                 id: uuid(),
-                ean: "",
+                EAN: "",
                 category: ""
               };
             });
