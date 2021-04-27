@@ -39,7 +39,7 @@ a:visited {
   grid-gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 30px auto;
   align-items: center;
 }
 
@@ -57,6 +57,8 @@ a:visited {
 
 .inlineLink {
   color: $red;
+  font-size: x-large;
+  font-weight: bolder;
 }
 
 .inlineLink:visited {
@@ -116,7 +118,7 @@ select:-webkit-autofill {
 }
 
 .btn {
-  background-color: $white;
+  // background-color: $white;
   border: none;
   border-radius: 4px;
   color: $red;
