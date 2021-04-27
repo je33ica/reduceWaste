@@ -21,9 +21,9 @@ const Barcode = () => {
 
 
   const navBarItems = [
-    { path: "/account", text: "Account", icon: navbarIcons.user }, //change icon?
+    { path: "/account", text: "Account", icon: navbarIcons.user }, 
     { path: "/dashboard", text: "Your store cupboard", icon: navbarIcons.barcode },
-    { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload }, //chnage icon
+    { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload },
     { path: "/addProducts", text: "Add products", icon: navbarIcons.add },
   ];
   return (
