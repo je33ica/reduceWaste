@@ -34,23 +34,33 @@ const Landing = () => {
       <div className={grid}>
         <div className={card}>
           <img src={recipes} alt="recipe" className={landingImg} />
-          <p>Easily find recipes from ingredients in your kitchen</p>
+          <p>
+            Use our recipe finder! Easily find great recipe ideas from
+            ingredients in your kitchen
+          </p>
         </div>
 
         <div className={card}>
-          <img src={store} alt="store" className={landingImgSecond} />
+          <img src={store} alt="store" className={landingImg} />
           <p>
             Never waste food again! Our colour coded system helps you easily
             identify what needs to be used
           </p>
         </div>
+
         <div className={card}>
-          <img src={handwrite} alt="store" className={landingImgThird} />
-          <p>Use Shopping lists & receipts to add to your store cupboard</p>
+          <img src={handwrite} alt="store" className={landingImg} />
+          <p>
+            Use our AI services! Scan shopping lists &amp; receipts or scan
+            barcodes to add to your store cupboard
+          </p>
         </div>
         <div className={card}>
-          <img src={add} alt="store" className={landingImgThird} />
-          <p>Easily item items </p>
+          <img src={add} alt="store" className={landingImg} />
+          <p>
+            Easily add items! Enter product information, save details such as
+            product type &amp; amount{" "}
+          </p>
         </div>
       </div>
     </>
