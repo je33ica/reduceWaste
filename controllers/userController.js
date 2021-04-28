@@ -1,5 +1,6 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
+const nodeMailerController = require("./nodeMailerController");
 
 const omitPassword = ({ username, email, userCreated }) => {
   const newUser = { username, email, userCreated };
@@ -29,6 +30,11 @@ module.exports = {
     db.User.create(user)
       .then((newlyCreatedUser) => {
         res.status(200).json(omitPassword(newlyCreatedUser));
+        nodeMailerController.sendMail(
+          newlyCreatedUser.email,
+          `Welcome to Reduce Waste ${newlyCreatedUser.username}, never waste food again!`,
+          `<h1>Thank you for signing up ${newlyCreatedUser.username}</h1>`
+        );
       })
       .catch((err) => {
         if (err.keyValue.hasOwnProperty("username")) {

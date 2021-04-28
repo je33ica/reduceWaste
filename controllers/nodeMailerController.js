@@ -41,9 +41,15 @@ const smtpTransport = nodemailer.createTransport({
 // };
 
 module.exports = {
-  sendMail: (mailOptions) => {
+  sendMail: (userEmail, subject, htmlTemplate) => {
+    const mailOptions = {
+      from: "hello.reduceWaste@gmail.com",
+      to: userEmail,
+      subject: subject,
+      generateTextFromHTML: true,
+      html: htmlTemplate,
+    };
     smtpTransport.sendMail(mailOptions, (error, response) => {
-      error ? console.log(error) : console.log(response);
       smtpTransport.close();
     });
   },
