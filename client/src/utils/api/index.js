@@ -27,6 +27,17 @@ const API = {
         "Content-Type": "application/json",
       }
     })
+  },
+  searchWithBarcode: (barcode) => {
+    return fetch("/api/users/products/barcode", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        EAN: barcode
+      })
+    })
   }
 };
 

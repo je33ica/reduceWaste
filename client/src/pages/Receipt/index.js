@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Redirect } from "react-router";
-import { uuid } from "uuidv4";
+import {v4 as uuid} from "uuid";
 import NavBar from "../../components/NavBar";
 import userContext from "../../utils/context/userContext";
 import ImageUpload from "../../components/ImageUpload";
@@ -77,7 +77,7 @@ const Receipts = () => {
       amount: "",
       expiry: date,
       id: uuid(),
-      ean: "",
+      EAN: "",
       category: ""
     };
     if (position === "start") {
@@ -131,7 +131,7 @@ const Receipts = () => {
                 amount: "",
                 expiry: date,
                 id: uuid(),
-                ean: "",
+                EAN: "",
                 category: ""
               };
             });
@@ -183,6 +183,8 @@ const Receipts = () => {
   const navBarItems = [
     { path: "/account", text: "Account", icon: navbarIcons.user },
     { path: "/dashboard", text: "Your food store", icon: navbarIcons.bag },
+    { path: "/addProducts", text: "Add products", icon: navbarIcons.add },
+    { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
   ];
   return (
     <>
@@ -209,11 +211,6 @@ const Receipts = () => {
           />
         </div>
       </div>
-      {displayedImage &&
-       <div style={{width: "90%", margin: "0 auto", maxWidth: "400px"}}>
-         <img src={displayedImage.base64} alt="Uploaded Receipt" style={{width: "100%", height: "auto"}}/>
-       </div>
-      }
       {resultsFromOcr.length > 0 && (
         <ProductForm
           addCard={addCard}
@@ -225,6 +222,11 @@ const Receipts = () => {
           displayPopup={displayPopup}
         />
       )}
+      {displayedImage &&
+       <div style={{width: "90%", margin: "0 auto", maxWidth: "400px"}}>
+         <img src={displayedImage.base64} alt="Uploaded Receipt" style={{width: "100%", height: "auto"}}/>
+       </div>
+      }
     </>
   );
 };

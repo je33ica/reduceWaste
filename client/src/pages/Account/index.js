@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { Link, Redirect } from "react-router-dom";
 import Loading from "../../components/Loading";
 import NavBar from "../../components/NavBar";
 import UserCard from "../../components/UserCard";
 import navbarIcons from "../../icons/navbarIcons";
+import userContext from "../../utils/context/userContext";
 
 const Account = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
 
   useEffect(() => {
     fetch("/api/users")
@@ -23,6 +25,9 @@ const Account = () => {
     { path: "/receipt", text: "Upload receipts", icon: navbarIcons.upload },
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
   ];
+  if (!isUserLoggedIn) {
+    return <Redirect to="/" />;
+  }
   return (
     <>
       <NavBar navBarItems={navBarItems} />

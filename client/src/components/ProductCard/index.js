@@ -1,6 +1,6 @@
 import { card, customSelect } from "./productcard.module.scss";
 
-const ProductCard = ({ product, removeCard, updateElement }) => {
+const ProductCard = ({ product, removeCard, updateElement, single }) => {
   return (
     <div className={card}>
       <label htmlFor="productName">Product</label>
@@ -24,13 +24,13 @@ const ProductCard = ({ product, removeCard, updateElement }) => {
           updateElement(e.target.value, e.target.name, product.id)
         }
       />
-      <label htmlFor="ean">
+      <label htmlFor="EAN">
         EAN (barcode) - <em>Optional</em>
       </label>
       <input
         type="text"
-        name="ean"
-        value={product.ean}
+        name="EAN"
+        value={product.EAN}
         onChange={(e) =>
           updateElement(e.target.value, e.target.name, product.id)
         }
@@ -45,7 +45,7 @@ const ProductCard = ({ product, removeCard, updateElement }) => {
         }}
         className={customSelect}
       >
-        <option value="" selected disabled hidden>
+        <option value="" disabled hidden>
           Choose a category
         </option>
         <option value="Fresh">Fresh</option>
@@ -63,13 +63,15 @@ const ProductCard = ({ product, removeCard, updateElement }) => {
           updateElement(e.target.value, e.target.name, product.id)
         }
       />
-      <button
-        className="btn"
-        type="button"
-        onClick={() => removeCard(product.id)}
-      >
-        Remove Item
-      </button>
+      {!single && (
+        <button
+          className="btn"
+          type="button"
+          onClick={() => removeCard(product.id)}
+        >
+          Remove Item
+        </button>
+      )}
     </div>
   );
 };
