@@ -12,7 +12,7 @@ import AddProducts from "./pages/AddProducts";
 import Receipt from "./pages/Receipt";
 import Barcode from "./pages/Barcode";
 import Dashboard from "./pages/Dashboard";
-import { NavBarContextProvider } from "./utils/context/navbarContext";
+import NavbarContext, { NavBarContextProvider } from "./utils/context/navbarContext";
 import Layout from "./layout";
 
 //checking response from back end
@@ -29,14 +29,18 @@ function App() {
     setDisplayMenu(bool);
   };
 
+  const [navbarItems, setNavbarItems] = useState([]);
+
+  const updateNavbarItems = (items) => {
+    setNavbarItems(items)
+  }
+
   return (
-    
+    <NavbarContext.Provider value={{navbarItems, updateNavbarItems}}>
       <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>
         <menuContext.Provider value={{ displayMenu, toggleMenu }}>
           <Router>
-            <Route>
             <Switch>
-            <NavBarContextProvider>
               <Layout>
                 <Route exact path="/">
                   <Home />
@@ -66,12 +70,11 @@ function App() {
                   <NoMatch />
                 </Route>
               </Layout>
-              </NavBarContextProvider>
             </Switch>
-            </Route>
           </Router>
         </menuContext.Provider>
       </userContext.Provider>
+      </NavbarContext.Provider>
     
   );
 }

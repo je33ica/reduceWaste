@@ -5,13 +5,12 @@ import { useContext } from "react";
 import NavbarContext from "../../utils/context/navbarContext";
 
 const Home = () => {
-  const navbarCtx = useContext(NavbarContext);
+  const {updateNavbarItems}= useContext(NavbarContext);
   const navBarItems = [
     { path: "/login", text: "Login", icon: navbarIcons.login },
     { path: "/registration", text: "Sign Up", icon: navbarIcons.signup },
   ];
-  console.log(navbarCtx)
-  navbarCtx.setNavBarItems(navBarItems)
+  updateNavbarItems(navBarItems)
   return (
     <>
       <Landing />
