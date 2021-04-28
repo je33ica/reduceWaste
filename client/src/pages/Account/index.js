@@ -4,11 +4,13 @@ import Loading from "../../components/Loading";
 import NavBar from "../../components/NavBar";
 import UserCard from "../../components/UserCard";
 import navbarIcons from "../../icons/navbarIcons";
+import NavbarContext from "../../utils/context/navbarContext";
 import userContext from "../../utils/context/userContext";
 
 const Account = () => {
   const [user, setUser] = useState(null);
   const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
+  const navbarCtx = useContext(NavbarContext)
 
   useEffect(() => {
     fetch("/api/users")

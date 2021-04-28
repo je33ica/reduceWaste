@@ -1,13 +1,20 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 
 const NavbarContext = createContext({
-  navbarItems: []
+  navbarItems: [],
+  setNavBarItems: () => {}
 });
 
 export const NavBarContextProvider = (props) => {
+  const [items, setItems] = useState([])
   const context = {
-    navbarItems: []
+    navbarItems: [],
+    setNavBarItems: updateNavBarItems
+  }
+
+  const updateNavBarItems = (items) => {
+    setItems(items)
   }
 
   return (
