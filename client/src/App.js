@@ -2,7 +2,7 @@ import "./App.scss";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import userContext from "./utils/context/userContext";
-import menuContext from "./utils/context/menuContext"
+import menuContext from "./utils/context/menuContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
@@ -26,16 +26,18 @@ function App() {
   const [displayMenu, setDisplayMenu] = useState(false);
 
   const toggleMenu = (bool) => {
-    setDisplayMenu(bool)
-  }
+    setDisplayMenu(bool);
+  };
 
   return (
-    <NavBarContextProvider>
-      <Layout>
-        <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>
-          <menuContext.Provider value={{displayMenu, toggleMenu}}>
-            <Router>
-              <Switch>
+    
+      <userContext.Provider value={{ isUserLoggedIn, setUserLogInStatus }}>
+        <menuContext.Provider value={{ displayMenu, toggleMenu }}>
+          <Router>
+            <Route>
+            <Switch>
+            <NavBarContextProvider>
+              <Layout>
                 <Route exact path="/">
                   <Home />
                 </Route>
@@ -63,12 +65,14 @@ function App() {
                 <Route path="*">
                   <NoMatch />
                 </Route>
-              </Switch>
-            </Router>
-          </menuContext.Provider>
-        </userContext.Provider>
-      </Layout>
-    </NavBarContextProvider>
+              </Layout>
+              </NavBarContextProvider>
+            </Switch>
+            </Route>
+          </Router>
+        </menuContext.Provider>
+      </userContext.Provider>
+    
   );
 }
 

@@ -8,13 +8,14 @@ const NavbarContext = createContext({
 
 export const NavBarContextProvider = (props) => {
   const [items, setItems] = useState([])
-  const context = {
-    navbarItems: [],
-    setNavBarItems: updateNavBarItems
-  }
 
   const updateNavBarItems = (items) => {
     setItems(items)
+  }
+
+  const context = {
+    navbarItems: items,
+    setNavBarItems: updateNavBarItems
   }
 
   return (

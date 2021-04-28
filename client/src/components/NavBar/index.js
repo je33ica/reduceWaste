@@ -18,7 +18,6 @@ import navbarIcons from "../../icons/navbarIcons";
 import NavbarContext from "../../utils/context/navbarContext";
 
 const NavBar = () => {
-  const location = useLocation();
   const navbarCtx = useContext(NavbarContext);
 
   const [displayTooltip, setTooltip] = useState(false);
@@ -31,7 +30,7 @@ const NavBar = () => {
   };
 
   const itemsWithLogout = [...navbarCtx.navbarItems, logoutItem];
-
+  const location = useLocation();
   if (location.pathname === "/" || location.pathname === "/login") {
     itemsWithLogout.pop();
   }

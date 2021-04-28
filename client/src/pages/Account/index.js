@@ -10,7 +10,8 @@ import userContext from "../../utils/context/userContext";
 const Account = () => {
   const [user, setUser] = useState(null);
   const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
-  const navbarCtx = useContext(NavbarContext)
+  const navbarCtx = useContext(NavbarContext);
+
 
   useEffect(() => {
     fetch("/api/users")
@@ -27,12 +28,13 @@ const Account = () => {
     { path: "/receipt", text: "Upload receipts", icon: navbarIcons.upload },
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
   ];
+  navbarCtx.setNavBarItems(navBarItems)
+
   if (!isUserLoggedIn) {
     return <Redirect to="/" />;
   }
   return (
     <>
-      <NavBar navBarItems={navBarItems} />
       {user ? (
         <>
           <UserCard user={user}/>
