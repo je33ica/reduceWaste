@@ -1,7 +1,7 @@
 import NavBar from "../../components/NavBar";
 import Landing from "../../components/Landing";
 import navbarIcons from "../../icons/navbarIcons"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import NavbarContext from "../../utils/context/navbarContext";
 
 const Home = () => {
@@ -10,7 +10,10 @@ const Home = () => {
     { path: "/login", text: "Login", icon: navbarIcons.login },
     { path: "/registration", text: "Sign Up", icon: navbarIcons.signup },
   ];
-  updateNavbarItems(navBarItems)
+  useEffect(() => {
+    updateNavbarItems(navBarItems)
+  }, [])
+  
   return (
     <>
       <Landing />
