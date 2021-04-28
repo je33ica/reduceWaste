@@ -48,7 +48,7 @@ const postToOCR = async (url) => {
         },
         url: results.headers["operation-location"],
       });
-      await timer(3000); // then the created Promise can be awaited
+      await timer(1500); // then the created Promise can be awaited
     }
     //if we have had a successful result from azure (i.e. the img has been read and the results have been received) then
     //return them (by checking with optional chaining) or return an error message

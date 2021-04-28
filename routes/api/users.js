@@ -53,6 +53,7 @@ router.post("/logout", destroySession);
 router.get("/products", isUserLoggedIn, userController.getProducts);
 router.put("/products", isUserLoggedIn, userController.addProduct);
 router.delete("/products", isUserLoggedIn, userController.removeProduct);
+router.post("/products/barcode", isUserLoggedIn, userController.searchBarcode)
 // isUserLoggedIn,
 // .put(userController.addProduct)
 

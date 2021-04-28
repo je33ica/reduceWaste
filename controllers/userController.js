@@ -90,4 +90,16 @@ module.exports = {
       })
       .catch((err) => res.status(400).json(err));
   },
+  searchBarcode: (req, res) => {
+    db.User.findById(req.session.userId).then((dbUser) => {
+      const product = dbUser.products.find(dbProduct => {
+        return dbProduct.EAN === req.body.EAN;
+      })
+      if (product){
+        return res.json(product)
+      } else{
+        return res.status(204).json({message: "no product with that barcode"})
+      }
+    }).catch((err) => res.status(500).json(err));
+  }
 };

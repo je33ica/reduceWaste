@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import ProductForm from "../../components/ProductForm";
-import { uuid } from "uuidv4";
+import {v4 as uuid} from "uuid";
 import NavBar from "../../components/NavBar";
 import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
@@ -14,7 +14,7 @@ const AddProducts = () => {
       amount: "",
       expiry: date,
       id: uuid(),
-      ean: "",
+      EAN: "",
       category: "",
     },
   ]);
@@ -45,7 +45,7 @@ const AddProducts = () => {
       amount: "",
       expiry: date,
       id: uuid(),
-      ean: "",
+      EAN: "",
       category: "",
     };
     if (position === "start") {
@@ -123,8 +123,8 @@ const AddProducts = () => {
       });
   };
   const navBarItems = [
-    { path: "/dashboard", text: "Your food store", icon: navbarIcons.bag },
     { path: "/account", text: "Account", icon: navbarIcons.user },
+    { path: "/dashboard", text: "Your food store", icon: navbarIcons.bag },
     { path: "/barcode", text: "Barcode scanner", icon: navbarIcons.barcode },
     { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload },
   ];
