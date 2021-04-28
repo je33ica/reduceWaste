@@ -114,6 +114,7 @@ const DashboardTable = ({
             className="deleteButton"
             onClick={() => removeProductFromView(product._id)}
             style={!colour ? { color: "black" } : { color: "white" }}
+            // style={{inlines}}
           >
             <FontAwesomeIcon icon={icons.trash} />
           </button>
