@@ -5,9 +5,26 @@
   width: 100vw;
   left: 0;
   top: 0;
-  background-color: $red;
+  // background-color: $red;
+
   height: 80px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #da5959, #d52323);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .navIconContainer {
   position: absolute;
