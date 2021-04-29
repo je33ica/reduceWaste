@@ -23,6 +23,12 @@ const requestPasswordReset = async (email) => {
     null
   );
 
+  const userHash = bcrypt.hashSync(
+    user._id,
+    bcrypt.genSaltSync(10),
+    null
+  );
+
 
   await new Token({
     userId: user._id,
@@ -30,7 +36,7 @@ const requestPasswordReset = async (email) => {
     createdAt: Date.now()
   }).save();
 
-  const link = `https://reduce-waste.herokuapp.com/passwordReset?token=${resetToken}&id=${user.id}`;
+  const link = `https://reduce-waste.herokuapp.com/passwordReset?token=${resetToken}&id=${userHash}`;
   sendMail(user.email, "Reduce Waste Password Reset Requested", `<h1>We have received your password reset request</h1><p>The link to reset your password is <a href="${link}" target="_blank">here</a></p> `)
 
   return link
