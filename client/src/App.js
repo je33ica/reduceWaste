@@ -12,6 +12,7 @@ import AddProducts from "./pages/AddProducts";
 import Receipt from "./pages/Receipt";
 import Barcode from "./pages/Barcode";
 import Dashboard from "./pages/Dashboard";
+import PasswordReset from "./pages/PasswordReset";
 
 //checking response from back end
 function App() {
@@ -55,6 +56,9 @@ function App() {
             </Route>
             <Route path="/dashboard">
               <Dashboard />
+            </Route>
+            <Route path="/passwordReset">
+              <PasswordReset />
             </Route>
             <Route path="*">
               <NoMatch />
