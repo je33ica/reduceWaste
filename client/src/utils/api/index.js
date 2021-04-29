@@ -38,6 +38,17 @@ const API = {
         EAN: barcode
       })
     })
+  },
+  requestPasswordReset: (email) => {
+    return fetch("/api/users/requestPasswordReset", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email
+      })
+    })
   }
 };
 

@@ -15,8 +15,6 @@ const PasswordReset = () => {
   }
 
   const {token, hashId} = parseQueryString(location.search);
-  console.log('token', token);
-  console.log('hashid,', hashId)
   const navBarItems = [
     { path: "/login", text: "Login", icon: navbarIcons.login },
     { path: "/registration", text: "Sign Up", icon: navbarIcons.signup },

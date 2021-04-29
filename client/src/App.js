@@ -13,6 +13,7 @@ import Receipt from "./pages/Receipt";
 import Barcode from "./pages/Barcode";
 import Dashboard from "./pages/Dashboard";
 import PasswordReset from "./pages/PasswordReset";
+import RequestReset from "./pages/RequestReset";
 
 //checking response from back end
 function App() {
@@ -59,6 +60,9 @@ function App() {
             </Route>
             <Route path="/passwordReset">
               <PasswordReset />
+            </Route>
+            <Route path="/requestPasswordReset">
+              <RequestReset />
             </Route>
             <Route path="*">
               <NoMatch />

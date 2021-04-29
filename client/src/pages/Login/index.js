@@ -5,7 +5,6 @@ import LoginForm from "../../components/LoginForm";
 import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
 import userContext from "../../utils/context/userContext";
-import API from "../../utils/api";
 import navbarIcons from "../../icons/navbarIcons";
 
 const Login = () => {

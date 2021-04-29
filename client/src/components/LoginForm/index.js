@@ -32,10 +32,16 @@ const LoginForm = ({ emailInput, passwordInput, loginHandler }) => {
           Login
         </button>
       </form>
-      <p style={{ textAlign: "center" }}>
+      <p style={{ textAlign: "center",fontSize: "0.9rem" }}>
         Not registered?{" "}
-        <Link className="inlineLink" to="/registration">
+        <Link className="inlineLink" to="/registration" style={{ textAlign: "center", fontSize: "0.9rem"}}>
           Click here to register
+        </Link>
+      </p>
+      <p style={{ textAlign: "center",fontSize: "0.9rem" }}>
+        Forgot your password?{" "}
+        <Link className="inlineLink" to="/requestPasswordReset" style={{ textAlign: "center", fontSize: "0.9rem" }}>
+          Click here to request a reset email
         </Link>
       </p>
     </>
