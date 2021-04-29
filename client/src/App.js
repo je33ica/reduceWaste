@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import userContext from "./utils/context/userContext";
 import menuContext from "./utils/context/menuContext"

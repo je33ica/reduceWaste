@@ -80,9 +80,9 @@ const DashboardTable = ({
   const orangeSorted = [];
   const generalSorted = [];
   productsWithColour.forEach((product) => {
-    if (product.colour == "redAlert") {
+    if (product.colour === "redAlert") {
       redSorted.push(product);
-    } else if (product.colour == "orangeAlert") {
+    } else if (product.colour === "orangeAlert") {
       orangeSorted.push(product);
     } else {
       generalSorted.push(product);

@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
-import { Redirect, useLocation } from "react-router";
+import { Redirect, useLocation, useHistory } from "react-router";
+import Loading from "../../components/Loading";
 import NavBar from "../../components/NavBar";
+import PopUpAlert from "../../components/PopUpAlert";
 import Reset from "../../components/Reset";
 import navbarIcons from "../../icons/navbarIcons";
 
@@ -12,6 +14,14 @@ const PasswordReset = () => {
     password: true,
     confirmPassword: true,
   });
+  const [loading, setLoading] = useState(false);
+  const [displayPopup, setDisplayPopup] = useState({
+    show: false,
+    type: "",
+    message: "",
+  });
+
+  const history = useHistory()
 
   const parseQueryString = (query) => {
     const withOutToken = query.replace("?token=", "");
@@ -51,6 +61,21 @@ const PasswordReset = () => {
     if (validationFailed) {
       return;
     }
+
+
+    setLoading(true);
+    setDisplayPopup({
+      type: "success",
+      message:"Password reset, redirecting to login page",
+      show: true
+    })
+    setTimeout(() => {
+      history.replace("/login")
+      setDisplayPopup({
+        show: false
+      })
+    }, 1500)
+
   };
   const navBarItems = [
     { path: "/login", text: "Login", icon: navbarIcons.login },
@@ -65,6 +90,8 @@ const PasswordReset = () => {
         resetPasswordHandler={resetPasswordHandler}
         validationState={validationState}
       />
+      {loading && <Loading />}
+      {displayPopup.show && <PopUpAlert type={displayPopup.type} message={displayPopup.message} />}
     </>
   );
 };
