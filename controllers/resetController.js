@@ -9,6 +9,14 @@ module.exports = {
       res.status(400)
       res.send(error)
     }
-
-  } 
+  },
+  resetPassword: async (req, res) => {
+    try {
+      const resetPasswordResult = await resetService.resetPassword(req.body.userId, req.body.token, req.body.password)
+      return res.json(resetPasswordResult)
+    } catch (error) {
+      res.status(400)
+      res.send(error)
+    }
+  }
 }

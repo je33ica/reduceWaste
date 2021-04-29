@@ -1,12 +1,9 @@
-const JWT = require("jsonwebtoken");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
 const Token = require("../models/tokenModel");
 const { sendMail } = require("../controllers/nodeMailerController");
 
-const JWTSecret = process.env.JWT_SECRET;
-const bcryptSalt = process.env.BCRYPT_SALT;
 
 const requestPasswordReset = async (email) => {
   const user = await User.findOne({email});
@@ -23,11 +20,11 @@ const requestPasswordReset = async (email) => {
     null
   );
 
-  const userHash = bcrypt.hashSync(
-    user._id.toString(),
-    bcrypt.genSaltSync(10),
-    null
-  );
+  // const userHash = bcrypt.hashSync(
+  //   user._id.toString(),
+  //   bcrypt.genSaltSync(10),
+  //   null
+  // );
 
 
   await new Token({
@@ -36,12 +33,39 @@ const requestPasswordReset = async (email) => {
     createdAt: Date.now()
   }).save();
 
-  const link = `https://reduce-waste.herokuapp.com/passwordReset?token=${resetToken}&id=${userHash}`;
+  const link = `https://reduce-waste.herokuapp.com/passwordReset?token=${resetToken}&id=${user._id.toString()}`;
   sendMail(user.email, "Reduce Waste Password Reset Requested", `<h1>We have received your password reset request</h1><p>The link to reset your password is <a href="${link}" target="_blank">here</a></p> `)
 
   return link
 }
 
+const resetPassword = async (userId, token, newPassword) => {
+  const passwordResetToken = await Token.findOne({userId});
+
+  if (!passwordResetToken){
+    throw new Error("Invalid or expired password resest token")
+  }
+
+  const isValidToken = bcrypt.compareSync(token, passwordResetToken);
+
+  if (!isValidToken){
+    throw new Error("Invalid or expired password reset token");
+  }
+
+  const hash = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10), null);
+
+  await User.updateOne(
+    {_id, userId},
+    { $set: {password: hash} },
+    { new: true }
+  )
+
+  await passwordResetToken.deleteOne();
+
+  return true
+}
+
 module.exports = {
-  requestPasswordReset
+  requestPasswordReset,
+  resetPassword
 }

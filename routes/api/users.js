@@ -57,6 +57,7 @@ router.post("/products/barcode", isUserLoggedIn, userController.searchBarcode)
 // isUserLoggedIn,
 // .put(userController.addProduct)
 
-router.post("/requestPasswordReset", resetController.sendResetEmail)
+router.post("/requestPasswordReset", resetController.sendResetEmail);
+router.post("/passwordReset", resetController.resetPassword);
 
 module.exports = router;
