@@ -6,7 +6,7 @@ import PopUpAlert from "../../components/PopUpAlert";
 import RecipeHolder from "../../components/RecipeHolder";
 import navbarIcons from "../../icons/navbarIcons";
 import API from "../../utils/api";
-
+import InfoKey from "../../components/infoKey";
 const Dashboard = () => {
   const [products, setProducts] = useState([]);
   const [ingredients, setIngredients] = useState({});
@@ -115,7 +115,7 @@ const Dashboard = () => {
     <>
       <h1 style={{ textAlign: "center" }}>Your food store</h1>
       <NavBar navBarItems={navBarItems} />
-
+      <InfoKey />
       {products.length > 0 ? (
         <>
           <RecipeHolder
