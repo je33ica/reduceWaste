@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
-// const passport = require("passport");
+const resetController = require("../../controllers/resetController");
 
 const invalidateSession = (req, res, next) => req.session.regenerate(next);
 
@@ -56,5 +56,7 @@ router.delete("/products", isUserLoggedIn, userController.removeProduct);
 router.post("/products/barcode", isUserLoggedIn, userController.searchBarcode)
 // isUserLoggedIn,
 // .put(userController.addProduct)
+
+router.post("/requestPasswordReset", resetController.sendResetEmail)
 
 module.exports = router;
