@@ -61,7 +61,7 @@ const ProductForm = ({
           </button>
         </>
       )}
-      {loading && <Loading />}
+      {(loading && productsArr.length > 8) && <Loading />}
     </form>
   );
 };
