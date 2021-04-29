@@ -1,16 +1,27 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import NavBar from "../../components/NavBar";
 import Reset from "../../components/Request";
 import navbarIcons from "../../icons/navbarIcons";
+import API from "../../utils/api";
 
 const RequestReset = () => {
+
+  const [outputResponse, setOutputResponse] = useState(null);
 
   const emailInput = useRef("");
 
   const requestResetHandler = (e) => {
     e.preventDefault()
     const enteredEmail = emailInput.current.value;
-    console.log(enteredEmail)
+    API.requestPasswordReset(enteredEmail).then(res => {
+      console.log(res)
+      if (res.status === 400){
+        //set state to display error message
+        setOutputResponse("That email address wasn't recognised");
+      } else {
+        setOutputResponse("An email containing a unique link to reset your password should be in your inbox (it may be in your junk)");
+      }
+    })
   }
 
   const navBarItems = [
@@ -21,6 +32,9 @@ const RequestReset = () => {
     <>
       <NavBar navBarItems={navBarItems} />
       <Reset emailInput={emailInput} requestResetHandler={requestResetHandler}/>
+      {outputResponse && <div style={{textAlign: "center"}}>
+        <p>{outputResponse}</p>
+        </div>}
     </>
   );
 };

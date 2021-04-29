@@ -40,6 +40,7 @@ const API = {
     })
   },
   requestPasswordReset: (email) => {
+    console.log(email)
     return fetch("/api/users/requestPasswordReset", {
       method: "POST",
       headers: {

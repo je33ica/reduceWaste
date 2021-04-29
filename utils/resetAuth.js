@@ -24,7 +24,7 @@ const requestPasswordReset = async (email) => {
   );
 
   const userHash = bcrypt.hashSync(
-    user._id,
+    user._id.toString(),
     bcrypt.genSaltSync(10),
     null
   );
