@@ -9,9 +9,10 @@
   font-weight: bold;
   border-radius: 5px;
 }
-.boxes:hover.tooltip {
-  display: block;
-}
+
+// .boxes:hover.tooltip {
+//   display: block;
+// }
 
 .tooltip {
   position: absolute;
@@ -27,6 +28,9 @@
   right: 105%;
 }
 
+.keyItem p {
+  margin: 0;
+}
 // .tooltip {
 //   display: none;
 //   position: absolute;
