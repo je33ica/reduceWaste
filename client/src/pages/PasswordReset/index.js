@@ -1,9 +1,18 @@
-import { useLocation } from "react-router";
+import {useRef, useState} from "react"
+import { Redirect, useLocation } from "react-router";
 import NavBar from "../../components/NavBar";
+import Reset from "../../components/Reset";
 import navbarIcons from "../../icons/navbarIcons";
 
 const PasswordReset = () => {
   const location = useLocation();
+  const passwordInput = useRef("");
+  const confirmPasswordInput = useRef("");
+  const [validationState, setValidationState] = useState({
+    password: true,
+    confirmPassword: true,
+  });
+
   const parseQueryString = (query) => {
     const withOutToken = query.replace("?token=", "");
     const withoutId = withOutToken.replace("id=", "");
@@ -14,7 +23,24 @@ const PasswordReset = () => {
     }
   }
 
+
   const {token, hashId} = parseQueryString(location.search);
+
+  // if (!token || !hashId){
+  //   return (
+  //     <Redirect to="/" />
+  //   )
+  // }
+
+  const resetPasswordHandler = (e) => {
+    e.preventDefault();
+    const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/;
+    const password = passwordInput.current.value;
+    const confirmPassword = confirmPasswordInput.current.value;
+    console.log(password);
+    console.log(confirmPassword);
+    
+  }
   const navBarItems = [
     { path: "/login", text: "Login", icon: navbarIcons.login },
     { path: "/registration", text: "Sign Up", icon: navbarIcons.signup },
@@ -22,7 +48,7 @@ const PasswordReset = () => {
   return (
     <>
       <NavBar navBarItems={navBarItems} />
-      <h1 style={{textAlign: "center"}}>Password reset page</h1>
+      <Reset passwordInput={passwordInput} confirmPasswordInput={confirmPasswordInput} resetPasswordHandler={resetPasswordHandler} validationState={validationState}/>
     </>
   );
 };
