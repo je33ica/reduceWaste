@@ -1,4 +1,6 @@
 import { useState } from "react";
+import {isMobile} from "react-device-detect";
+import {Link} from "react-router-dom"
 import { v4 as uuid } from "uuid";
 import Loading from "../../components/Loading";
 import NavBar from "../../components/NavBar";
@@ -152,6 +154,30 @@ const Barcode = () => {
     { path: "/receipt", text: "Upload receipt", icon: navbarIcons.upload },
     { path: "/addProducts", text: "Add products", icon: navbarIcons.add },
   ];
+
+  //the barcode scanner doesn't currently work on mobile
+  //still investigating, but not for now render an error
+
+  if (isMobile){
+    return (
+      <>
+        <NavBar navBarItems={navBarItems} />
+        <p style={{ textAlign: "center" }}>Unfortunately our barcode scanner is not currently available on mobile devices. We are currently working on a fix</p>
+        <p style={{ textAlign: "center" }}>
+          You can try these options instead. Click{" "}
+          <Link to="/addProducts" className="inlineLink">
+            here
+          </Link>{" "}
+          to add products or try our{" "}
+          <Link to="/receipts" className="inlineLink">
+            Receipt Reader
+          </Link>{" "}
+          instead.
+        </p>
+      </>
+    )
+  }
+
   return (
     <>
       <NavBar navBarItems={navBarItems} />
