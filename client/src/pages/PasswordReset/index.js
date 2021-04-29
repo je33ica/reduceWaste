@@ -5,6 +5,7 @@ import NavBar from "../../components/NavBar";
 import PopUpAlert from "../../components/PopUpAlert";
 import Reset from "../../components/Reset";
 import navbarIcons from "../../icons/navbarIcons";
+import API from "../../utils/api";
 
 const PasswordReset = () => {
   const location = useLocation();
@@ -21,7 +22,7 @@ const PasswordReset = () => {
     message: "",
   });
 
-  const history = useHistory()
+  const history = useHistory();
 
   const parseQueryString = (query) => {
     const withOutToken = query.replace("?token=", "");
@@ -29,17 +30,15 @@ const PasswordReset = () => {
     const paramArr = withoutId.split("&");
     return {
       token: paramArr[0],
-      hashId: paramArr[1],
+      userId: paramArr[1],
     };
   };
 
-  const { token, hashId } = parseQueryString(location.search);
+  const { token, userId } = parseQueryString(location.search);
 
-  // if (!token || !hashId){
-  //   return (
-  //     <Redirect to="/" />
-  //   )
-  // }
+  if (!token || !userId) {
+    return <Redirect to="/" />;
+  }
 
   const resetPasswordHandler = (e) => {
     e.preventDefault();
@@ -62,20 +61,34 @@ const PasswordReset = () => {
       return;
     }
 
-
     setLoading(true);
-    setDisplayPopup({
-      type: "success",
-      message:"Password reset, redirecting to login page",
-      show: true
-    })
-    setTimeout(() => {
-      history.replace("/login")
-      setDisplayPopup({
-        show: false
-      })
-    }, 1500)
 
+    API.resetPassword(userId, token, password).then((res) => {
+      if (res.status === 200) {
+        setDisplayPopup({
+          type: "success",
+          message: "Password reset, redirecting to login page",
+          show: true,
+        });
+        setTimeout(() => {
+          history.replace("/login");
+          setDisplayPopup({
+            show: false,
+          });
+        }, 1500);
+      } else {
+        setDisplayPopup({
+          type: "failure",
+          message: "Could not reset password. Please try again later",
+          show: true,
+        });
+        setTimeout(() => {
+          setDisplayPopup({
+            show: false,
+          });
+        }, 1500);
+      }
+    });
   };
   const navBarItems = [
     { path: "/login", text: "Login", icon: navbarIcons.login },
@@ -91,7 +104,9 @@ const PasswordReset = () => {
         validationState={validationState}
       />
       {loading && <Loading />}
-      {displayPopup.show && <PopUpAlert type={displayPopup.type} message={displayPopup.message} />}
+      {displayPopup.show && (
+        <PopUpAlert type={displayPopup.type} message={displayPopup.message} />
+      )}
     </>
   );
 };

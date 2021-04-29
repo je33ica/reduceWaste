@@ -40,27 +40,25 @@ const requestPasswordReset = async (email) => {
 }
 
 const resetPassword = async (userId, token, newPassword) => {
-  const passwordResetToken = await Token.findOne({userId});
+  const passwordReset = await Token.findOne({userId});
 
-  if (!passwordResetToken){
+  if (!passwordReset.token){
     throw new Error("Invalid or expired password resest token")
   }
 
-  const isValidToken = bcrypt.compareSync(token, passwordResetToken);
-
+  const isValidToken = bcrypt.compareSync(token, passwordReset.token);
   if (!isValidToken){
     throw new Error("Invalid or expired password reset token");
   }
 
   const hash = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10), null);
-
-  await User.updateOne(
-    {_id, userId},
+  await User.findByIdAndUpdate(
+    {_id: userId},
     { $set: {password: hash} },
     { new: true }
   )
 
-  await passwordResetToken.deleteOne();
+  await passwordReset.deleteOne();
 
   return true
 }

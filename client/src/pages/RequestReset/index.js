@@ -14,7 +14,7 @@ const RequestReset = () => {
     const enteredEmail = emailInput.current.value;
     API.requestPasswordReset(enteredEmail).then((res) => {
       console.log(res);
-      if (res.status === 400) {
+      if (res.status !== 200) {
         //set state to display error message
         setOutputResponse("That email address wasn't recognised");
       } else {
