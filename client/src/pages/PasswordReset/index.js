@@ -1,4 +1,4 @@
-import {useRef, useState} from "react"
+import { useRef, useState } from "react";
 import { Redirect, useLocation } from "react-router";
 import NavBar from "../../components/NavBar";
 import Reset from "../../components/Reset";
@@ -19,12 +19,11 @@ const PasswordReset = () => {
     const paramArr = withoutId.split("&");
     return {
       token: paramArr[0],
-      hashId: paramArr[1]
-    }
-  }
+      hashId: paramArr[1],
+    };
+  };
 
-
-  const {token, hashId} = parseQueryString(location.search);
+  const { token, hashId } = parseQueryString(location.search);
 
   // if (!token || !hashId){
   //   return (
@@ -37,10 +36,22 @@ const PasswordReset = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/;
     const password = passwordInput.current.value;
     const confirmPassword = confirmPasswordInput.current.value;
-    console.log(password);
-    console.log(confirmPassword);
-    
-  }
+    let validationFailed = false;
+    const tempValidationState = { ...validationState };
+
+    if (!passwordRegex.test(password)) {
+      tempValidationState.password = false;
+      validationFailed = true;
+    }
+    if (password !== confirmPassword) {
+      tempValidationState.confirmPassword = false;
+      validationFailed = true;
+    }
+    setValidationState(tempValidationState);
+    if (validationFailed) {
+      return;
+    }
+  };
   const navBarItems = [
     { path: "/login", text: "Login", icon: navbarIcons.login },
     { path: "/registration", text: "Sign Up", icon: navbarIcons.signup },
@@ -48,7 +59,12 @@ const PasswordReset = () => {
   return (
     <>
       <NavBar navBarItems={navBarItems} />
-      <Reset passwordInput={passwordInput} confirmPasswordInput={confirmPasswordInput} resetPasswordHandler={resetPasswordHandler} validationState={validationState}/>
+      <Reset
+        passwordInput={passwordInput}
+        confirmPasswordInput={confirmPasswordInput}
+        resetPasswordHandler={resetPasswordHandler}
+        validationState={validationState}
+      />
     </>
   );
 };
