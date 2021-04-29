@@ -34,17 +34,23 @@ const Barcode = () => {
           if (res.status === 200) {
             return res.json();
           }
+          console.log('the code is: ', resultFromScan.codeResult.code
+          )
           setProductsArr([{
             productName: "",
             amount: "",
             expiry: date,
             id: uuid(),
-            EAN: "",
+            EAN: resultFromScan.codeResult.code + "",
             category: "",
           }])
+          console.log(productsArr)
         })
         .then((parsed) => {
-          setProductsArr([{...parsed, id: uuid()}]);
+          if (parsed){
+            setProductsArr([{...parsed, id: uuid()}]);
+          }
+          
         })
         .catch((err) => {
           setLoading(false);
