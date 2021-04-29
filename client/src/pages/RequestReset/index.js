@@ -1,7 +1,17 @@
+import { useRef } from "react";
 import NavBar from "../../components/NavBar";
+import Reset from "../../components/Request";
 import navbarIcons from "../../icons/navbarIcons";
 
 const RequestReset = () => {
+
+  const emailInput = useRef("");
+
+  const requestResetHandler = (e) => {
+    e.preventDefault()
+    const enteredEmail = emailInput.current.value;
+    console.log(enteredEmail)
+  }
 
   const navBarItems = [
     { path: "/login", text: "Login", icon: navbarIcons.login },
@@ -10,7 +20,7 @@ const RequestReset = () => {
   return (
     <>
       <NavBar navBarItems={navBarItems} />
-      <h1 style={{textAlign: "center"}}>Request Reset</h1>
+      <Reset emailInput={emailInput} requestResetHandler={requestResetHandler}/>
     </>
   );
 };
