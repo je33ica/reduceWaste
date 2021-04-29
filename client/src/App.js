@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import userContext from "./utils/context/userContext";
 import menuContext from "./utils/context/menuContext"
@@ -12,6 +12,8 @@ import AddProducts from "./pages/AddProducts";
 import Receipt from "./pages/Receipt";
 import Barcode from "./pages/Barcode";
 import Dashboard from "./pages/Dashboard";
+import PasswordReset from "./pages/PasswordReset";
+import RequestReset from "./pages/RequestReset";
 
 //checking response from back end
 function App() {
@@ -55,6 +57,12 @@ function App() {
             </Route>
             <Route path="/dashboard">
               <Dashboard />
+            </Route>
+            <Route path="/passwordReset">
+              <PasswordReset />
+            </Route>
+            <Route path="/requestPasswordReset">
+              <RequestReset />
             </Route>
             <Route path="*">
               <NoMatch />

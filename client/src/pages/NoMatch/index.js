@@ -1,5 +1,4 @@
 import NavBar from "../../components/NavBar";
-import Landing from "../../components/Landing";
 import navbarIcons from "../../icons/navbarIcons"
 
 const NoMatch = () => {

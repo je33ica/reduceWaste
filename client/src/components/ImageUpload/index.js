@@ -7,9 +7,8 @@ const ImageUpload = ({ uploadImage, displayPopup, loading }) => {
       <input
         type="file"
         onChange={uploadImage}
-        style={{ marginTop: "20px", marginBottom: "20px" }}
+        style={{ marginTop: "20px", marginBottom: "20px", cursor: "default" }}
         className="btn"
-        style={{ cursor: "default" }}
       />
       {loading && <Loading />}
       {displayPopup.show && (

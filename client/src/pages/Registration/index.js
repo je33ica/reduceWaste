@@ -5,7 +5,6 @@ import NavBar from "../../components/NavBar";
 import RegistrationForm from "../../components/RegistrationForm";
 import PopUpAlert from "../../components/PopUpAlert";
 import Loading from "../../components/Loading";
-import API from "../../utils/api";
 import navbarIcons from "../../icons/navbarIcons";
 
 const Registration = () => {
@@ -31,7 +30,7 @@ const Registration = () => {
   // we check, using context, if the user is logged in and if so we redirect them to the account page
   // the only way a logged in user would be able to access this page is by typing it direct in to the url
   //but we still wanted to guard against it
-  const { isUserLoggedIn, setUserLogInStatus } = useContext(userContext);
+  const { isUserLoggedIn } = useContext(userContext);
 
   // further check - if the user gets to a page by typing in the address, we can lose the log in status of the user s
   // we add a quick check to the backend to see if the user is currently logged in
