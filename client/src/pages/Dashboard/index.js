@@ -77,15 +77,6 @@ const Dashboard = () => {
       })
       .catch((err) => console.log(err));
   };
-  useEffect(() => {
-    fetch("api/users/products", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        setProducts(result);
-      });
-  }, []);
 
   const removeProductFromView = (id) => {
     const newProducts = products.filter((product) => product._id !== id);
