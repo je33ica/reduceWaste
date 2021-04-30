@@ -92,6 +92,16 @@ const AddProducts = () => {
             message: result.message,
           });
         } else {
+          setProducts([
+            {
+              productName: "",
+              amount: "",
+              expiry: date,
+              id: uuid(),
+              EAN: "",
+              category: "",
+            }
+          ])
           setDisplayPopup({
             show: true,
             type: "success",

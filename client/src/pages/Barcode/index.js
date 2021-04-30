@@ -36,8 +36,6 @@ const Barcode = () => {
           if (res.status === 200) {
             return res.json();
           }
-          console.log('the code is: ', resultFromScan.codeResult.code
-          )
           setProductsArr([{
             productName: "",
             amount: "",
@@ -46,7 +44,6 @@ const Barcode = () => {
             EAN: resultFromScan.codeResult.code + "",
             category: "",
           }])
-          console.log(productsArr)
         })
         .then((parsed) => {
           if (parsed){
@@ -101,6 +98,14 @@ const Barcode = () => {
             message: response.message,
           });
         } else {
+          setProductsArr([{
+            productName: "",
+            amount: "",
+            expiry: date,
+            id: uuid(),
+            EAN: "",
+            category: "",
+          }])
           setDisplayPopup({
             show: true,
             type: "success",
