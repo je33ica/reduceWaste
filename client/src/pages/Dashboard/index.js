@@ -83,7 +83,24 @@ const Dashboard = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        setProducts(result);
+        // setProducts(result);
+        const preventError = result.reduce((acc, product) => {
+          if (!product.productName){
+            return acc
+          }
+          const tempObj = {
+            EAN: product.EAN || "",
+            amount: product.amount || "",
+            category: product.category || "",
+            dateAdded: product.dateAdded || "",
+            expiry: product.expiry || "",
+            productName: product.productName || "",
+            _id: product._id || ""
+          }
+          acc.push(tempObj)
+          return acc
+        }, [])
+        setProducts(preventError)
       });
   }, []);
 
