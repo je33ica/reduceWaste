@@ -85,6 +85,8 @@ const Dashboard = () => {
       .then((result) => {
         // setProducts(result);
         const preventError = result.reduce((acc, product) => {
+          //due to earlier problem with validation, products could be added with empty values
+          //this reduce function removes them and prevents the error causing crashes on db
           if (!product.productName){
             return acc
           }

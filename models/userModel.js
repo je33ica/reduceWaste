@@ -27,6 +27,7 @@ const UserSchema = new Schema({
     {
       EAN: {
         type: String,
+        default: ""
       },
 
       productName: {
@@ -36,6 +37,7 @@ const UserSchema = new Schema({
 
       amount: {
         type: String,
+        default: ""
       },
 
       dateAdded: {
@@ -50,6 +52,7 @@ const UserSchema = new Schema({
       },
       category: {
         type: String,
+        default: ""
       },
     },
   ],
