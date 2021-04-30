@@ -151,7 +151,8 @@ const Receipts = () => {
 
   const submitProductCardstoDB = () => {
     setLoading(true);
-    API.addProducts(resultsFromOcr)
+    const filtered = resultsFromOcr.filter(product => product.productName !== "")
+    API.addProducts(filtered)
       .then((res) => res.json())
       .then((result) => {
         setLoading(false);

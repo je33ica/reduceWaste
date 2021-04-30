@@ -81,12 +81,13 @@ const Barcode = () => {
     //the server expects an array
     setLoading(true);
     //submit the registration form
+    const filtered = productsArr.filter(product => product.productName !== "")
     fetch("api/users/products", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(productsArr),
+      body: JSON.stringify(filtered),
     })
       .then((res) => res.json())
       .then((response) => {

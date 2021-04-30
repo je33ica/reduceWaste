@@ -75,12 +75,13 @@ const AddProducts = () => {
     //the server expects an array
     setLoading(true);
     //submit the registration form
+    const filtered = products.filter(product => product.productName !== "")
     fetch("api/users/products", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(products),
+      body: JSON.stringify(filtered),
     })
       .then((res) => res.json())
       .then((result) => {
