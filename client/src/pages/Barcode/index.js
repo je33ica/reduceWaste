@@ -14,7 +14,8 @@ const Barcode = () => {
   const date = new Date().toISOString().slice(0, 10);
   const [scanning, setScanning] = useState(false);
   const [result, setResult] = useState(null);
-  const [productsArr, setProductsArr] = useState([])
+  const [productsArr, setProductsArr] = useState([]);
+  const [foundInDb, setFoundInDb] = useState(false)
   const [displayPopup, setDisplayPopup] = useState({
     show: false,
     type: "",
@@ -48,6 +49,7 @@ const Barcode = () => {
         .then((parsed) => {
           if (parsed){
             setProductsArr([{...parsed, id: uuid()}]);
+            setFoundInDb(true);
           }
           
         })
@@ -154,7 +156,7 @@ const Barcode = () => {
 
   const updateElement = (value, target, id) => {
     let elementUpdated = false;
-    const tempResults = [productsArr];
+    const tempResults = [...productsArr];
     for (let i = 0; i < tempResults.length && !elementUpdated; i++) {
       if (tempResults[i].id === id) {
         tempResults[i][target] = value;
@@ -211,8 +213,8 @@ const Barcode = () => {
         {scanning && <Scanner readBarcode={readBarcode} toggleScanner={toggleScanner}/>}
         {result && <h4>Your barcode is {result}</h4>}
         {loading && <Loading />}
-        {productsArr[0]?.productName && <p>We found the following product previously in your store. Would you like to add it again?</p>}
-        {productsArr[0] && (
+        {foundInDb && <p>We found the following product previously in your store. Would you like to add it again?</p>}
+        {productsArr.length > 0 && (
           <ProductForm
             updateElement={updateElement}
             productsArr={productsArr}
