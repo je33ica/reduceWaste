@@ -83,7 +83,26 @@ const Dashboard = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        setProducts(result);
+        // setProducts(result);
+        const preventError = result.reduce((acc, product) => {
+          //due to earlier problem with validation, products could be added with empty values
+          //this reduce function removes them and prevents the error causing crashes on db
+          if (!product.productName){
+            return acc
+          }
+          const tempObj = {
+            EAN: product.EAN || "",
+            amount: product.amount || "",
+            category: product.category || "",
+            dateAdded: product.dateAdded || "",
+            expiry: product.expiry || "",
+            productName: product.productName || "",
+            _id: product._id || ""
+          }
+          acc.push(tempObj)
+          return acc
+        }, [])
+        setProducts(preventError)
       });
   }, []);
 

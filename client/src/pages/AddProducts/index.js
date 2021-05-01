@@ -75,12 +75,27 @@ const AddProducts = () => {
     //the server expects an array
     setLoading(true);
     //submit the registration form
+    const filtered = products.filter(product => product.productName !== "");
+    if (filtered.length === 0){
+      setLoading(false);
+      setDisplayPopup({
+        show: true,
+        type: "failure",
+        message: "You must add at least one product",
+      });
+      setTimeout(() => {
+        setDisplayPopup({
+          show: false,
+        });
+      }, 2000);
+      return
+    }
     fetch("api/users/products", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(products),
+      body: JSON.stringify(filtered),
     })
       .then((res) => res.json())
       .then((result) => {
@@ -92,6 +107,16 @@ const AddProducts = () => {
             message: result.message,
           });
         } else {
+          setProducts([
+            {
+              productName: "",
+              amount: "",
+              expiry: date,
+              id: uuid(),
+              EAN: "",
+              category: "",
+            }
+          ])
           setDisplayPopup({
             show: true,
             type: "success",

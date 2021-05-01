@@ -151,7 +151,22 @@ const Receipts = () => {
 
   const submitProductCardstoDB = () => {
     setLoading(true);
-    API.addProducts(resultsFromOcr)
+    const filtered = resultsFromOcr.filter(product => product.productName !== "")
+    if (filtered.length === 0){
+      setLoading(false);
+      setDisplayPopup({
+        show: true,
+        type: "failure",
+        message: "You must add at least one product",
+      });
+      setTimeout(() => {
+        setDisplayPopup({
+          show: false,
+        });
+      }, 2000);
+      return
+    }
+    API.addProducts(filtered)
       .then((res) => res.json())
       .then((result) => {
         setLoading(false);

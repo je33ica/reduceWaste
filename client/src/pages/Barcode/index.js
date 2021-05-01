@@ -36,8 +36,6 @@ const Barcode = () => {
           if (res.status === 200) {
             return res.json();
           }
-          console.log('the code is: ', resultFromScan.codeResult.code
-          )
           setProductsArr([{
             productName: "",
             amount: "",
@@ -46,7 +44,6 @@ const Barcode = () => {
             EAN: resultFromScan.codeResult.code + "",
             category: "",
           }])
-          console.log(productsArr)
         })
         .then((parsed) => {
           if (parsed){
@@ -84,12 +81,27 @@ const Barcode = () => {
     //the server expects an array
     setLoading(true);
     //submit the registration form
+    const filtered = productsArr.filter(product => product.productName !== "");
+    if (filtered.length === 0){
+      setLoading(false);
+      setDisplayPopup({
+        show: true,
+        type: "failure",
+        message: "You must add at least one product",
+      });
+      setTimeout(() => {
+        setDisplayPopup({
+          show: false,
+        });
+      }, 2000);
+      return
+    }
     fetch("api/users/products", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(productsArr),
+      body: JSON.stringify(filtered),
     })
       .then((res) => res.json())
       .then((response) => {
@@ -101,6 +113,14 @@ const Barcode = () => {
             message: response.message,
           });
         } else {
+          setProductsArr([{
+            productName: "",
+            amount: "",
+            expiry: date,
+            id: uuid(),
+            EAN: "",
+            category: "",
+          }])
           setDisplayPopup({
             show: true,
             type: "success",
