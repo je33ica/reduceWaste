@@ -75,7 +75,8 @@ const Barcode = () => {
 
   const submitProductHandler = (e) => {
     e.preventDefault();
-
+    setResult(null);
+    setFoundInDb(false)
     //before fetch -> render the loading component
     //insde 2nd .then -> unrender loading component
     //render a a pop up alert based on the response
