@@ -11,8 +11,7 @@ An app to help reduce wastage by tracking food items
 5. [User Story](##user-story)
 6. [Tech](##technology)
 7. [Deployment](##deployment)
-8. [License](##license)
-9. [Questions](##questions)
+8. [Questions](##questions)
 
 ## Introduction
 
@@ -27,6 +26,8 @@ SO THAT my I am notified within a reasonable time period that an item is about t
 ## Business Context
 
 Reduce food waste, save money and the enviromental impact caused by food waste.
+
+
 
 ## Key Features
 
@@ -51,10 +52,8 @@ Reduce food waste, save money and the enviromental impact caused by food waste.
 Deployed through Heroku, Reduce Waste is available [here](https://reduce-waste.herokuapp.com/dashboard)
 
 <!-- screenshots -->
+![Reduce Waste (1)](https://user-images.githubusercontent.com/67834752/116780334-f72fd480-aa73-11eb-9199-d7c6b836b80b.gif)
 
-## Licence
-
-<!-- licence info here -->
 
 ## Questions
 
